@@ -15,6 +15,7 @@
 package net.agef.jobexchange.services;
 
 import java.io.IOException;
+import java.net.URL;
 
 
 import net.agef.jobexchange.application.ApplicantWorker;
@@ -479,11 +480,11 @@ public class AppModule
     }
     
     // Quartz related configuration
-    
-    public static void contributeSchedulerFactory(MappedConfiguration<String, Resource> configuration)
+    //TODO Quartz Konfiguration wieder herstellen 
+    public void contributeSchedulerFactory(OrderedConfiguration<URL> configuration) 
     {
         Resource configResource = new ClasspathResource("quartz.properties");
-        configuration.add("quartz.properties", configResource);
+        configuration.add("configuration", configResource.toURL());
     }
 
 

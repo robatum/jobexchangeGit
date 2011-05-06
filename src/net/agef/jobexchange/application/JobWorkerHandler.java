@@ -46,7 +46,7 @@ import org.apache.lucene.index.Term;
 import org.apache.lucene.queryParser.MultiFieldQueryParser;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.queryParser.QueryParser;
-import org.apache.lucene.search.Hits;
+
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.Sort;
@@ -60,6 +60,7 @@ import org.hibernate.search.FullTextQuery;
 import org.hibernate.search.FullTextSession;
 import org.hibernate.search.Search;
 import org.hibernate.search.SearchFactory;
+import org.hibernate.search.Version;
 import org.hibernate.search.reader.ReaderProvider;
 import org.hibernate.search.store.DirectoryProvider;
 import org.hibernate.transform.Transformers;
@@ -230,100 +231,100 @@ public class JobWorkerHandler implements JobWorker{
 	}
 	
 	
-	@SuppressWarnings({ "unchecked", "deprecation" })
-	public Collection<JobImpl> getMoreLikeThis(Long jobOfferId){
-		List<JobImpl> mltJobOffers = new ArrayList<JobImpl>();
-		
-		FullTextSession fullTextSession = Search.getFullTextSession(session.getSession());  
-		SearchFactory searchFactory = fullTextSession.getSearchFactory();
-		DirectoryProvider jobProvider = searchFactory.getDirectoryProviders(JobImpl.class)[0];
-		ReaderProvider readerProvider = searchFactory.getReaderProvider();
-		
-		IndexSearcher is = null;
-		try {
-			is = new IndexSearcher(jobProvider.getDirectory());
-		} catch (CorruptIndexException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		IndexReader reader = readerProvider.openReader(jobProvider);
-		QueryParser parser = new QueryParser("id", new StandardAnalyzer());
-		Query query;
-		
-		// TODO Klasse "Hits" in getMoreLoikeThis Methode is deprecated
-		Hits hits;
-		String mltQueryString = new String();
-		logger.info("JobOfferId:"+ jobOfferId+ "--- jobOfferId String: "+jobOfferId.toString());
-		
-		try {
-			query = parser.parse(jobOfferId.toString());
-			hits = is.search(query);
-			for (int i = 0; i < hits.length();i++){
-				logger.info("ID: "+ i +"-- Hit ID:"+hits.id(i)+" --- Entity ID:"+hits.doc(i).get("id"));
-			}
-			if (hits.length()>0) {
-				logger.info("Hits : "+hits.length());
-				MoreLikeThis mlt = new MoreLikeThis(reader);
-				mlt.setFieldNames(new String[] {"jobDescription", "taskDescription", "desiredProfession"});
-				Integer parentDocumentId = hits.length()-1;
-				Query mltQuery = mlt.like(hits.id(parentDocumentId));
-				Hits mltHits = is.search(mltQuery);
-				logger.info("Habe gesucht und "+mltHits.length()+" Resultate erhalten");
-				Integer counter = 0;
-				for (int i=0;i < mltHits.length();i++ ){
-					// TODO nur nach lucene document id checken ... hibernate id muss nicht immer gleich bleiben
-					if (!hits.doc(parentDocumentId).get("id").equals(mltHits.doc(i).get("id"))){
-						if (counter>0){
-							logger.info("Bin im "+ i +" make Querystring");
-							mltQueryString = mltQueryString + " OR " + mltHits.doc(i).get("id"); 
-						} else {
-							logger.info("Bin im "+ i+" else");
-							mltQueryString = mltHits.doc(i).get("id"); 
-						}
-						counter++;
-					}
-				}
-				logger.info("Querystring lautet"+ mltQueryString);
-			} else {
-				logger.info("Hits gleich null");
-				return mltJobOffers;
-			}
-		} catch (IOException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		} catch (ParseException e3) {
-			// TODO Auto-generated catch block
-			e3.printStackTrace();
-		}
-		
-		QueryParser mltParser = new QueryParser("id", new StandardAnalyzer() );
-		Query luceneQuery;
-		
-		
-		try {
-			if (!mltQueryString.equals("")){
-				luceneQuery = mltParser.parse(mltQueryString);
-				FullTextQuery fullTextQuery = fullTextSession.createFullTextQuery(luceneQuery, JobImpl.class );  
-				mltJobOffers = fullTextQuery.list(); 
-			}
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		finally {
-		    readerProvider.closeReader(reader);
-		    try {
-				is.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		return mltJobOffers;
-	}
+//	@SuppressWarnings({ "unchecked", "deprecation" })
+//	public Collection<JobImpl> getMoreLikeThis(Long jobOfferId){
+//		List<JobImpl> mltJobOffers = new ArrayList<JobImpl>();
+//		
+//		FullTextSession fullTextSession = Search.getFullTextSession(session.getSession());  
+//		SearchFactory searchFactory = fullTextSession.getSearchFactory();
+//		DirectoryProvider jobProvider = searchFactory.getDirectoryProviders(JobImpl.class)[0];
+//		ReaderProvider readerProvider = searchFactory.getReaderProvider();
+//		
+//		IndexSearcher is = null;
+//		try {
+//			is = new IndexSearcher(jobProvider.getDirectory());
+//		} catch (CorruptIndexException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		} catch (IOException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//		IndexReader reader = readerProvider.openReader(jobProvider);
+//		QueryParser parser = new QueryParser(null, "id", new StandardAnalyzer(null));
+//		Query query;
+//		
+//		// TODO Klasse "Hits" in getMoreLoikeThis Methode is deprecated
+//		Hits hits;
+//		String mltQueryString = new String();
+//		logger.info("JobOfferId:"+ jobOfferId+ "--- jobOfferId String: "+jobOfferId.toString());
+//		
+//		try {
+//			query = parser.parse(jobOfferId.toString());
+//			hits = is.search(query);
+//			for (int i = 0; i < hits.length();i++){
+//				logger.info("ID: "+ i +"-- Hit ID:"+hits.id(i)+" --- Entity ID:"+hits.doc(i).get("id"));
+//			}
+//			if (hits.length()>0) {
+//				logger.info("Hits : "+hits.length());
+//				MoreLikeThis mlt = new MoreLikeThis(reader);
+//				mlt.setFieldNames(new String[] {"jobDescription", "taskDescription", "desiredProfession"});
+//				Integer parentDocumentId = hits.length()-1;
+//				Query mltQuery = mlt.like(hits.id(parentDocumentId));
+//				Hits mltHits = is.search(mltQuery);
+//				logger.info("Habe gesucht und "+mltHits.length()+" Resultate erhalten");
+//				Integer counter = 0;
+//				for (int i=0;i < mltHits.length();i++ ){
+//					// TODO nur nach lucene document id checken ... hibernate id muss nicht immer gleich bleiben
+//					if (!hits.doc(parentDocumentId).get("id").equals(mltHits.doc(i).get("id"))){
+//						if (counter>0){
+//							logger.info("Bin im "+ i +" make Querystring");
+//							mltQueryString = mltQueryString + " OR " + mltHits.doc(i).get("id"); 
+//						} else {
+//							logger.info("Bin im "+ i+" else");
+//							mltQueryString = mltHits.doc(i).get("id"); 
+//						}
+//						counter++;
+//					}
+//				}
+//				logger.info("Querystring lautet"+ mltQueryString);
+//			} else {
+//				logger.info("Hits gleich null");
+//				return mltJobOffers;
+//			}
+//		} catch (IOException e2) {
+//			// TODO Auto-generated catch block
+//			e2.printStackTrace();
+//		} catch (ParseException e3) {
+//			// TODO Auto-generated catch block
+//			e3.printStackTrace();
+//		}
+//		
+//		QueryParser mltParser = new QueryParser("id", new StandardAnalyzer() );
+//		Query luceneQuery;
+//		
+//		
+//		try {
+//			if (!mltQueryString.equals("")){
+//				luceneQuery = mltParser.parse(mltQueryString);
+//				FullTextQuery fullTextQuery = fullTextSession.createFullTextQuery(luceneQuery, JobImpl.class );  
+//				mltJobOffers = fullTextQuery.list(); 
+//			}
+//		} catch (ParseException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} 
+//		finally {
+//		    readerProvider.closeReader(reader);
+//		    try {
+//				is.close();
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
+//		return mltJobOffers;
+//	}
 
 	
 	private String createDefaultJobOfferQueryString(String criteria, Country country, Territory territory){
@@ -364,7 +365,7 @@ public class JobWorkerHandler implements JobWorker{
 		
 		
 			FullTextSession fullTextSession = Search.getFullTextSession(session.getSession());  
-			MultiFieldQueryParser parser = new MultiFieldQueryParser( new String[]{"jobconcatsearchfield"}, new StandardAnalyzer());
+			MultiFieldQueryParser parser = new MultiFieldQueryParser( null, new String[]{"jobconcatsearchfield"}, new StandardAnalyzer(null));
 			//,"organisationDescription", "jobDescription", "taskDescription", "organisationName" --- "jobconcatsearchfield"
 			parser.setAllowLeadingWildcard(true);
 //			String escapedCriteria;
@@ -410,7 +411,7 @@ public class JobWorkerHandler implements JobWorker{
 				}
 				logger.info("Parsed Query: "+luceneQuery.toString());
 				FullTextQuery fullTextQuery = fullTextSession.createFullTextQuery( luceneQuery, JobImpl.class );  
-				org.apache.lucene.search.Sort sort = new Sort(new SortField("countryOfEmployment.shortEnglishName"));
+				org.apache.lucene.search.Sort sort = new Sort(new SortField("countryOfEmployment.shortEnglishName",SortField.STRING));
 				fullTextQuery.setSort(sort);
 				List<JobImpl> jobOffers = fullTextQuery.list(); 
 				if(jobOffers!=null){
@@ -500,7 +501,7 @@ public class JobWorkerHandler implements JobWorker{
 	public Integer getJobOfferResultAmountByCriteria(final String criteria,final Country country,final Territory territory) {
 		
 		FullTextSession fullTextSession = Search.getFullTextSession(session.getSession());  
-		MultiFieldQueryParser parser = new MultiFieldQueryParser( new String[]{"jobconcatsearchfield"}, new StandardAnalyzer());
+		MultiFieldQueryParser parser = new MultiFieldQueryParser(null, new String[]{"jobconcatsearchfield"}, new StandardAnalyzer(null));
 		//,"organisationDescription", "jobDescription", "taskDescription", "organisationName" --- "jobconcatsearchfield"
 		parser.setAllowLeadingWildcard(true);
 		
@@ -535,7 +536,7 @@ public class JobWorkerHandler implements JobWorker{
 		
 		
 			FullTextSession fullTextSession = Search.getFullTextSession(session.getSession());  
-			MultiFieldQueryParser parser = new MultiFieldQueryParser( new String[]{"jobconcatsearchfield"}, new StandardAnalyzer());
+			MultiFieldQueryParser parser = new MultiFieldQueryParser( null, new String[]{"jobconcatsearchfield"}, new StandardAnalyzer(null));
 			//,"organisationDescription", "jobDescription", "taskDescription", "organisationName" --- "jobconcatsearchfield"
 			parser.setAllowLeadingWildcard(true);
 			
@@ -563,7 +564,7 @@ public class JobWorkerHandler implements JobWorker{
 				
 				fullTextQuery.setProjection(FullTextQuery.SCORE, "id", "countryOfEmploymentId", "organisationIndustrySectorId", "jobDescription");
 				fullTextQuery.setResultTransformer(Transformers.aliasToBean(JobSearchResultDTO.class));
-				org.apache.lucene.search.Sort sort = new Sort(new SortField("countryOfEmploymentId"));
+				org.apache.lucene.search.Sort sort = new Sort(new SortField("countryOfEmploymentId", SortField.STRING));
 				fullTextQuery.setSort(sort);
 				//fullTextQuery.setSort(Sort.RELEVANCE);
 				List<JobSearchResultDTO> jobOffers = fullTextQuery.list(); 
@@ -662,7 +663,7 @@ public class JobWorkerHandler implements JobWorker{
 		
 		
 			FullTextSession fullTextSession = Search.getFullTextSession(session.getSession());  
-			MultiFieldQueryParser parser = new MultiFieldQueryParser( new String[]{"jobconcatsearchfield"}, new StandardAnalyzer());
+			MultiFieldQueryParser parser = new MultiFieldQueryParser( null, new String[]{"jobconcatsearchfield"}, new StandardAnalyzer(null));
 			//,"organisationDescription", "jobDescription", "taskDescription", "organisationName" --- "jobconcatsearchfield"
 			parser.setAllowLeadingWildcard(true);
 			
@@ -720,7 +721,7 @@ public class JobWorkerHandler implements JobWorker{
 				}
 				logger.info("Parsed Query: "+luceneQuery.toString());
 				FullTextQuery fullTextQuery = fullTextSession.createFullTextQuery( luceneQuery, JobImpl.class );  
-				org.apache.lucene.search.Sort sort = new Sort(new SortField("countryOfEmployment.shortEnglishName"));
+				org.apache.lucene.search.Sort sort = new Sort(new SortField("countryOfEmployment.shortEnglishName",SortField.STRING));
 				fullTextQuery.setSort(sort);
 				List<JobImpl> jobOffers = fullTextQuery.list(); 
 				if(jobOffers!=null){

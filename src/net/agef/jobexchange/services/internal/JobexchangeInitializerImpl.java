@@ -48,9 +48,9 @@ public class JobexchangeInitializerImpl implements ApplicationInitializerFilter 
 	private String[] dataProviderAGEFIP = { "213.146.113.73", "87.193.197.15", "217.91.217.146" };
 	private String[] dataProviderGETJOBSIP = { "127.0.0.1" };
 
-	private boolean runFirst = false;
+	private boolean runFirst = true;
 	private boolean readSearchData = false;
-	private boolean insertTestData = false;
+	private boolean insertTestData = true;
 	private boolean contextStart = true;
 	private boolean addDataProviderIP = false;
 

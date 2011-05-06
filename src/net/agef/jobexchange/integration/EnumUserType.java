@@ -48,7 +48,7 @@ public abstract class EnumUserType implements UserType{
 	     return false;
 	   }
 
-	   return Hibernate.STRING.isEqual(x, y);
+	   return Hibernate.STRING.isEqual((String)x, (String)y);
 	 }
 
 	public int hashCode(Object object) throws HibernateException

@@ -37,8 +37,8 @@ public interface JobWorker {
 		
 	public List<String> getAutoCompleteResults(String partialString);
 	
-	public Collection<JobImpl> getMoreLikeThis(Long jobOfferId);
-	
+//	public Collection<JobImpl> getMoreLikeThis(Long jobOfferId);
+
 	public Collection<JobImpl> getJobOfferByCriteria(String criteria, Country country, Territory territory);
 	
 	public Integer getJobOfferResultAmountByCriteria(final String criteria,final Country country,final Territory territory);

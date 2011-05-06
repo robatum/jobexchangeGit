@@ -39,10 +39,12 @@ import net.agef.jobexchange.webservice.adapter.OccupationalFieldAssembler;
 import net.agef.jobexchange.webservice.entities.ApplicantsSearchResultDTO;
 
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.document.Field;
 import org.apache.lucene.queryParser.MultiFieldQueryParser;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.Sort;
+import org.apache.lucene.search.SortField;
 import org.apache.tapestry5.hibernate.HibernateSessionManager;
 import org.apache.tapestry5.ioc.Invokable;
 import org.apache.tapestry5.ioc.services.ParallelExecutor;
@@ -315,7 +317,7 @@ public class ApplicantWorkerHandler implements ApplicantWorker {
 	public Collection<Applicant> getApplicantByCriteria(String criteria, Country country, Territory territory) {
 
 		FullTextSession fullTextSession = Search.getFullTextSession(session.getSession());
-		MultiFieldQueryParser parser = new MultiFieldQueryParser(new String[] { "applicantconcatsearchfield" }, new StandardAnalyzer());
+		MultiFieldQueryParser parser = new MultiFieldQueryParser(null, new String[] { "applicantconcatsearchfield" }, new StandardAnalyzer(null));
 
 		// String escapedCriteria;
 		// if(criteria!=null){
@@ -388,7 +390,7 @@ public class ApplicantWorkerHandler implements ApplicantWorker {
 		logger.info("getApplicantByCriteria() Begin");
 
 		FullTextSession fullTextSession = Search.getFullTextSession(session.getSession());
-		MultiFieldQueryParser parser = new MultiFieldQueryParser(new String[] { "applicantconcatsearchfield" }, new StandardAnalyzer());
+		MultiFieldQueryParser parser = new MultiFieldQueryParser(null, new String[] { "applicantconcatsearchfield" }, new StandardAnalyzer(null));
 
 		parser.setAllowLeadingWildcard(true);
 
@@ -424,7 +426,8 @@ public class ApplicantWorkerHandler implements ApplicantWorker {
 			// SortField("id"));
 			// fullTextQuery.setSort(sort);
 			if(criteria == null || criteria.trim().equals("")){
-				fullTextQuery.setSort(new Sort("id", true));
+				// TODO UPDATE: Hier muss die Sortierung nach ID wieder implementiert werden
+				//fullTextQuery.setSort(new Sort("id",true));
 				logger.info("Sortiere nach id DESC");
 			} else {
 				fullTextQuery.setSort(Sort.RELEVANCE);
@@ -655,7 +658,7 @@ List<ApplicantsSearchResultDTO> applicants = new ArrayList<ApplicantsSearchResul
 	@SuppressWarnings("unchecked")
 	private List<ApplicantsSearchResultDTO> prepareAndExecuteFulltextQueryForExtendedCriteria(String criteria, Country country, Territory territory) {
 		FullTextSession fullTextSession = Search.getFullTextSession(session.getSession());
-		MultiFieldQueryParser parser = new MultiFieldQueryParser(new String[] { "applicantconcatsearchfield" }, new StandardAnalyzer());
+		MultiFieldQueryParser parser = new MultiFieldQueryParser(null, new String[] { "applicantconcatsearchfield" }, new StandardAnalyzer(null));
 
 		parser.setAllowLeadingWildcard(true);
 

@@ -15,7 +15,7 @@ public class EnglishAnalyzer extends Analyzer {
      */
     @Override
     public TokenStream tokenStream(String fieldName, Reader reader) {
-        TokenStream result = new StandardTokenizer(reader);
+        TokenStream result = new StandardTokenizer(null, reader);
         result = new StandardFilter(result);
         result = new LowerCaseFilter(result);
         result = new SnowballFilter(result, fieldName);

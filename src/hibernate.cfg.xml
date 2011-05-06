@@ -16,7 +16,7 @@
 		<property name="show_sql">false</property>
 		<property name="format_sql">true</property>
 		<!--      comment following line during 2nd run   --> 
-		<property name="hbm2ddl.auto">update</property> 
+		<property name="hbm2ddl.auto">create</property> 
 		<property name="hibernate.cache.provider_class">org.hibernate.cache.HashtableCacheProvider</property>
 
 		<!-- Lucen Search - Index im Dateisystem speichern    -->

@@ -7,10 +7,12 @@
 
    <title>${title}</title> 
 <!-- This demo uses the Alpha 1 of JQueryMobile as for example with Alpha 2 the Tapestry redirect-after-post does not work -->
-   <link type="text/css" rel="stylesheet" href="http://code.jquery.com/mobile/1.0a2/jquery.mobile-1.0a2.min.css" />
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.css" />
 
-   <script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
-   <script src="http://code.jquery.com/mobile/1.0a1/jquery.mobile-1.0a1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.js"></script>
+   
+   
 </head>
 <body>
  <div data-role="page">
