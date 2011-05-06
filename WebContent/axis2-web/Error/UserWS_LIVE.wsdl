@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:ns="http://webservice.jobexchange.agef.net" xmlns:ax27="http://entities.webservice.jobexchange.agef.net/xsd" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://webservice.jobexchange.agef.net">
+    <wsdl:documentation>
+		Please Type your service description here
+	</wsdl:documentation>
+    <wsdl:types>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://entities.webservice.jobexchange.agef.net/xsd">
+            <xs:complexType name="UserDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="addresses" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="alternativeAddress" nillable="true" type="ax27:AddressDTO"/>
+                    <xs:element minOccurs="0" name="citizenship1" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="citizenship2" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="cobraUserId" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="currentAddress" nillable="true" type="ax27:AddressDTO"/>
+                    <xs:element minOccurs="0" name="dataProvider" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="dateOfBirth" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="emailBusiness" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="emailPrivate" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="familyName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="fathersName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="givenName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="internet" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="nationality" nillable="true" type="ax27:CountryDTO"/>
+                    <xs:element minOccurs="0" name="title" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="userId" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="userRole" nillable="true" type="ax27:AbstractUserRoleDTO"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="AddressDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="address1" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="address2" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="city" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="country" nillable="true" type="ax27:CountryDTO"/>
+                    <xs:element minOccurs="0" name="faxNumber" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="federalState" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="mobileNumber" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="phoneNumber" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="zipCode" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CountryDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="country" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="AbstractUserRoleDTO">
+                <xs:sequence/>
+            </xs:complexType>
+            <xs:complexType name="AlumniRoleDTO">
+                <xs:complexContent>
+                    <xs:extension base="ax27:AbstractUserRoleDTO">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="organisationDescription" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="organisationIndustrySector" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="organisationName" nillable="true" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="OrganisationRoleDTO">
+                <xs:complexContent>
+                    <xs:extension base="ax27:AbstractUserRoleDTO">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="organisationDescription" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="organisationIndustrySector" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="organisationName" nillable="true" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:ax28="http://entities.webservice.jobexchange.agef.net/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://webservice.jobexchange.agef.net">
+            <xs:import namespace="http://entities.webservice.jobexchange.agef.net/xsd"/>
+            <xs:element name="addAlumniUser">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="user" nillable="true" type="ax28:UserDTO"/>
+                        <xs:element minOccurs="0" name="apdUserId" type="xs:long"/>
+                        <xs:element minOccurs="0" name="userRole" nillable="true" type="ax28:AlumniRoleDTO"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addAlumniUserResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addOrganisationUser">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="user" nillable="true" type="ax28:UserDTO"/>
+                        <xs:element minOccurs="0" name="apdUserId" type="xs:long"/>
+                        <xs:element minOccurs="0" name="userRole" nillable="true" type="ax28:OrganisationRoleDTO"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addOrganisationUserResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="changeUserRoleToAlumni">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="apdUserId" type="xs:long"/>
+                        <xs:element minOccurs="0" name="role" nillable="true" type="ax28:AlumniRoleDTO"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="changeUserRoleToAlumniResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="changeUserRoleToOrganisation">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="apdUserId" type="xs:long"/>
+                        <xs:element minOccurs="0" name="role" nillable="true" type="ax28:OrganisationRoleDTO"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="changeUserRoleToOrganisationResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="deleteUser">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="apdUserId" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="deleteUserResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="modifyUser">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="user" nillable="true" type="ax28:UserDTO"/>
+                        <xs:element minOccurs="0" name="apdUserId" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="modifyUserResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="switchContactAddress">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="apdUserId" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="switchContactAddressResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="modifyUserRequest">
+        <wsdl:part name="parameters" element="ns:modifyUser"/>
+    </wsdl:message>
+    <wsdl:message name="modifyUserResponse">
+        <wsdl:part name="parameters" element="ns:modifyUserResponse"/>
+    </wsdl:message>
+    <wsdl:message name="deleteUserRequest">
+        <wsdl:part name="parameters" element="ns:deleteUser"/>
+    </wsdl:message>
+    <wsdl:message name="deleteUserResponse">
+        <wsdl:part name="parameters" element="ns:deleteUserResponse"/>
+    </wsdl:message>
+    <wsdl:message name="switchContactAddressRequest">
+        <wsdl:part name="parameters" element="ns:switchContactAddress"/>
+    </wsdl:message>
+    <wsdl:message name="switchContactAddressResponse">
+        <wsdl:part name="parameters" element="ns:switchContactAddressResponse"/>
+    </wsdl:message>
+    <wsdl:message name="changeUserRoleToOrganisationRequest">
+        <wsdl:part name="parameters" element="ns:changeUserRoleToOrganisation"/>
+    </wsdl:message>
+    <wsdl:message name="changeUserRoleToOrganisationResponse">
+        <wsdl:part name="parameters" element="ns:changeUserRoleToOrganisationResponse"/>
+    </wsdl:message>
+    <wsdl:message name="addAlumniUserRequest">
+        <wsdl:part name="parameters" element="ns:addAlumniUser"/>
+    </wsdl:message>
+    <wsdl:message name="addAlumniUserResponse">
+        <wsdl:part name="parameters" element="ns:addAlumniUserResponse"/>
+    </wsdl:message>
+    <wsdl:message name="changeUserRoleToAlumniRequest">
+        <wsdl:part name="parameters" element="ns:changeUserRoleToAlumni"/>
+    </wsdl:message>
+    <wsdl:message name="changeUserRoleToAlumniResponse">
+        <wsdl:part name="parameters" element="ns:changeUserRoleToAlumniResponse"/>
+    </wsdl:message>
+    <wsdl:message name="addOrganisationUserRequest">
+        <wsdl:part name="parameters" element="ns:addOrganisationUser"/>
+    </wsdl:message>
+    <wsdl:message name="addOrganisationUserResponse">
+        <wsdl:part name="parameters" element="ns:addOrganisationUserResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="UserWSPortType">
+        <wsdl:operation name="modifyUser">
+            <wsdl:input message="ns:modifyUserRequest" wsaw:Action="urn:modifyUser"/>
+            <wsdl:output message="ns:modifyUserResponse" wsaw:Action="urn:modifyUserResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="deleteUser">
+            <wsdl:input message="ns:deleteUserRequest" wsaw:Action="urn:deleteUser"/>
+            <wsdl:output message="ns:deleteUserResponse" wsaw:Action="urn:deleteUserResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="switchContactAddress">
+            <wsdl:input message="ns:switchContactAddressRequest" wsaw:Action="urn:switchContactAddress"/>
+            <wsdl:output message="ns:switchContactAddressResponse" wsaw:Action="urn:switchContactAddressResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="changeUserRoleToOrganisation">
+            <wsdl:input message="ns:changeUserRoleToOrganisationRequest" wsaw:Action="urn:changeUserRoleToOrganisation"/>
+            <wsdl:output message="ns:changeUserRoleToOrganisationResponse" wsaw:Action="urn:changeUserRoleToOrganisationResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="addAlumniUser">
+            <wsdl:input message="ns:addAlumniUserRequest" wsaw:Action="urn:addAlumniUser"/>
+            <wsdl:output message="ns:addAlumniUserResponse" wsaw:Action="urn:addAlumniUserResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="changeUserRoleToAlumni">
+            <wsdl:input message="ns:changeUserRoleToAlumniRequest" wsaw:Action="urn:changeUserRoleToAlumni"/>
+            <wsdl:output message="ns:changeUserRoleToAlumniResponse" wsaw:Action="urn:changeUserRoleToAlumniResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="addOrganisationUser">
+            <wsdl:input message="ns:addOrganisationUserRequest" wsaw:Action="urn:addOrganisationUser"/>
+            <wsdl:output message="ns:addOrganisationUserResponse" wsaw:Action="urn:addOrganisationUserResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="UserWSSoap11Binding" type="ns:UserWSPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="modifyUser">
+            <soap:operation soapAction="urn:modifyUser" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteUser">
+            <soap:operation soapAction="urn:deleteUser" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="switchContactAddress">
+            <soap:operation soapAction="urn:switchContactAddress" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="changeUserRoleToOrganisation">
+            <soap:operation soapAction="urn:changeUserRoleToOrganisation" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addAlumniUser">
+            <soap:operation soapAction="urn:addAlumniUser" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="changeUserRoleToAlumni">
+            <soap:operation soapAction="urn:changeUserRoleToAlumni" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addOrganisationUser">
+            <soap:operation soapAction="urn:addOrganisationUser" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="UserWSSoap12Binding" type="ns:UserWSPortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="modifyUser">
+            <soap12:operation soapAction="urn:modifyUser" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteUser">
+            <soap12:operation soapAction="urn:deleteUser" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="switchContactAddress">
+            <soap12:operation soapAction="urn:switchContactAddress" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="changeUserRoleToOrganisation">
+            <soap12:operation soapAction="urn:changeUserRoleToOrganisation" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addAlumniUser">
+            <soap12:operation soapAction="urn:addAlumniUser" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="changeUserRoleToAlumni">
+            <soap12:operation soapAction="urn:changeUserRoleToAlumni" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addOrganisationUser">
+            <soap12:operation soapAction="urn:addOrganisationUser" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="UserWSHttpBinding" type="ns:UserWSPortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="modifyUser">
+            <http:operation location="UserWS/modifyUser"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="modifyUser"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="modifyUser"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteUser">
+            <http:operation location="UserWS/deleteUser"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="deleteUser"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="deleteUser"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="switchContactAddress">
+            <http:operation location="UserWS/switchContactAddress"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="switchContactAddress"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="switchContactAddress"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="changeUserRoleToOrganisation">
+            <http:operation location="UserWS/changeUserRoleToOrganisation"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="changeUserRoleToOrganisation"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="changeUserRoleToOrganisation"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addAlumniUser">
+            <http:operation location="UserWS/addAlumniUser"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="addAlumniUser"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="addAlumniUser"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="changeUserRoleToAlumni">
+            <http:operation location="UserWS/changeUserRoleToAlumni"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="changeUserRoleToAlumni"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="changeUserRoleToAlumni"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addOrganisationUser">
+            <http:operation location="UserWS/addOrganisationUser"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="addOrganisationUser"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="addOrganisationUser"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="UserWS">
+        <wsdl:port name="UserWSHttpSoap11Endpoint" binding="ns:UserWSSoap11Binding">
+            <soap:address location="http://jobexchange.getjobs.net:80/jobexchange/services/UserWS.UserWSHttpSoap11Endpoint"/>
+        </wsdl:port>
+        <wsdl:port name="UserWSHttpSoap12Endpoint" binding="ns:UserWSSoap12Binding">
+            <soap12:address location="http://jobexchange.getjobs.net:80/jobexchange/services/UserWS.UserWSHttpSoap12Endpoint"/>
+        </wsdl:port>
+        <wsdl:port name="UserWSHttpEndpoint" binding="ns:UserWSHttpBinding">
+            <http:address location="http://jobexchange.getjobs.net:80/jobexchange/services/UserWS.UserWSHttpEndpoint"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

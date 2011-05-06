@@ -1,0 +1,6 @@
+<t:LayoutSecured t:title="Manage Login User" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+        <h1>Manage LoginUser</h1>
+		<br />
+      
+
+</t:LayoutSecured>

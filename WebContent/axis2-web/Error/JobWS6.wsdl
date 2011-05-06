@@ -1,0 +1,735 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:ns="http://webservice.jobexchange.agef.net" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:ax25="http://entities.webservice.jobexchange.agef.net/xsd" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://webservice.jobexchange.agef.net">
+    <wsdl:documentation>
+		Please Type your service description here
+	</wsdl:documentation>
+    <wsdl:types>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://entities.webservice.jobexchange.agef.net/xsd">
+            <xs:complexType name="JobDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="alternativeProfession" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="applicationExpireDate" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="attachmentLocation" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="cobraJobId" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="commentsRegardingApplicationProcedure" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="computerSkills" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="computerSkillsComments" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="contactPerson" nillable="true" type="ax25:ContactPersonDTO"/>
+                    <xs:element minOccurs="0" name="contactPersonAddress" nillable="true" type="ax25:AddressDTO"/>
+                    <xs:element minOccurs="0" name="countryOfEmployment" nillable="true" type="ax25:CountryDTO"/>
+                    <xs:element minOccurs="0" name="currency" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="desiredProfession" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="drivingLicence" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="durationOfContract" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="furtherComments" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="furtherCommentsRegardingEducation" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="furtherRequirements" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="jobDescription" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="jobOfferExpireDate" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="jobOfferId" type="xs:long"/>
+                    <xs:element minOccurs="0" name="jobOfferOwner" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="languageSkillsEnglish" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="languageSkillsGerman" nillable="true" type="xs:string"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="languageSkillsOther" nillable="true" type="ax25:LanguageSkillDTO"/>
+                    <xs:element minOccurs="0" name="locationOfEmployment" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="minimumRequirementsForEducation" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="miscellaneousServices" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="numberOfJobs" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="organisationDescription" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="organisationName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="possibleCommencementDate" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="preferredPublication" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="salary" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="specialKnowledge" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="taskDescription" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="weeklyHoursOfWork" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="workExperience" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="ContactPersonDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="addresses" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="emailBusiness" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="familyName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="fathersName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="givenName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="internet" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="position" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="title" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="AddressDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="address1" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="address2" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="city" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="country" nillable="true" type="ax25:CountryDTO"/>
+                    <xs:element minOccurs="0" name="faxNumber" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="federalState" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="mobileNumber" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="phoneNumber" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="zipCode" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CountryDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="country" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="LanguageSkillDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="level" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="JobApplicationDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="applicationOwnerId" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="applicationOwnerName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="contactNote" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="relatedJobDescription" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="relatedJobId" nillable="true" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="TerritoryDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="territory" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:ax26="http://entities.webservice.jobexchange.agef.net/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://webservice.jobexchange.agef.net">
+            <xs:import namespace="http://entities.webservice.jobexchange.agef.net/xsd"/>
+            <xs:element name="addJobOffer">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="jobOffer" nillable="true" type="ax26:JobDTO"/>
+                        <xs:element minOccurs="0" name="apdUserId" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addJobOfferResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="applyToJobOffer">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="jobOfferId" type="xs:long"/>
+                        <xs:element minOccurs="0" name="apdUserId" type="xs:long"/>
+                        <xs:element minOccurs="0" name="contactNote" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="applyToJobOfferResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="deleteJobOffer">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="jobOfferId" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="deleteJobOfferResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="modifyJobOffer">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="jobOffer" nillable="true" type="ax26:JobDTO"/>
+                        <xs:element minOccurs="0" name="apdUserId" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="modifyJobOfferResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAutoCompleteList">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="expression" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAutoCompleteListResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getJobOfferApplications">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="apdUserId" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getJobOfferApplicationsResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax26:JobApplicationDTO"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getReceivedJobOfferApplications">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="apdUserId" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getReceivedJobOfferApplicationsResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax26:JobApplicationDTO"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getJobOfferDetails">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="jobOfferId" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getJobOfferDetailsResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax26:JobDTO"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAllJobOffersResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax26:JobDTO"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getJobOfferByCriteria">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="criteria" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="country" nillable="true" type="ax26:CountryDTO"/>
+                        <xs:element minOccurs="0" name="territory" nillable="true" type="ax26:TerritoryDTO"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getJobOfferByCriteriaResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax26:JobDTO"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getJobOffersByUser">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="apdUserId" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getJobOffersByUserResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax26:JobDTO"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getSimilarJobOffers">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="jobOfferId" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getSimilarJobOffersResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax26:JobDTO"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="applyToJobOfferRequest">
+        <wsdl:part name="parameters" element="ns:applyToJobOffer"/>
+    </wsdl:message>
+    <wsdl:message name="applyToJobOfferResponse">
+        <wsdl:part name="parameters" element="ns:applyToJobOfferResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getAutoCompleteListRequest">
+        <wsdl:part name="parameters" element="ns:getAutoCompleteList"/>
+    </wsdl:message>
+    <wsdl:message name="getAutoCompleteListResponse">
+        <wsdl:part name="parameters" element="ns:getAutoCompleteListResponse"/>
+    </wsdl:message>
+    <wsdl:message name="deleteJobOfferRequest">
+        <wsdl:part name="parameters" element="ns:deleteJobOffer"/>
+    </wsdl:message>
+    <wsdl:message name="deleteJobOfferResponse">
+        <wsdl:part name="parameters" element="ns:deleteJobOfferResponse"/>
+    </wsdl:message>
+    <wsdl:message name="addJobOfferRequest">
+        <wsdl:part name="parameters" element="ns:addJobOffer"/>
+    </wsdl:message>
+    <wsdl:message name="addJobOfferResponse">
+        <wsdl:part name="parameters" element="ns:addJobOfferResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getSimilarJobOffersRequest">
+        <wsdl:part name="parameters" element="ns:getSimilarJobOffers"/>
+    </wsdl:message>
+    <wsdl:message name="getSimilarJobOffersResponse">
+        <wsdl:part name="parameters" element="ns:getSimilarJobOffersResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getJobOfferDetailsRequest">
+        <wsdl:part name="parameters" element="ns:getJobOfferDetails"/>
+    </wsdl:message>
+    <wsdl:message name="getJobOfferDetailsResponse">
+        <wsdl:part name="parameters" element="ns:getJobOfferDetailsResponse"/>
+    </wsdl:message>
+    <wsdl:message name="modifyJobOfferRequest">
+        <wsdl:part name="parameters" element="ns:modifyJobOffer"/>
+    </wsdl:message>
+    <wsdl:message name="modifyJobOfferResponse">
+        <wsdl:part name="parameters" element="ns:modifyJobOfferResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getReceivedJobOfferApplicationsRequest">
+        <wsdl:part name="parameters" element="ns:getReceivedJobOfferApplications"/>
+    </wsdl:message>
+    <wsdl:message name="getReceivedJobOfferApplicationsResponse">
+        <wsdl:part name="parameters" element="ns:getReceivedJobOfferApplicationsResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getJobOffersByUserRequest">
+        <wsdl:part name="parameters" element="ns:getJobOffersByUser"/>
+    </wsdl:message>
+    <wsdl:message name="getJobOffersByUserResponse">
+        <wsdl:part name="parameters" element="ns:getJobOffersByUserResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getJobOfferByCriteriaRequest">
+        <wsdl:part name="parameters" element="ns:getJobOfferByCriteria"/>
+    </wsdl:message>
+    <wsdl:message name="getJobOfferByCriteriaResponse">
+        <wsdl:part name="parameters" element="ns:getJobOfferByCriteriaResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getAllJobOffersRequest"/>
+    <wsdl:message name="getAllJobOffersResponse">
+        <wsdl:part name="parameters" element="ns:getAllJobOffersResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getJobOfferApplicationsRequest">
+        <wsdl:part name="parameters" element="ns:getJobOfferApplications"/>
+    </wsdl:message>
+    <wsdl:message name="getJobOfferApplicationsResponse">
+        <wsdl:part name="parameters" element="ns:getJobOfferApplicationsResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="JobWSPortType">
+        <wsdl:operation name="applyToJobOffer">
+            <wsdl:input message="ns:applyToJobOfferRequest" wsaw:Action="urn:applyToJobOffer"/>
+            <wsdl:output message="ns:applyToJobOfferResponse" wsaw:Action="urn:applyToJobOfferResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getAutoCompleteList">
+            <wsdl:input message="ns:getAutoCompleteListRequest" wsaw:Action="urn:getAutoCompleteList"/>
+            <wsdl:output message="ns:getAutoCompleteListResponse" wsaw:Action="urn:getAutoCompleteListResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="deleteJobOffer">
+            <wsdl:input message="ns:deleteJobOfferRequest" wsaw:Action="urn:deleteJobOffer"/>
+            <wsdl:output message="ns:deleteJobOfferResponse" wsaw:Action="urn:deleteJobOfferResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="addJobOffer">
+            <wsdl:input message="ns:addJobOfferRequest" wsaw:Action="urn:addJobOffer"/>
+            <wsdl:output message="ns:addJobOfferResponse" wsaw:Action="urn:addJobOfferResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getSimilarJobOffers">
+            <wsdl:input message="ns:getSimilarJobOffersRequest" wsaw:Action="urn:getSimilarJobOffers"/>
+            <wsdl:output message="ns:getSimilarJobOffersResponse" wsaw:Action="urn:getSimilarJobOffersResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getJobOfferDetails">
+            <wsdl:input message="ns:getJobOfferDetailsRequest" wsaw:Action="urn:getJobOfferDetails"/>
+            <wsdl:output message="ns:getJobOfferDetailsResponse" wsaw:Action="urn:getJobOfferDetailsResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="modifyJobOffer">
+            <wsdl:input message="ns:modifyJobOfferRequest" wsaw:Action="urn:modifyJobOffer"/>
+            <wsdl:output message="ns:modifyJobOfferResponse" wsaw:Action="urn:modifyJobOfferResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getReceivedJobOfferApplications">
+            <wsdl:input message="ns:getReceivedJobOfferApplicationsRequest" wsaw:Action="urn:getReceivedJobOfferApplications"/>
+            <wsdl:output message="ns:getReceivedJobOfferApplicationsResponse" wsaw:Action="urn:getReceivedJobOfferApplicationsResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getJobOffersByUser">
+            <wsdl:input message="ns:getJobOffersByUserRequest" wsaw:Action="urn:getJobOffersByUser"/>
+            <wsdl:output message="ns:getJobOffersByUserResponse" wsaw:Action="urn:getJobOffersByUserResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getJobOfferByCriteria">
+            <wsdl:input message="ns:getJobOfferByCriteriaRequest" wsaw:Action="urn:getJobOfferByCriteria"/>
+            <wsdl:output message="ns:getJobOfferByCriteriaResponse" wsaw:Action="urn:getJobOfferByCriteriaResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getAllJobOffers">
+            <wsdl:input message="ns:getAllJobOffersRequest" wsaw:Action="urn:getAllJobOffers"/>
+            <wsdl:output message="ns:getAllJobOffersResponse" wsaw:Action="urn:getAllJobOffersResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getJobOfferApplications">
+            <wsdl:input message="ns:getJobOfferApplicationsRequest" wsaw:Action="urn:getJobOfferApplications"/>
+            <wsdl:output message="ns:getJobOfferApplicationsResponse" wsaw:Action="urn:getJobOfferApplicationsResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="JobWSSoap11Binding" type="ns:JobWSPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="applyToJobOffer">
+            <soap:operation soapAction="urn:applyToJobOffer" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAutoCompleteList">
+            <soap:operation soapAction="urn:getAutoCompleteList" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteJobOffer">
+            <soap:operation soapAction="urn:deleteJobOffer" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addJobOffer">
+            <soap:operation soapAction="urn:addJobOffer" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getSimilarJobOffers">
+            <soap:operation soapAction="urn:getSimilarJobOffers" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getJobOfferDetails">
+            <soap:operation soapAction="urn:getJobOfferDetails" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="modifyJobOffer">
+            <soap:operation soapAction="urn:modifyJobOffer" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getReceivedJobOfferApplications">
+            <soap:operation soapAction="urn:getReceivedJobOfferApplications" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getJobOfferByCriteria">
+            <soap:operation soapAction="urn:getJobOfferByCriteria" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getJobOffersByUser">
+            <soap:operation soapAction="urn:getJobOffersByUser" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAllJobOffers">
+            <soap:operation soapAction="urn:getAllJobOffers" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getJobOfferApplications">
+            <soap:operation soapAction="urn:getJobOfferApplications" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="JobWSSoap12Binding" type="ns:JobWSPortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="applyToJobOffer">
+            <soap12:operation soapAction="urn:applyToJobOffer" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAutoCompleteList">
+            <soap12:operation soapAction="urn:getAutoCompleteList" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteJobOffer">
+            <soap12:operation soapAction="urn:deleteJobOffer" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addJobOffer">
+            <soap12:operation soapAction="urn:addJobOffer" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getSimilarJobOffers">
+            <soap12:operation soapAction="urn:getSimilarJobOffers" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getJobOfferDetails">
+            <soap12:operation soapAction="urn:getJobOfferDetails" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="modifyJobOffer">
+            <soap12:operation soapAction="urn:modifyJobOffer" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getReceivedJobOfferApplications">
+            <soap12:operation soapAction="urn:getReceivedJobOfferApplications" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getJobOfferByCriteria">
+            <soap12:operation soapAction="urn:getJobOfferByCriteria" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getJobOffersByUser">
+            <soap12:operation soapAction="urn:getJobOffersByUser" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAllJobOffers">
+            <soap12:operation soapAction="urn:getAllJobOffers" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getJobOfferApplications">
+            <soap12:operation soapAction="urn:getJobOfferApplications" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="JobWSHttpBinding" type="ns:JobWSPortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="applyToJobOffer">
+            <http:operation location="JobWS/applyToJobOffer"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="applyToJobOffer"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="applyToJobOffer"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAutoCompleteList">
+            <http:operation location="JobWS/getAutoCompleteList"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="getAutoCompleteList"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="getAutoCompleteList"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteJobOffer">
+            <http:operation location="JobWS/deleteJobOffer"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="deleteJobOffer"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="deleteJobOffer"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addJobOffer">
+            <http:operation location="JobWS/addJobOffer"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="addJobOffer"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="addJobOffer"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getSimilarJobOffers">
+            <http:operation location="JobWS/getSimilarJobOffers"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="getSimilarJobOffers"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="getSimilarJobOffers"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getJobOfferDetails">
+            <http:operation location="JobWS/getJobOfferDetails"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="getJobOfferDetails"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="getJobOfferDetails"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="modifyJobOffer">
+            <http:operation location="JobWS/modifyJobOffer"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="modifyJobOffer"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="modifyJobOffer"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getReceivedJobOfferApplications">
+            <http:operation location="JobWS/getReceivedJobOfferApplications"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="getReceivedJobOfferApplications"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="getReceivedJobOfferApplications"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getJobOfferByCriteria">
+            <http:operation location="JobWS/getJobOfferByCriteria"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="getJobOfferByCriteria"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="getJobOfferByCriteria"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getJobOffersByUser">
+            <http:operation location="JobWS/getJobOffersByUser"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="getJobOffersByUser"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="getJobOffersByUser"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAllJobOffers">
+            <http:operation location="JobWS/getAllJobOffers"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="getAllJobOffers"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="getAllJobOffers"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getJobOfferApplications">
+            <http:operation location="JobWS/getJobOfferApplications"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="getJobOfferApplications"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="getJobOfferApplications"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="JobWS">
+        <wsdl:port name="JobWSHttpSoap11Endpoint" binding="ns:JobWSSoap11Binding">
+            <soap:address location="http://localhost:8080/jobexchange/services/JobWS.JobWSHttpSoap11Endpoint"/>
+        </wsdl:port>
+        <wsdl:port name="JobWSHttpSoap12Endpoint" binding="ns:JobWSSoap12Binding">
+            <soap12:address location="http://localhost:8080/jobexchange/services/JobWS.JobWSHttpSoap12Endpoint"/>
+        </wsdl:port>
+        <wsdl:port name="JobWSHttpEndpoint" binding="ns:JobWSHttpBinding">
+            <http:address location="http://localhost:8080/jobexchange/services/JobWS.JobWSHttpEndpoint"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

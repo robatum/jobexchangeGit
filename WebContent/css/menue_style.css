@@ -1,0 +1,215 @@
+/* CSS Document */
+Menue-styles fuer non-IEs
+	Achtung:
+	Fuer non-IEs gilt das Stylesheet  'dropdown.css '!
+	Fuer IE gilt das Stylesheet  'fix-ie.css '  (per CC )!
+* /
+
+#menuebox {
+	position: relative;
+	height: 30px;
+}
+
+.stupidie {
+	display: none;
+}
+
+#menue {
+	position: absolute;
+	top: 5px;
+	left: 0;
+	z-index: 100;
+}
+
+#menue .aussen {
+	float: left;
+	display: block;
+	overflow: hidden;
+	width: 8em;
+	height: 1.3em;
+	font-weight: bold;
+	text-align: center;
+	background-color: #dec79a;
+	color: #513913;
+	border: 1px solid;
+	border-color: #d0843e #78561d #78561d #d0843e;
+}
+
+#menue .aussen:hover {
+	height: auto;
+	background-color: #624617;
+	color: #fff;
+}
+
+a.innen-1 {
+	margin-top: 2px;
+}
+
+a.innen,a.innen-1 {
+	display: block;
+	width: 7.9em;
+	padding: 2px 0;
+	text-decoration: none;
+	font-weight: normal;
+	border-bottom: 1px solid #78561d;
+	background-color: #ffffff;
+	color: #600;
+}
+
+a:visited.innen,a:visited.innen-1 {
+	background-color: #ecd8ae;
+	color: #555;
+}
+
+a:hover.innen,a:hover.innen-1 {
+	background-color: #ffffff;
+	color: #900;
+}
+
+span.menutag {
+	display: block;
+	cursor: default;
+}
+
+/*
+	Menue-styles fuer IEs
+	Am besten per Conditional Comment einbinden.
+	Fuer IE5.5 und 5.0 muessen nur geringfuegige kosmetische
+	Anpassungen vorgenommen werden (siehe Kommentare).
+*/
+#menue {
+	display: none;
+}
+
+.stupidie {
+	display: block;
+	position: absolute;
+	top: 105px;
+	left: 136px;
+	z-index: 300;
+}
+
+a.auss {
+	float: left;
+	width: 8em;
+	height: 1.4em;
+	overflow: hidden;
+	display: block;
+	font-weight: bold;
+	text-align: center;
+	text-decoration: none;
+	background-color: #eef6ee; /*hintergrundfarbe menue normal f�r alle*/
+	color: #ffffff;
+	border: 1px solid;
+	border-color: #245524;
+}
+
+a:hover.auss {
+	overflow: visible;
+	background-color: #333333; /*hover farbe f�r hauptmen�*/
+	color: #ffffff;
+}
+
+a:hover.auss table {
+	display: block;
+	margin-top: 3px;
+	background-color: #245524;
+	color: #eef6ee;
+	border-collapse: collapse;
+}
+
+a.inn {
+	display: block;
+	width: 7.9em; /* fuer 5er IEs anpassen, sonst 'zuckt' es */
+	padding: 2px 0;
+	font-family: Tahoma;
+	font-size: 10px; /* fuer 5er IEs auf 80% reduzieren */
+	font-weight: bold;
+	text-align: center;
+	text-decoration: none;
+	border-bottom: 1px solid #ffffff; /*zellen trennstriche*/
+	background-color: #245524;
+	color: #ffffff;
+}
+
+a:visited.inn {
+	background-color: #eef6ef;
+	color: #245524;
+}
+
+a:hover.inn {
+	position: relative;
+	background-color: #245524;
+	color: #ffffff; /*Schriftfarbe Hover*/
+}
+
+span.menutag {
+	display: block;
+	cursor: default;
+}
+
+/* use a semi-transparent image for the overlay */
+#overlay {
+	background-image: url(../images/overlay/white.png);
+	color: #efefef;
+}
+
+/* container for external content. uses vertical scrollbar, if needed */
+div.wrap {
+	height: 590px;
+	overflow-y: auto;
+}
+
+.preview-box {
+	background-color: #F2F8FA;
+	padding: 5px 10px;
+	margin-top: 0;
+}
+
+.abschnitt-header {
+	color: #000;
+	font-size: 14px;
+	font-weight: bold;
+	margin: 20px 0 0 0;
+}
+
+.nl {
+	height: 1px;
+	clear: both;
+	width: 100%;
+	font-size: 1px;
+	background-color: #fff;
+	overflow: hidden; /* IE6fix für 1px hohe*/
+}
+
+.hr {
+	border-top: 1px solid #CBCBCB;
+	height: 1px;
+	font-size: 1px;
+	margin-bottom: 0px;
+	margin-top: 5px;
+}
+
+.field-name {
+	margin: 3px 0;
+	color: #000;
+	font-size: 11px;
+	font-weight: bold;
+}
+
+.field-value {
+	margin: 3px 0;
+	color: #000;
+	font-size: 11px;
+}
+
+.spalte1 {
+	float: left;
+	width: 35%;
+	padding-right: 10px;
+	text-align: right;
+}  /* zusatz für field-name */
+.spalte2 {
+	float: left;
+	width: 60%;
+} /* zusatz für field-value */

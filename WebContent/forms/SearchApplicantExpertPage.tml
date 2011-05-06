@@ -1,0 +1,373 @@
+<t:Layout t:title="candidates and expert profiles search" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd" xmlns:p="tapestry:parameter">
+  	<div class="fliesstext_gross">
+    	<b>${message:pleaseNotice}</b>
+  	</div>
+  	<br />
+	<div class="fliesstext">
+       Auf dieser Website veröffentlicht AGEF weltweite Bewerber- und Expertenprofile von Absolventen und 
+       Fachkräften aus Entwicklungs- und Schwellenländern, die in Deutschland studiert 
+       oder Arbeitserfahrung erworben haben. 
+    </div>
+  
+
+		<div>
+		<br />
+		<fieldset><legend><strong>${message:searchCriteria}</strong></legend>
+		<t:form t:id="beanForm">
+			<t:errors />
+		 	<div class="t-beaneditor">
+		 		<div class="t-beaneditor-row">
+    		<!--		<t:label for="territorySelect">${message:countrySelect}</t:label>
+    				<t:select t:id="territorySelect" value="territoryItem" model="territoryListSelectionModel" encoder="territoryListValueEncoder" t:mixins="chenillekit/OnEvent" event="change" onCompleteCallback="onSelectCompleteFunction" t:blankoption="always"/>
+					<t:select t:id="countrySelect" value="countryItem" model="countryListSelectionModel" encoder="countryListValueEncoder" t:mixins="chenillekit/OnEvent" event="change" t:blankoption="always"/>       				
+     	    --> 		
+     	     		
+     	     		<p>
+     	     			<t:label for="territorySelect">${message:territorySelect}</t:label>
+         				<t:select t:id="territorySelect" value="territoryItem"  t:blankoption="always" model="territoryListSelectionModel" zone="countryZone" encoder="territoryListValueEncoder"/>
+     				</p>
+      
+				      <t:zone t:id="countryZone">
+				         <t:if test="territoryItem">
+				            <t:delegate to="countryBlock" />
+				         </t:if>
+				      </t:zone>
+				      
+				      <t:block id="countryBlock">
+				         <p>
+				        	<label>${message:countrySelect}</label>
+				            <t:select t:id="countrySelect" value="countryItem" model="countryListSelectionModel" encoder="countryListValueEncoder" t:blankoption="always"/>
+				         </p>
+				      </t:block>
+     	     		
+     	     		
+<!--        		${territoryItem}  + ${territoryItem?.nameEnglish}-->
+        		</div>
+		        <div class="t-beaneditor-row">
+					<t:label for="searchfield"/>
+            		<t:textfield t:id="searchField" value="searchField" size="50"/>
+		        	<div class="t-beaneditor-row">
+		        		<t:submit t:id="submit" value="${message:searchSubmit}"/>
+					</div>
+				</div>
+			</div>
+		</t:form>
+		</fieldset>	
+		
+		
+		
+		<fieldset><legend><strong>${message:searchResults}</strong></legend>
+<!--			<t:ProgressiveDisplay update="show">-->
+			<t:grid t:source="applicantSearchList" rowsPerPage="10" inPlace="false" row="applicantSearchData" t:id="applicantGrid" t:model="applicantGridModel">
+				<t:parameter name="resultsCell">
+					<table width="700px">
+					<tr>
+					<td width="50%">
+<!--					<t:actionlink t:id="details" zone="detailsZone" context="applicantSearchData.applicantProfileId">-->
+						<b>Abschluss: </b>${applicantSearchData?.fieldOfHighestDegree}
+<!--					</t:actionlink>-->
+					<br />
+					</td>
+					<td width="50%">							
+ 						<b>Berufserfahrung:</b> ${applicantSearchData?.combinedWorkExperiences}
+						<br />
+						
+						<div style="text-align:left; float: left;">
+						<b>Ort:</b> ${applicantSearchData?.currentCountryOfResidence}
+	    				</div>
+	    				
+<!--	    				<div style="text-align:right;">-->
+<!--	    					<t:actionlink t:id="moreLikeThisLink" context="jobData.jobOfferId">-->
+<!--	    						${message:moreLikeThis}-->
+<!--	    					</t:actionlink>-->
+<!--	    				</div>-->
+<!--	    				<div style="text-align:right;">-->
+<!--	    					<t:actionlink t:id="mapLink" context="jobData.jobOfferId">-->
+<!--	    						${message:showOnMap}-->
+<!--	    					</t:actionlink>	-->
+<!--	    				</div>-->
+	    				
+					</td>
+					</tr>
+					<tr>
+					<td colspan="2">
+					<t:actionlink t:id="details" zone="detailsZone" context="applicantSearchData.applicantProfileId">
+						<b>Details >></b>
+					</t:actionlink><br />	
+<!--					<div t:type="chenillekit/SlidingPanel" subject="${message:readMore}" style="width: 100%;" closed="true">
+ 				<div>
+        				<t:textoutput t:value="${applicantData?.highestDegree?.fieldSpecialization}" />
+   				</div>
+					</div>
+-->						
+					</td>
+					</tr>
+				</table>
+	    		</t:parameter>
+			</t:grid>
+<!--			</t:ProgressiveDisplay>-->
+		</fieldset>
+		<br />
+		
+		
+		<t:zone t:id="detailsZone"/>
+     	<t:block id="applicantDetails">
+         	<div class="wrap">
+         	<table border="0" style="width:100%;">
+			<!-- HEADER !-->
+			<tr class="header"><td><b>Bewerbernummer: ${ApplicantProfileId} | ${applicantData?.highestDegree?.fieldSpecialization}</b></td></tr>
+			</table>
+
+         	
+         	<!-- Hoechste Ausbildung BEGIN -->
+         	
+         	<div class="abschnitt-header">Höchste Ausbildung</div>
+         	<div class="hr"> </div>
+				<div class="preview-box" style="padding:0;">
+
+					<span class="field-name spalte1">Fachrichtung:</span>
+					<span class="field-value spalte2">${applicantData?.highestDegree?.fieldSpecialization}</span>
+					<div class="nl"> </div>
+         	
+					<span class="field-name spalte1">Abschluss:</span>
+					<span class="field-value spalte2">${getEnumLabel(applicantData?.highestDegree?.degree)}</span>
+					<div class="nl"> </div>
+				
+					<span class="field-name spalte1">Jahr des Abschlusses:</span>
+					<span class="field-value spalte2"><span t:type="chenillekit/DateFormat" value="applicantData?.highestDegree?.dateOfGraduation" pattern="literal:yyyy"/></span>
+					<div class="nl"> </div>
+					
+					<span class="field-name spalte1">Ausbildungseinrichtung:</span>
+					<span class="field-value spalte2">${getEnumLabel(applicantData?.highestDegree?.educationalInstitute)}</span>
+					<div class="nl"> </div>
+				
+					<span class="field-name spalte1">Land:</span>
+					<span class="field-value spalte2">${applicantData?.highestDegree?.country?.officialEnglishName}</span>
+					<div class="nl"> </div>
+		
+				</div> 
+			
+			
+			<!-- Hoechste Ausbildung END  -->
+			
+			
+			<!-- Weitere Ausbildungen  BEGIN-->
+			
+			<t:loop source="applicantData?.furtherEducation" value="educationItem">
+			<div class="abschnitt-header">Weitere Ausbildungen Ausbildung</div>
+         	<div class="hr"> </div>
+				
+				<div class="preview-box" style="padding:0;">
+
+					<span class="field-name spalte1">Fachrichtung:</span>
+					<span class="field-value spalte2">${educationItem?.fieldSpecialization}</span>
+					<div class="nl"> </div>
+         	
+					<span class="field-name spalte1">Abschluss:</span>
+					<span class="field-value spalte2">${getEnumLabel(educationItem?.degree)}</span>
+					<div class="nl"> </div>
+				
+					<span class="field-name spalte1">Jahr des Abschlusses:</span>
+					<span class="field-value spalte2"><span t:type="chenillekit/DateFormat" value="educationItem?.dateOfGraduation" pattern="literal:yyyy"/></span>
+					<div class="nl"> </div>
+					
+					<span class="field-name spalte1">Ausbildungseinrichtung:</span>
+					<span class="field-value spalte2">${getEnumLabel(educationItem?.educationalInstitute)}</span>
+					<div class="nl"> </div>
+				
+					<span class="field-name spalte1">Land:</span>
+					<span class="field-value spalte2">${educationItem?.country?.shortEnglishName}</span>
+					<div class="nl"> </div>
+		
+				</div> 
+			</t:loop>
+			
+			<!-- Weitere Ausbildungen END -->
+			
+			
+			<!--  Berufserfahrungen  BEGIN -->
+			
+			<t:loop source="applicantData?.workExperience" value="workExperienceItem">
+			
+				<div class="abschnitt-header">Berufserfahrungen</div><div class="hr"> </div>
+		
+				<!-- START PREVIEW BOX -->
+				<div class="preview-box" style="padding:0;">
+				
+					<span class="field-name spalte1">von:</span> <span class="field-value spalte2"><span t:type="chenillekit/DateFormat" value="workExperienceItem?.started" pattern="literal:yyyy"/></span>
+					<div class="nl"> </div>
+					
+					<span class="field-name spalte1">bis:</span> <span class="field-value spalte2"><span t:type="chenillekit/DateFormat" value="workExperienceItem?.finished" pattern="literal:yyyy"/></span>
+					<div class="nl"> </div>
+					
+					<span class="field-name spalte1">Berufsbezeichnung:</span> <span class="field-value spalte2">${workExperienceItem?.jobTitle}</span>
+					<div class="nl"> </div>
+							
+					<span class="field-name spalte1">Berufsfeld:</span> <span class="field-value spalte2">${workExperienceItem?.occupationalField?.fieldNameGerman}</span>
+					<div class="nl"> </div>
+										
+					<span class="field-name spalte1">Branche:</span> <span class="field-value spalte2">${workExperienceItem?.sector?.sectorNameGerman}</span>
+					<div class="nl"> </div>
+							
+					<span class="field-name spalte1">Tätigkeit/ Beschreibung:</span> <span class="field-value spalte2">${workExperienceItem?.jobDescription}</span>
+					<div class="nl"> </div>
+					
+				</div> 
+				<!-- END PREVIEW BOX -->
+		 </t:loop>
+		
+<!-- END Berufliche Erfahrungen !-->
+			
+			
+			
+			
+			
+			<div class="abschnitt-header">Einsatzfeld</div><div class="hr"> </div>
+			<!-- START PREVIEW BOX -->
+			<div class="preview-box" style="padding:0;">
+			
+				<span class="field-name spalte1">Bevorzugtes Tätigkeitsfeld:</span>  <span class="field-value spalte2">${applicantData?.preferredFieldOfActivity?.sectorNameGerman}</span>
+				<div class="nl"> </div>
+			
+				<span class="field-name spalte1">Verfügbarkeit:</span>  <span class="field-value spalte2">${getEnumLabel(applicantData?.durationOfContract)}</span>
+				<div class="nl"> </div>
+			
+				<span class="field-name spalte1">Verfügbar ab:</span>  <span class="field-value spalte2"><span t:type="chenillekit/DateFormat" value="applicantData?.availableFromDate" pattern="literal:dd.MM.yyyy"/></span>
+				<div class="nl"> </div>
+				
+				<span class="field-name spalte1">Bevorzugter Einsatzort:</span>  <span class="field-value spalte2">${applicantData?.preferredLocation?.shortEnglishName}</span>
+				<div class="nl"> </div>
+			
+				<span class="field-name spalte1">Einsatzort Bemerkungen:</span>  <span class="field-value spalte2">${applicantData?.locationRemarks}</span>
+				<div class="nl"> </div>
+			
+				<span class="field-name spalte1">Weitere Anmerkungen:</span>  <span class="field-value spalte2">${applicantData?.additionalRemarks}</span>
+				<div class="nl"> </div>
+				
+				
+			
+			</div> 	
+			<t:if test="${applicantData?.managementExperience}">
+			
+				<!-- BEGIN Leitungsfahrungen!-->
+				
+				<div class="abschnitt-header">Leitungserfahrungen</div><div class="hr"> </div>
+	
+				<!-- START PREVIEW BOX -->
+			
+				<div class="preview-box" style="padding:0;">
+				
+					<span class="field-name spalte1">Leitungserfahrung:</span> <span class="field-value spalte2">${getEnumLabel(applicantData?.managementExperience)}</span>
+					<div class="nl"> </div>
+				
+					<span class="field-name spalte1">Branche:</span> <span class="field-value spalte2">${applicantData?.managementExperienceSector?.sectorNameGerman}</span>
+					<div class="nl"> </div>
+					
+					<span class="field-name spalte1">Teamgröße:</span> <span class="field-value spalte2">${getEnumLabel(applicantData?.managementExperienceTeamSize)}</span>
+					<div class="nl"> </div>
+					 
+							
+					<span class="field-name spalte1">Dauer:</span> <span class="field-value spalte2">${getEnumLabel(applicantData?.managementExperienceDuration)}</span>
+					<div class="nl"> </div>
+					
+					<span class="field-name spalte1">Bemerkungen:</span> <span class="field-value spalte2">${applicantData?.managementExperienceRemarks}</span>
+					<div class="nl"> </div>
+					
+					
+							
+				</div> 
+				<!-- END PREVIEW BOX -->
+			
+				<!-- END Leitungsfahrungen!-->
+			</t:if>
+
+		<!-- BEGIN Kenntnisse, Fähigkeiten, Qualifikationen !-->
+				<div class="abschnitt-header">Kenntnisse, Fähigkeiten, Qualifikationen</div><div class="hr"> </div>
+				<!-- START PREVIEW BOX -->
+					<div class="preview-box" style="padding:0;">
+				
+					<span class="field-name spalte1">Computerkenntnisse:</span> <span class="field-value spalte2">${getEnumLabel(applicantData?.computerSkills)}</span>
+					<div class="nl"> </div>
+					
+					<span class="field-name spalte1">Computerkenntnisse Bemerkungen:</span> <span class="field-value spalte2">${applicantData?.computerSkillsComments}</span>
+					<div class="nl"> </div>
+								
+					<span class="field-name spalte1">Führerschein:</span> <span class="field-value spalte2">${getEnumLabel(applicantData?.drivingLicence)}</span>
+					<div class="nl"> </div>
+				
+								
+					<span class="field-name spalte1">Sprachkenntnisse Deutsch:</span><span class="field-value spalte2">${getEnumLabel(applicantData?.languageSkillsGerman)}</span>
+					<div class="nl"> </div>
+					
+					<span class="field-name spalte1">Sprachkenntnisse Englisch:</span><span class="field-value spalte2">${getEnumLabel(applicantData?.languageSkillsEnglish)}</span>
+					<div class="nl"> </div>
+								
+					<span class="field-name spalte1">Sonstige Kenntnisse:</span> <span class="field-value spalte2">${applicantData?.additionalSkills}</span>
+					<div class="nl"> </div>
+						
+				</div> 
+				<!-- END PREVIEW BOX -->
+				
+		<!-- END Kenntnisse, Fähigkeiten, Qualifikationen !-->
+		
+		<!-- BEGIN Kontakt !-->
+				<div class="abschnitt-header">Kontakt</div><div class="hr"> </div>
+				<!-- START PREVIEW BOX -->
+					<div class="preview-box" style="padding:0;">
+			
+			
+			<span class="field-name spalte1">Bewerbernummer:</span>
+			<span class="field-value spalte2">${applicantData?.applicantProfileOwner?.cobraSuperId}</span>
+			<div class="nl"> </div>
+						
+			<span class="field-name spalte1">Hinweis:</span>
+			<span class="field-value spalte2">
+				Bewerber- und Expertenprofile werden auf dieser Webseite anonym veröffentlicht. Sollten Sie Interesse an
+				dem hier veröffentlichten Bewerberprofil haben, so wenden Sie sich bitte unter Angabe der Bewerbernummer: <b>${applicantProfileId}</b> 
+				an folgende eMailadresse: beratung[at]agef.de .
+			</span>
+		<div class="nl"> </div>
+		</div> 
+	<!-- END PREVIEW BOX -->	
+	<!-- END Kontakt !-->
+         	</div>
+			<script type="text/javascript">
+     			showWindow();
+     		</script>
+     	</t:block>
+		
+	</div>
+	
+	<div t:id="detailwindow" />
+    
+    
+<!--    <script type="text/javascript">  
+
+			function onSelectCompleteFunction(response) {
+				var json = response.result; 
+				var array = $A(json)
+				var counter = 0;
+				document.forms['beanForm'].countrySelect.options.length = 0;
+				//alert(response.result[1]);
+				array.each(function(item){  
+					document.forms['beanForm'].countrySelect.options[counter] = new Option(item[1],item[0]);
+					counter++;
+				})
+			}
+
+    </script>
+-->    
+    <script type="text/javascript"> 
+    function showWindow()
+    {
+        ${detailwindow.componentResources.id}.setTitle("Bewerber Details")
+        ${detailwindow.componentResources.id}.setContent("detailsZone",false,false)
+        ${detailwindow.componentResources.id}.showCenter(true)
+
+        
+    }
+
+    </script>  
+    
+    
+</t:Layout>

@@ -1,0 +1,104 @@
+<t:LayoutSecured t:title="Jobexchange Overview" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+			
+		
+		<tr>
+		<td align="left" valign="top" width="50%" >
+		
+		
+		<table border="0" width="100%" cellpadding="2">
+        <th width="100%" class="getjob" bgcolor="#245524">
+                     ${message:jobOffer}
+                    </th>
+                    
+                    
+                      <tr> 
+                       <td align="left" valign="top"  width="100%" bgcolor="#618561"> 
+                       	 [<t:pagelink class="lm_active" t:page="administration/addjobofferpage">${message:jobOffer_add}</t:pagelink>]
+                       </td>
+                       
+                       </tr>
+                       <tr> 
+                       <td align="left" valign="top"  width="100%" bgcolor="#618561"> 
+                      	[<t:pagelink class="lm_active" t:page="administration/managejobofferspage">${message:jobOffer_manage}</t:pagelink>]
+                       </td>
+                       
+                       </tr>
+      </table>
+		
+		</td>
+		
+		
+		<td align="left" valign="top" width="50%" >
+		
+		
+		<table border="0" width="100%" cellpadding="2">
+        <th width="100%" class="getjob" bgcolor="#245524">
+                     ${message:organisation}
+                    </th>
+                    
+                    <tr> 
+                       <td align="left" valign="top"  width="100%" bgcolor="#618561"> 
+                      	[<t:pagelink class="lm_active" t:page="administration/addorganisationpage">${message:organisation_add}</t:pagelink>]
+                       </td>
+                       
+                       </tr>
+                      <tr> 
+                       <td align="left" valign="top"  width="100%" bgcolor="#618561"> 
+                       	 [<t:pagelink class="lm_active" t:page="administration/manageorganisationspage">${message:organisation_manage}</t:pagelink>]	
+                       </td>
+                       
+                       </tr>
+                       
+      </table>
+      </td>
+      </tr>
+   		<tr>
+    		<td><img src="images/leer.gif" width="1" height="40" /></td>
+  		</tr>
+  		
+  		
+  		<t:security.ifrole role="ROLE_ADMIN"> 
+        
+        
+		<tr>	
+			
+		<td align="left" valign="top" width="50%" >
+		<table border="0" width="100%" cellpadding="2">
+        <th width="100%" class="getjob" bgcolor="#245524">
+                     ${message:loginuser}
+                    </th>
+                    
+                    <tr> 
+                       <td align="left" valign="top"  width="100%" bgcolor="#618561"> 
+                      	[<t:pagelink class="lm_active" t:page="administration/addloginuserpage">${message:loginuser_add}</t:pagelink>]
+                       </td>
+                       
+                     </tr>
+                     <tr> 
+                       <td align="left" valign="top"  width="100%" bgcolor="#618561"> 
+                       	 [<t:pagelink class="lm_active" t:page="administration/manageloginuserpage">${message:loginuser_manage}</t:pagelink>]	
+                       </td>
+                       
+                     </tr>
+                      
+                       
+      </table>
+      </td>    
+      </tr>
+      <tr>
+    		<td><img src="images/leer.gif" width="1" height="40" /></td>    		
+        		
+      </tr>	
+        		
+      	</t:security.ifrole>  
+
+  	
+  
+  
+  
+  
+
+		
+       
+
+</t:LayoutSecured>

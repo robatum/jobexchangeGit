@@ -1,0 +1,79 @@
+<t:LayoutSecured t:title="Add Organisation" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+		<tr>
+    		<td colspan="2">
+		<fieldset><legend><strong>${message:addOrganisation}</strong></legend>
+		<t:form t:id="beanForm">
+			<t:errors />
+		 	<div class="t-beaneditor">
+		 		<div class="t-beaneditor-row">
+		 			<p><h4>${message:organisationInformation}</h4></p>
+    				<t:label for="industrySectorSelect"/>
+    				<t:select t:id="industrySectorSelect" value="orgIndustrySectorItem" model="orgIndustrySectorListSelectionModel" encoder="orgIndustrySectorListValueEncoder" t:blankoption="always" validate="required"/>
+
+        		</div>
+        		<div class="t-beaneditor-row">
+					
+		        	<t:beaneditor t:id="beanEditor" t:object="orgRoleData" t:model="orgDataModel">
+						<t:parameter name="organisationName">
+	                		<t:label for="organisationName"/>
+	                		<t:textfield t:id="organisationName" value="orgRoleData.organisationName" size="60"/>
+	            		</t:parameter>
+					</t:beaneditor>
+					
+				</div>
+				
+				<div class="t-beaneditor-row">
+					<p><h4>${message:contactPerson}</h4></p>
+		        	<t:beaneditor t:id="beanEditorUser" t:object="orgUser" t:model="orgUserModel">
+						
+						<t:parameter name="emailBusiness">
+	                		<t:label for="emailBusiness"/>
+	                		<t:textfield t:id="emailBusiness" value="orgUser.emailBusiness" size="50"/>
+	            		</t:parameter>
+						<t:parameter name="internet">
+	                		<t:label for="internet"/>
+	                		<t:textfield t:id="internet" value="orgUser.internet" size="60"/>
+	            		</t:parameter>
+					</t:beaneditor>
+					
+				</div>
+				<div class="t-beaneditor-row">
+					<p><h4>${message:contactPersonAddress}</h4></p>
+		 			<t:beaneditor t:id="beanEditorUserAddress" t:object="orgUserAddress" t:model="orgUserAddressModel">
+					
+					<t:parameter name="orgUserTerritory">
+		        			<t:label for="territorySelect">${message:countrySelect}</t:label>
+    						<t:select t:id="territorySelect" value="territoryItem" model="territoryListSelectionModel" encoder="territoryListValueEncoder" t:mixins="chenillekit/OnEvent" event="change" onCompleteCallback="onSelectCompleteFunction" t:blankoption="always" validate="required"/>
+    						<t:select t:id="countrySelect" value="countryDummyItem" model="countryDummyListSelectionModel" encoder="countryDummyListValueEncoder" t:mixins="chenillekit/OnEvent" event="change" t:blankoption="always"/>       				
+     	     		</t:parameter>
+					</t:beaneditor>
+				</div>
+		        <div class="t-beaneditor-row">
+		        	<br />
+		 			<t:if test="isModified">
+	    					<t:submit t:id="submit_m" value="${message:modifyOrganisation}"/>
+	    					<t:parameter name="else">
+	    						<t:submit t:id="submit_a" value="${message:addOrganisation}"/>
+	    					</t:parameter>
+	    			</t:if>
+				</div>
+			</div>
+		</t:form>
+		</fieldset>
+		</td>
+		</tr>
+		<script type="text/javascript">  
+		function onSelectCompleteFunction(response) {
+			var json = response.result; 
+			var array = $A(json)
+			var counter = 0;
+			document.forms['beanForm'].countrySelect.options.length = 0;
+			//alert(response.result[1]);
+			array.each(function(item){  
+				document.forms['beanForm'].countrySelect.options[counter] = new Option(item[1],item[0]);
+				counter++;
+			})
+		}
+
+		</script> 
+</t:LayoutSecured>

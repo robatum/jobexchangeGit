@@ -1,0 +1,16 @@
+<t:Layout t:title="Start" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+        <h1>jobexchange Start Page</h1>
+
+        <p> Please select: </p>
+
+        <p>
+        	[<t:pagelink t:page="loginpage">login</t:pagelink>] <br />
+            [<t:pagelink t:page="forms/AddJobPage">add job offer</t:pagelink>] <br /> 
+            [<t:pagelink t:page="forms/searchjobpage">search for jobs</t:pagelink>] <br />
+            [<t:pagelink t:page="forms/searchjobpageDev">search for jobsDev</t:pagelink>] <br />
+            
+            [<t:pagelink t:page="forms/searchapplicantexpertpage">search applicant/ expert profile</t:pagelink>] <br />
+            [<t:pagelink t:page="forms/addapplicantexpertprofilepage">add applicant/ expert profile</t:pagelink>] <br />
+        </p>
+
+</t:Layout>

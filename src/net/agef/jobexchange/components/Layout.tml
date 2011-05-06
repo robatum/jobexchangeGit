@@ -1,0 +1,34 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>GETJOBS - German Experienced and/or Trained personnel JOB Service | ${title}</title>
+	
+		<!-- This link is the one that works at runtime -->
+		<link rel="stylesheet" type="text/css" href="${stylesheetLayout}"/>
+		<link rel="stylesheet" type="text/css" href="${stylesheetMenu}"/>
+		<link rel="stylesheet" type="text/css" href="${stylesheetComponent}"/>
+		<!--[if lte IE 7]>
+				<link rel="stylesheet" type="text/css" href="${stylesheetLayout}"/>
+				<link rel="stylesheet" type="text/css" href="${stylesheetMenu}"/>
+				<link rel="stylesheet" type="text/css" href="${stylesheetComponent}"/>
+				</style>
+		<![endif]-->
+	</head>
+	<body>  
+
+<!--	<div id="word"><strong>Getjob Jobexchange</strong> </div> -->
+<!--	<div id="menue-section-start">-->
+<!--		<ul id="menu_start">-->
+<!--		  <li> <t:pagelink t:page="forms/searchpage">search jobs</t:pagelink></li>  -->
+<!--		  <li> <t:PageLink t:page="forms/jobpage">add jobs</t:PageLink></li> -->
+<!--		  <li> <t:PageLink t:page="forms/applicantexpertpage">add experts</t:PageLink></li>-->
+<!--		  <li> <t:PageLink t:page="Index">Home</t:PageLink></li>   -->
+<!--		</ul> -->
+<!--	</div>-->
+	
+	<!-- Content -->
+	<t:body/>
+	<!-- Content End -->
+
+	</body>
+</html>

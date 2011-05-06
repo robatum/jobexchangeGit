@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+   <head>
+   <meta charset="utf-8" />
+   <meta content="width=device-width, minimum-scale=1, maximum-scale=1" name="viewport" />
+   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+   <title>${title}</title> 
+<!-- This demo uses the Alpha 1 of JQueryMobile as for example with Alpha 2 the Tapestry redirect-after-post does not work -->
+   <link type="text/css" rel="stylesheet" href="http://code.jquery.com/mobile/1.0a2/jquery.mobile-1.0a2.min.css" />
+
+   <script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
+   <script src="http://code.jquery.com/mobile/1.0a1/jquery.mobile-1.0a1.min.js"></script>
+</head>
+<body>
+ <div data-role="page">
+
+   <header data-role="header">
+	<h1>${title}</h1>
+   </header>
+
+   <div data-role="content">
+   <t:body />
+   </div>
+
+   <footer data-role="footer">
+	<h4>AGEF gGmbH 2010</h4>
+   </footer>
+
+ </div>
+
+</body>
+</html>

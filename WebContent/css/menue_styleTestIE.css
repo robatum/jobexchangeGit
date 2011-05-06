@@ -1,0 +1,82 @@
+/*
+	Menuestyles fuer IEs
+	per Conditional Comment einbinden.
+	
+*/
+#menue {
+	display: none;
+}
+
+.stupidie {
+	display: block;
+	position: absolute;
+	top: 0 px;
+	left: 0;
+	z-index: 200;
+	width: 100%;
+}
+
+a.auss { /*background-image:url(images/hg_menue.jpg);*/
+	float: left;
+	width: 24.5%;
+	height: 1.4em;
+	overflow: hidden;
+	display: block;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	font-weight: bold;
+	text-align: center;
+	text-decoration: none;
+	background-color: #eef6ee;
+	color: #245524;
+	border: 1px solid;
+	border-color: #245524;
+}
+
+a:hover.auss {
+	overflow: visible;
+	background-color: #eef6ee;
+	color: #eef6ee;
+}
+
+a:hover.auss table {
+	display: block;
+	margin-top: 3px;
+	background-color: #eef6ee;
+	color: #245524;
+	border-collapse: collapse;
+}
+
+a.inn { /*background-image:url(images/hg_menue.jpg);*/
+	display: block;
+	width: 11.2em; /* fuer 5er IEs anpassen, sonst 'ruckelt' es */
+	padding: 2px 0;
+	font-size: 80%; /* fuer 5er IEs auf 80% reduzieren */
+	font-weight: normal;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	text-align: center;
+	text-decoration: none;
+	border-bottom: 1px solid #ffffff;
+	background-color: #eef6ee;
+	color: #245524;
+}
+
+a:visited.inn {
+	background-color: #eef6ee;
+	color: #245524;
+}
+
+a:hover.inn {
+	position: relative;
+	background-color: #245524;
+	color: #eef6ee;
+}
+
+span.menutag {
+	display: block;
+	cursor: default;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	font-weight: bold;
+	font-size: 10px;
+	color: #245524;
+	letter-spacing: 0.05em;
+}

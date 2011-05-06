@@ -1,0 +1,16 @@
+<t:LayoutMobile t:title="Stellenangebote" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd" xmlns:p="tapestry:parameter">
+	 <strong>${resultSize} Ergebnisse.</strong><br />
+	 <t:pagelink page="mobile/JobSearch" data-transition="pop" data-role="button" data-inline="true">zur Suche</t:pagelink>
+	 <ul class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+	 <t:loop source="jobSearchList" value="job">
+	 	<li class="ui-btn ui-btn-icon-right ui-li ui-btn-up-c">
+	 		<div class="ui-btn-inner">
+	 			<div class="ui-btn-text">
+					<h5 class="ui-li-heading" style="white-space: normal;">${job.jobdescription}</h5>
+					<p class="ui-li-desc">${job.countryofemployment.officialEnglishName}</p>
+	 			</div>
+	 		</div>
+	 	</li>
+	 </t:loop>
+	 </ul>
+</t:LayoutMobile>

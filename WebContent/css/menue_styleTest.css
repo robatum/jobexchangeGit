@@ -1,0 +1,78 @@
+/*
+	Menuestyle fuer non-IEs
+
+*/
+#menuebox {
+	position: relative;
+	height: 30px;
+	width: 100%;
+}
+
+.stupidie {
+	display: block;
+}
+
+#menue {
+	position: absolute;
+	top: 0 px;
+	left: 0 px;
+	z-index: 200;
+	width: 100%
+}
+
+#menue .aussen {
+	float: left;
+	display: table-cell;
+	overflow: hidden;
+	width: 24.5%;
+	height: 1.5em;
+	font-weight: bold;
+	text-align: center;
+	background-color: #eef6ee;
+	color: #000000;
+	border: 1px solid;
+	border-color: #245524;
+}
+
+#menue .aussen:hover {
+	height: auto;
+	background-color: #eef6ee;
+	color: #245524;
+}
+
+a.innen-1 {
+	margin-top: 2px;
+}
+
+a.innen,a.innen-1 {
+	display: block;
+	width: 100%;
+	padding: 2px 0;
+	text-decoration: none;
+	font-weight: normal;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	border-bottom: 1px solid #ffffff;
+	background-color: #eef6ee; /*dropdown untermenue hintergrundfarbe*/
+	color: #245524; /*schrift innen*/
+}
+
+a:visited.innen,a:visited.innen-1 {
+	background-color: #eef6ee;
+	color: #245524;
+}
+
+a:hover.innen,a:hover.innen-1 {
+	background-color: #245524;
+	color: #eef6ee;
+}
+
+span.menutag {
+	height: 20px;
+	display: block;
+	cursor: default;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	font-weight: bold;
+	font-size: 10px;
+	letter-spacing: 0.05em;
+	color: #245524;
+}

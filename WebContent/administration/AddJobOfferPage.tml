@@ -1,0 +1,109 @@
+<t:LayoutSecured t:title="${message:addJobOffer}" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+		<tr>
+    		<td colspan="2">
+		<fieldset><legend><strong>${message:addJobOffer}</strong></legend>
+		<t:form t:id="beanForm">
+			<t:errors />
+		 	<div class="t-beaneditor">
+		 	
+		 		<div class="t-beaneditor-row">
+		 			<p><h4>${message:jobOfferDetails}</h4></p>
+    				<t:label for="organisationSelect"/>
+    				<t:select t:id="organisationSelect" value="orgUserDataItem" model="orgUserDataListSelectionModel" encoder="orgUserDataListValueEncoder" t:blankoption="always" validate="required"/> ${message:noOrganisationAvailable} [<t:pagelink t:page="administration/addorganisationpage">${message:addNewOrganisationHere}</t:pagelink>] <br />
+
+        		</div>
+        		
+        		<div class="t-beaneditor-row">
+    				<t:label for="occupationalFieldSelect"/>
+    				<t:select t:id="occupationalFieldSelect" value="occupationalFieldItem" model="occupationalFieldListSelectionModel" encoder="occupationalFieldListValueEncoder" t:blankoption="always" validate="required"/> 
+
+        		</div>
+		 		<div class="t-beaneditor-row">
+    				
+        		
+        		</div>
+        		<div class="t-beaneditor-row">
+						
+		        	<t:beaneditor t:id="beanEditor" t:object="jobOffer" t:model="jobOfferModel">
+		        		
+		        		<t:parameter name="locationOfEmployment">
+	                		<t:label for="locationOfEmployment"/>
+	                		<t:textfield t:id="locationOfEmployment" value="jobOffer.locationOfEmployment" size="50"/>
+	                		<br/>
+	                		<p><h4>${message:educationRequirements}</h4></p>
+	            		</t:parameter>
+	                	<t:parameter name="territoryOfEmployment">
+		        			<t:label for="territorySelect">${message:countryOfEmployment}</t:label>
+    						<t:select t:id="territorySelect" value="territoryItem" model="territoryListSelectionModel" encoder="territoryListValueEncoder" t:mixins="chenillekit/OnEvent" event="change" onCompleteCallback="onSelectCompleteFunction" t:blankoption="always" validate="required"/>
+    						<t:select t:id="countrySelect" value="countryDummyItem" model="countryDummyListSelectionModel" encoder="countryDummyListValueEncoder" t:mixins="chenillekit/OnEvent" event="change" t:blankoption="always"/>       				
+     	     			</t:parameter>
+		        		<t:parameter name="desiredProfession">
+		        			<p><h4>${message:workExperience}</h4></p>
+	                		<t:label for="desiredProfession"/>
+	                		<t:textfield t:id="desiredProfession" value="jobOffer.desiredProfession" size="50"/>
+	            		</t:parameter>
+	            		<t:parameter name="experiencesAndKnowledge">
+	                		<br/>
+	                		<p><h4>${message:experiencesAndKnowledge}</h4></p>
+	            		</t:parameter>
+	            		<t:parameter name="alternativeProfession">
+	                		<t:label for="alternativeProfession"/>
+	                		<t:textfield t:id="alternativeProfession" value="jobOffer.alternativeProfession" size="50"/>
+	            		</t:parameter>
+	            		<t:parameter name="jobDescription">
+	                		<t:label for="jobDescription"/>
+	                		<t:textfield t:id="jobDescription" value="jobOffer.jobDescription" size="80"/>
+	            		</t:parameter>
+		        		<t:parameter name="applicationFormLink">
+	                		<t:label for="applicationFormLink"/>
+	                		<t:textfield t:id="applicationFormLink" value="jobOffer.applicationFormLink" size="60"/>
+	            		</t:parameter>
+						<t:parameter name="numberOfJobs">
+	                		<t:label for="numberOfJobs"/>
+	                		<t:select t:id="numberOfJobs" value="jobAmountItem" model="jobAmountListSelectionModel" encoder="jobAmountListValueEncoder" validate="required"/>
+	            		</t:parameter>
+	            		<t:parameter name="furtherRequirements">
+	                		<t:label for="furtherRequirements"/>
+	                		<t:textarea t:id="furtherRequirements" value="jobOffer.furtherRequirements" size="90%"/>
+	            			<br />
+	            			<p><h4>${message:conditionsOfEmployment}</h4></p>
+	            		</t:parameter>
+	            		<t:parameter name="salaryCurrency">
+		        			<t:label for="salaryCurrencySelect"/>
+    						<t:select t:id="salaryCurrencySelect" value="salaryCurrencyItem" model="salaryCurrencyListSelectionModel" encoder="salaryCurrencyListValueEncoder" t:blankoption="always"/> 
+
+	                	</t:parameter>
+					</t:beaneditor>
+					
+				</div>
+		        <div class="t-beaneditor-row">
+		        	<br />
+		        	<t:if test="modified">
+	    					<t:submit t:id="submit_m" value="${message:modifyJobOffer}"/>
+	    					<t:parameter name="else">
+	    						<t:submit t:id="submit_a" value="${message:addJobOffer}"/>
+	    					</t:parameter>
+	    			</t:if>
+		 			
+				</div>
+			</div>
+		</t:form>
+		</fieldset>
+		</td>
+		</tr>
+		<script type="text/javascript">  
+		
+			function onSelectCompleteFunction(response) {
+				var json = response.result; 
+				var array = $A(json)
+				var counter = 0;
+				document.forms['beanForm'].countrySelect.options.length = 0;
+				//alert(response.result[1]);
+				array.each(function(item){  
+					document.forms['beanForm'].countrySelect.options[counter] = new Option(item[1],item[0]);
+					counter++;
+				})
+			}
+
+</script> 
+</t:LayoutSecured>

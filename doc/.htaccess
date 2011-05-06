@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "Restricted Directory"
+AuthUserFile  /var/www/web4/html/.docuser
+require valid-user

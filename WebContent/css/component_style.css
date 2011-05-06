@@ -1,0 +1,167 @@
+DIV.t-data-grid-pager SPAN.current {
+	background: #507E5E;
+}
+
+DIV.t-data-grid TH {
+	background: #507E5E;
+}
+
+/***** Beandisplay  ***/
+DIV.t-beandisplay {
+	display: block;
+	border: 2px solid green;
+	background: #ffc;
+	padding: 2px;
+	font-family: "Trebuchet MS", Arial, sans-serif;
+}
+
+/***** Beandisplay workaraound sinxce 5.0.14 ***/
+	/* IE 7 issue -> http://www.nabble.com/-jira--Created:-(TAPESTRY-2701)-BeanDisplay-formatting-can-be-off-in-IE7-with-short-values-td19778804.html
+*/
+DIV.t-beandisplay-row {
+	clear: both; //
+	display: block;
+	padding-top: 10px;
+	color: black;
+}
+
+DIV.t-beandisplay { //
+	background-color: #EEF6EE;
+	/*text-decoration: none; 
+   font-weight:normal; 
+   font-family:Verdana, Arial, Helvetica, Geneva, sans-serif; 
+   font-size:11px;*/
+	background: #ffffff;
+	border: 20px outset black;
+	width: 150px;
+}
+
+DL.t-beandisplay DD:after {
+	content: " ";
+}
+
+DL.t-beandisplay DD {
+	white-space: pre;
+	margin-left: 0.5em;
+	clear: left;
+	display: block;
+	text-align: left;
+	width: 95%;
+	background-color: #EEF6EE;
+	border-bottom: 1px solid #ccc;
+}
+
+DL.t-beandisplay DT {
+	background-color: #487148;
+	text-decoration: none;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	margin-left: 0.5em;
+	float: left;
+	text-align: left;
+	clear: left;
+	width: 94.5%;
+	color: white;
+	border: 1px outset black;
+}
+
+DL.t-beandisplay P {
+	padding: 5px;
+	width: 95%;
+}
+
+DIV.t-beandisplay DIV.t-beandisplay-label {
+	padding-right: 5px;
+}
+
+/***** #ececeb;   background: #ccff99; ***/
+DIV.t-beaneditor {
+	display: block;
+	border: 2px solid green;
+	padding: 2px;
+	font-family: "Trebuchet MS", Arial, sans-serif;
+}
+
+DIV.t-beaneditor LABEL {
+	width: 150px;
+	display: block;
+	float: left;
+	text-align: right;
+	clear: left;
+	padding-right: 3px;
+}
+
+DIV.t-beaneditor TEXTAREA {
+	width: 80%;
+	text-align: left;
+	padding-right: 3px;
+}
+
+/* Sliding Panel - Start */
+DIV.tap5c_slidingpanel {
+	
+}
+
+DIV.tap5c_slidingPanelSubject {
+	font-weight: bold;
+	text-align: left;
+	cursor: pointer;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 5px;
+	-moz-user-select: none;
+	background: url( ../images/white-top-bottom.gif ) repeat-x scroll 0 -1px
+		;
+}
+
+DIV.tap5c_slidingPanelSubject-toggler {
+	background: transparent url( ../images/tool-sprites.gif ) no-repeat
+		scroll;
+	cursor: pointer;
+	float: left;
+	height: 15px;
+	margin-top: 0;
+	margin-right: 5px;
+	overflow: hidden;
+	width: 15px;
+	background-position: 0 -75px;
+}
+
+DIV.open {
+	background-position: 0 -60px;
+}
+
+DIV.tap5c_slidingPanelContent {
+	text-align: left;
+	padding-left: 5px;
+	padding-bottom: 5px;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+	border-bottom: 1px solid black;
+	overflow: hidden;
+	background: #507E5E url( ../images/fieldset_gradient.jpg ) repeat-x;
+}
+
+/* Sliding Panel - End #F2EFE9*/ /* Tool Tip - Start*/
+DIV.tap5c_tooltip {
+	width: 150px;
+	border: 1px solid black;
+}
+
+DIV.tap5c_tooltip-title {
+	background: silver;
+	font-size: 10pt;
+	font-family: sans-serif;
+	font-weight: bold;
+	padding: 3px;
+	background: url( ../images/white-top-bottom.gif ) repeat-x scroll 0 -1px
+		;
+}
+
+DIV.tap5c_tooltip-content {
+	background-color: #FFFFFF;
+	font: 9pt Arial, Helvetica, sans-serif;
+	padding: 3px;
+}
+/* Tool Tip - End*/

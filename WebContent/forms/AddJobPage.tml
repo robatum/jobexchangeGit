@@ -1,0 +1,75 @@
+<t:LayoutSecured t:title="Publish your job offer" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+        
+        <h3><strong>Job Offer</strong></h3>
+		<div><br />
+		<fieldset><legend><strong>Current Job Offers</strong></legend>
+			<t:grid t:source="jobList" rowsPerPage="10" inPlace="true" row="jobData" t:id="jobGrid" t:model="jobGridModel">
+				<t:parameter name="deleteCell">
+	    			<t:actionlink t:id="delete" context="jobData.jobOfferId">
+	    				delete
+	    			</t:actionlink>
+	    	</t:parameter>
+			</t:grid>
+		</fieldset>
+		<br />
+		<fieldset><legend><strong>Add Job Offer</strong></legend>
+		<t:form t:id="beanForm">
+			<t:errors />
+		 	<div class="t-beaneditor">
+		 		<div class="t-beaneditor-row">
+    				<t:label for="territorySelect"/>
+    				<t:select t:id="territorySelect" value="territoryItem" model="territoryListSelectionModel" encoder="territoryListValueEncoder" t:mixins="chenillekit/OnEvent" event="change" onCompleteCallback="onSelectCompleteFunction" t:blankoption="always" validate="required"/>
+        			
+        			
+     				
+    				<t:select t:id="countrySelect" value="countryDummyItem" model="countryDummyListSelectionModel" encoder="countryDummyListValueEncoder" t:mixins="chenillekit/OnEvent" event="change" t:blankoption="always"/>       				
+     	     		
+        		
+        		</div>
+        		<!--  <div class="t-beaneditor-row">
+        			<t:beaneditor t:id="userRoleData" t:model="userRoleDataModel"/>
+        		</div>
+		     -->   <div class="t-beaneditor-row">
+
+		        	<t:beaneditor t:id="beanEditor" t:object="jobOffer" t:model="model">
+				<!--		<t:parameter name="contactAddress">
+							
+						</t:parameter>
+				-->	
+					</t:beaneditor>
+					
+				<!-- <t:checkbox t:id="addAddress" t:mixins="triggerfragment" fragment="addedAddress"/>
+                	<t:label for="addAddress">Add address?</t:label>
+
+                	<t:formfragment t:id="addedAddress" visible="addAddress">
+
+                    		<h2>Address</h2>
+							<t:beaneditor t:id="contactAddress" t:object="currentContactAddress"/>
+                   		<t:beaneditor t:id="contactPerson" t:object="contactPerson"/>
+
+                	</t:formfragment>	
+			-->	</div>
+		        <div class="t-beaneditor-row">
+		        	<t:outputRaw value="reCaptchaHTML" />
+		 			<t:submit t:id="submit" value="add joboffer"/>
+				</div>
+			</div>
+		</t:form>
+		</fieldset>
+		</div>
+        
+		<script type="text/javascript">  
+		function onSelectCompleteFunction(response) {
+			var json = response.result; 
+			var array = $A(json)
+			var counter = 0;
+			document.forms['beanForm'].countrySelect.options.length = 0;
+			//alert(response.result[1]);
+			array.each(function(item){  
+				document.forms['beanForm'].countrySelect.options[counter] = new Option(item[1],item[0]);
+				counter++;
+			})
+		}
+
+</script> 
+</t:LayoutSecured>

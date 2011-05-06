@@ -1,0 +1,56 @@
+<t:LayoutSecured t:title="Add Login User" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+        <tr>
+    		<td colspan="2">
+		<fieldset><legend><strong>${message:addOrganisation}</strong></legend>
+		<t:form t:id="beanForm">
+			<t:errors />
+		 	<div class="t-beaneditor">
+		 		<div class="t-beaneditor-row">
+		 			<p><h4>${message:organisationInformation}</h4></p>
+    				<t:label for="loginUserRoleSelect"/>
+    				<t:select t:id="loginUserRoleSelect" value="loginUserRoleItem" model="loginUserRoleListSelectionModel" encoder="loginuserRoleListValueEncoder" t:blankoption="always" validate="required"/>
+
+        		</div>
+        		<div class="t-beaneditor-row">
+					
+		        	<t:beaneditor t:id="beanEditor" t:object="loginUser" t:model="loginUserModel">
+					</t:beaneditor>
+					
+				</div>
+				
+				
+				<div class="t-beaneditor-row">
+					<p><h4>${message:contactPersonAddress}</h4></p>
+		 			<t:beaneditor t:id="beanEditorUserAddress" t:object="loginUserAddress" t:model="loginUserAddressModel">
+					
+					<t:parameter name="loginUserTerritory">
+		        			<t:label for="territorySelect">Country</t:label>
+    						<t:select t:id="territorySelect" value="territoryItem" model="territoryListSelectionModel" encoder="territoryListValueEncoder" t:mixins="chenillekit/OnEvent" event="change" onCompleteCallback="onSelectCompleteFunction" t:blankoption="always" validate="required"/>
+    						<t:select t:id="countrySelect" value="countryDummyItem" model="countryDummyListSelectionModel" encoder="countryDummyListValueEncoder" t:mixins="chenillekit/OnEvent" event="change" t:blankoption="always"/>       				
+     	     		</t:parameter>
+					</t:beaneditor>
+				</div>
+		        <div class="t-beaneditor-row">
+		 			<t:submit t:id="submit" value="${message:addOrganisation}"/>
+				</div>
+			</div>
+		</t:form>
+		</fieldset>
+		</td>
+		</tr>
+		<script type="text/javascript">  
+		function onSelectCompleteFunction(response) {
+			var json = response.result; 
+			var array = $A(json)
+			var counter = 0;
+			document.forms['beanForm'].countrySelect.options.length = 0;
+			//alert(response.result[1]);
+			array.each(function(item){  
+				document.forms['beanForm'].countrySelect.options[counter] = new Option(item[1],item[0]);
+				counter++;
+			})
+		}
+		</script> 
+      
+
+</t:LayoutSecured>

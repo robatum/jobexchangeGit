@@ -1,0 +1,35 @@
+<t:LayoutSecured t:title="Manage Organisations" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+      	   <tr>
+    		<td colspan="2">
+      	   <fieldset><legend><strong>Your Organisations</strong></legend>
+			<t:grid t:source="organisationUserDataList" rowsPerPage="10" inPlace="false" row="organisationUserData" t:id="organisationUserGrid" t:model="organisationUserGridModel">
+				<t:parameter name="industrySectorCell">
+						<t:if test="${organisationUserData.industrySector}">
+							${organisationUserData.industrySector.sectorNameEnglish}
+						
+							<t:parameter name="else">
+								---
+							</t:parameter>
+						</t:if>
+	    		</t:parameter>
+				<t:parameter name="jobsCell">
+						${organisationUserJobOffers}
+	    		</t:parameter>
+	    		<t:parameter name="jobsOnlineCell">
+						${organisationUserOnlineJobOffers}
+	    		</t:parameter>
+				<t:parameter name="modifyCell">
+	    			<t:pagelink t:page="administration/addorganisationpage" context="organisationUserData.owner.id">
+	    				modify
+	    			</t:pagelink>
+	    		</t:parameter>
+				<t:parameter name="deleteCell">
+	    			<t:actionlink t:id="delete" context="organisationUserData.owner.id">
+	    				delete
+	    			</t:actionlink>
+	    		</t:parameter>
+			</t:grid>
+		</fieldset>
+		</td>
+		</tr>
+</t:LayoutSecured>

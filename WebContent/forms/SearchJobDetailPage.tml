@@ -1,0 +1,22 @@
+<t:Layout t:title="Job search" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+  	<div class="fliesstext_gross">
+    	<b>${message:pleaseNotice}</b>
+  	</div>
+  	<br />
+	<div class="fliesstext">
+      
+    </div>
+  
+
+		<div><br />
+		<fieldset><legend><strong>${message:jobDetails}</strong></legend>
+			<div>
+         	<t:beandisplay object="jobData" >
+         		<t:parameter name="currentcontactaddress">
+         			<t:beandisplay object="jobData.currentcontactaddress" />
+         		</t:parameter>
+         	</t:beandisplay>
+         	</div>
+         </fieldset>
+    
+</t:Layout>

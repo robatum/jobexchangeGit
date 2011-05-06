@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>jobexchange</groupId>
+	<artifactId>jobexchange</artifactId>
+	<name>jobexchange</name>
+	<version>0.0.9-SNAPSHOT</version>
+	<description>AGEF Jobexchange Webapplication</description>
+	<profiles>
+		<profile>
+			<id>local-development</id>
+			<properties>
+				<!-- TODO Dependencies fuer das Profil anpassen, sodass hsql ausgeschlossen 
+					und mysql eingeschlossen wird -->
+				<jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
+				<jdbc.url>jdbc:mysql://localhost/jobexchange</jdbc.url>
+				<jdbc.liquibase.url>jdbc:mysql://localhost:3306/jobexchange
+				</jdbc.liquibase.url>
+				<jdbc.username>root</jdbc.username>
+				<jdbc.password></jdbc.password>
+				<jdbc.dialect>net.agef.jobexchange.services.internal.MysqlDialectUtf8</jdbc.dialect>
+				<!-- TODO Schemagenerierung aussschließen -->
+				<!--
+					jdbc.show_sql></jdbc.show_sql>=true wird das zur Zeit
+					interpretiert?
+				-->
+				<update.schema>true</update.schema>
+			</properties>
+		</profile>
+		
+		
+		<profile>
+			<id>local-development-andreas</id>
+			<properties>
+				<!-- TODO Dependencies fuer das Profil anpassen, sodass hsql ausgeschlossen 
+					und mysql eingeschlossen wird -->
+				<jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
+				<jdbc.url>jdbc:mysql://localhost/jobexchange</jdbc.url>
+				<jdbc.liquibase.url>jdbc:mysql://localhost:8889/jobexchange
+				</jdbc.liquibase.url>
+				<jdbc.username>root</jdbc.username>
+				<jdbc.password>root</jdbc.password>
+				<jdbc.dialect>net.agef.jobexchange.services.internal.MysqlDialectUtf8</jdbc.dialect>
+				<!-- TODO Schemagenerierung aussschließen -->
+				<!--
+					jdbc.show_sql></jdbc.show_sql>=true wird das zur Zeit
+					interpretiert?
+				-->
+				<update.schema>true</update.schema>
+			</properties>
+		</profile>
+		
+		
+		<profile>
+			<id>Development-Release-Jobexchange</id>
+			<properties>
+				<!-- TODO Dependencies fuer das Profil anpassen, sodass hsql ausgeschlossen 
+					und mysql eingeschlossen wird -->
+				<jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
+				<jdbc.url>jdbc:mysql://127.0.0.1:3307/usr_web2_1</jdbc.url>
+				<jdbc.liquibase.url>jdbc:mysql://127.0.0.1:3307/usr_web2_1
+				</jdbc.liquibase.url>
+				<jdbc.username>username</jdbc.username>
+				<jdbc.password>password</jdbc.password>
+				<jdbc.dialect>net.agef.jobexchange.services.internal.MysqlDialectUtf8</jdbc.dialect>
+				<!-- TODO Schemagenerierung aussschließen -->
+				<!--
+					jdbc.show_sql></jdbc.show_sql>=true wird das zur Zeit
+					interpretiert?
+				-->
+				<update.schema>true</update.schema>
+			</properties>
+		</profile>
+		
+		
+		
+		<profile>
+			<id>LIVE-Release-Jobexchange</id>
+			<properties>
+				<!-- TODO Dependencies fuer das Profil anpassen, sodass hsql ausgeschlossen 
+					und mysql eingeschlossen wird -->
+				<jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
+				<jdbc.url>jdbc:mysql://127.0.0.1:3307/usr_web1_1</jdbc.url>
+				<jdbc.liquibase.url>jdbc:mysql://127.0.0.1:3307/usr_web1_1
+				</jdbc.liquibase.url>
+				<jdbc.username>username</jdbc.username>
+				<jdbc.password>password</jdbc.password>
+				<jdbc.dialect>net.agef.jobexchange.services.internal.MysqlDialectUtf8</jdbc.dialect>
+				<!-- TODO Schemagenerierung aussschließen -->
+				<!--
+					jdbc.show_sql></jdbc.show_sql>=true wird das zur Zeit
+					interpretiert?
+				-->
+				<update.schema>true</update.schema>
+			</properties>
+		</profile>
+		
+		
+		<profile>
+			<id>local-feature-development</id>
+			<properties>
+				<jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
+				<jdbc.url>jdbc:mysql://localhost/jobexchange-feature</jdbc.url>
+				<jdbc.liquibase.url>jdbc:mysql://localhost:3306/jobexchange-feature
+				</jdbc.liquibase.url>
+				<jdbc.username>root</jdbc.username>
+				<jdbc.password></jdbc.password>
+				<jdbc.dialect>org.hibernate.dialect.MySQL5Dialect</jdbc.dialect>
+				<!-- TODO Schemagenerierung aussschließen -->
+				<!-- jdbc.show_sql></jdbc.show_sql>=true wird das zur Zeit interpretiert? -->
+				<update.schema>true</update.schema>
+			</properties>
+		</profile>
+	</profiles>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>liquibase</id>
+			<url>http://mvnrepository.com/artifact/org.liquibase/liquibase-plugin
+			</url>
+		</pluginRepository>
+	</pluginRepositories>
+	<dependencies>
+		<!-- All Tapestry and Hibernate related dependencies -->
+		<dependency>
+
+			<groupId>org.apache.tapestry</groupId>
+			<artifactId>tapestry-core</artifactId>
+			<version>${tapestry-release-version}</version>
+
+
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tapestry</groupId>
+			<artifactId>tapestry-hibernate</artifactId>
+			<version>${tapestry-release-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${hibernate-release-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-annotations</artifactId>
+			<version>${hibernate-annotations-release-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-search</artifactId>
+			<version>${hibernate-search-release-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-snowball</artifactId>
+			<version>${lucene.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-queries</artifactId>
+			<version>${lucene.version}</version>
+		</dependency>
+		<!-- All components and database related dependencies -->
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring-release-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-dao</artifactId>
+			<version>${spring-release-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.9</version>
+		</dependency>
+		<dependency>
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.1.2</version>
+			<!-- <version>0.9.1</version> -->
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.6</version>
+		</dependency>
+
+		<!-- <dependency> -->
+		<!-- <groupId>org.apache.tapestry</groupId> -->
+		<!-- <artifactId>t5c-commons</artifactId> -->
+		<!-- <version>${t5components-release-version}</version> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.apache.tapestry</groupId> -->
+		<!-- <artifactId>t5c-contrib</artifactId> -->
+		<!-- <version>${t5components-release-version}</version> -->
+		<!-- </dependency> -->
+		<dependency>
+			<groupId>org.apache.tapestry</groupId>
+			<artifactId>tapestry-upload</artifactId>
+			<version>${tapestry-release-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.4</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>nu.localhost.tapestry</groupId>
+			<artifactId>tapestry-spring-security</artifactId>
+			<version>${tapestry-spring-security-release-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.chenillekit</groupId>
+			<artifactId>chenillekit-quartz</artifactId>
+			<version>${chenillekit-release-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.chenillekit</groupId>
+			<artifactId>chenillekit-tapestry</artifactId>
+			<version>${chenillekit-release-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.chenillekit</groupId>
+			<artifactId>chenillekit-hibernate</artifactId>
+			<version>${chenillekit-release-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>uk.co.ioko</groupId>
+			<artifactId>tapestry-mixins</artifactId>
+			<version>1.3.0</version>
+		</dependency>
+
+		<!-- <dependency> -->
+		<!-- <groupId>org.opensymphony.quartz</groupId> -->
+		<!-- <artifactId>quartz</artifactId> -->
+		<!-- <version>1.6.5</version> -->
+		<!-- </dependency> -->
+
+		<!-- -->
+		<!-- <dependency> -->
+		<!-- <groupId>nu.localhost.tapestry</groupId> -->
+		<!-- <artifactId>tapestry5-acegi</artifactId> -->
+		<!-- <version>${tapestry5-acegi-release-version}</version> -->
+		<!-- </dependency> -->
+
+
+
+
+
+
+
+		<!-- A dependency on either JUnit or TestNG is required, or the surefire 
+			plugin (which runs the tests) will fail, preventing Maven from packaging 
+			the WAR. Tapestry includes a large number of testing facilities designed 
+			for use with TestNG (http://testng.org/), so it's recommended. -->
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>5.8</version>
+			<!-- <version>5.1</version> -->
+			<classifier>jdk15</classifier>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.1</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+
+	</dependencies>
+	<build>
+		<finalName>jobexchange</finalName>
+		<sourceDirectory>src</sourceDirectory>
+		<outputDirectory>target</outputDirectory>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+					<optimize>true</optimize>
+				</configuration>
+			</plugin>
+
+			<!-- Run the application using "mvn jetty:run" -->
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>maven-jetty-plugin</artifactId>
+				<version>6.1.9</version>
+				<configuration>
+					<!-- Log to the console. -->
+					<requestLog implementation="org.mortbay.jetty.NCSARequestLog">
+						<!-- This doesn't do anything for Jetty, but is a workaround for a 
+							Maven bug that prevents the requestLog from being set. -->
+						<append>true</append>
+					</requestLog>
+				</configuration>
+			</plugin>
+
+			<!-- Run the application using "mvn jetty:run" -->
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>maven-jetty-plugin</artifactId>
+				<version>6.1.9</version>
+				<configuration>
+					<!-- Log to the console. -->
+					<requestLog implementation="org.mortbay.jetty.NCSARequestLog">
+						<!-- This doesn't do anything for Jetty, but is a workaround for a 
+							Maven bug that prevents the requestLog from being set. -->
+						<append>true</append>
+					</requestLog>
+				</configuration>
+			</plugin>
+
+			<!-- This changes the WAR file packaging so that what would normally go 
+				into WEB-INF/classes is instead packaged as WEB-INF/lib/jobexchange.jar. 
+				This is necessary for Tapestry to be able to search for page and component 
+				classes at startup. Only certain application servers require this configuration, 
+				please see the documentation at the Tapestry 5 project page (http://tapestry.apache.org/tapestry5/). -->
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<archiveClasses>true</archiveClasses>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.liquibase</groupId>
+				<artifactId>liquibase-plugin</artifactId>
+				<version>1.9.5.0</version>
+				<configuration>
+					<changeLogFile>src/dbchangelog.xml</changeLogFile>
+					<driver>${jdbc.driver}</driver>
+					<url>${jdbc.liquibase.url}</url>
+					<username>${jdbc.username}</username>
+					<password>${jdbc.password}</password>
+					<promptOnNonLocalDatabase>true</promptOnNonLocalDatabase>
+				</configuration>
+				<goals>
+					<goal>update</goal>
+				</goals>
+			</plugin>
+		</plugins>
+	</build>
+
+	<reporting>
+
+		<!-- Adds a report detailing the components, mixins and base classes defined 
+			by this module. -->
+		<plugins>
+			<plugin>
+				<groupId>org.apache.tapestry</groupId>
+				<artifactId>tapestry-component-report</artifactId>
+				<version>${tapestry-release-version}</version>
+				<configuration>
+					<rootPackage>net.agef.jobexchange</rootPackage>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>
+
+	<repositories>
+		<!-- This can be commented out when the tapestry-release-version is a not 
+			a snapshot. The non-snapshot Tapestry artifacts are distributed through the 
+			central repository at ibiblio. -->
+
+		<repository>
+			<id>tapestry-snapshots</id>
+			<url>http://tapestry.formos.com/maven-snapshot-repository/</url>
+		</repository>
+		
+
+        <repository>
+            <id>tapestry</id>
+            <url>http://tapestry.formos.com/maven-repository</url>
+        </repository>
+
+
+		<repository>
+			<id>tapestry-snapshots2</id>
+			<url>https://repository.apache.org/content/repositories/orgapachetapestry-023/
+			</url>
+		</repository>
+
+		<repository>
+			<id>maven-repo</id>
+			<url>http://repo1.maven.org/maven2/</url>
+		</repository>
+
+
+
+
+		<repository>
+			<id>codehaus.snapshots</id>
+			<url>http://snapshots.repository.codehaus.org</url>
+		</repository>
+		<repository>
+			<id>OpenQA_Release</id>
+			<name>OpenQA Release Repository</name>
+			<url>http://archiva.openqa.org/repository/releases/</url>
+		</repository>
+		<repository>
+			<id>localhost.nu</id>
+			<url>http://www.localhost.nu/java/mvn</url>
+		</repository>
+		<repository>
+			<id>localhost.nu-snapshots</id>
+			<url>http://www.localhost.nu/java/mvn-snapshot</url>
+		</repository>
+<!-- 		<repository> -->
+<!-- 			<id>t5components</id> -->
+<!-- 			<name>T5Components Maven Repository</name> -->
+<!-- 			<url>http://87.193.218.134:8080/t5components/maven-repository</url> -->
+<!-- 		</repository> -->
+		<repository>
+			<id>jboss-repository-mirror</id>
+			<name>jboss-repository</name>
+			<url>http://repository.jboss.org/maven2</url>
+		</repository>
+		<repository>
+			<id>org.apache.tapestry</id>
+			<name>hlship tap5 Release Repo</name>
+			<url>http://people.apache.org/~hlship/tapestry-ibiblio-rsynch-repository/
+			</url>
+		</repository>
+
+
+		<repository>
+			<id>jboss</id>
+			<url>http://repository.jboss.com/maven2</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+
+		<repository>
+			<id>chenillekit</id>
+			<url>http://www.chenillekit.org/mvnrepo/release</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+
+
+<!-- 		<repository> -->
+<!-- 			<id>tapestry</id> -->
+<!-- 			<url>http://tapestry.formos.com/maven-repository</url> -->
+<!-- 		</repository> -->
+
+		<repository>
+			<id>repository.jboss.com</id>
+			<url>http://repository.jboss.com/maven2/</url>
+		</repository>
+
+	</repositories>
+
+	<!-- <pluginRepositories> As above, this can be commented out when access 
+		to the snapshot version of a Tapestry Maven plugin is not required. <pluginRepository> 
+		<id>tapestry-snapshots</id> <url>http://tapestry.formos.com/maven-snapshot-repository/</url> 
+		</pluginRepository> </pluginRepositories> -->
+
+	<properties>
+		<tapestry-release-version>5.1.0.5</tapestry-release-version>
+		<spring-release-version>2.0.8</spring-release-version>
+		<hibernate-release-version>3.3.2.GA</hibernate-release-version>
+		<hibernate-search-release-version>3.1.1.GA
+		</hibernate-search-release-version>
+		<hibernate-annotations-release-version>3.4.0.GA
+		</hibernate-annotations-release-version>
+		<lucene.version>2.4.0</lucene.version>
+		<tapestry-spring-security-release-version>2.1.0
+		</tapestry-spring-security-release-version>
+		<chenillekit-release-version>1.2.0</chenillekit-release-version>
+
+
+		<!-- <t5components-release-version>0.5.18</t5components-release-version> -->
+		<!-- <hibernate-release-version>3.2.6 ga</hibernate-release-version> -->
+		<!-- <hibernate-search-release-version>3.0.1.GA</hibernate-search-release-version> -->
+		<!-- <hibernate-annotations-release-version>3.3.1.GA</hibernate-annotations-release-version> -->
+		<!-- <lucene-core.version>2.3.0</lucene-core.version> -->
+		<!-- <lucene-add.version>2.3.2</lucene-add.version> -->
+		<!-- <tapestry-spring-security-release-version>2.0.1</tapestry-spring-security-release-version> -->
+		<!-- <axis2-release-version>1.4</axis2-release-version> -->
+		<!-- <acegi-release-version>1.0.6</acegi-release-version> -->
+		<!-- <tapestry5-acegi-release-version>1.1.1-SNAPSHOT</tapestry5-acegi-release-version> -->
+
+	</properties>
+</project>

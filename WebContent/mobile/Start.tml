@@ -1,0 +1,10 @@
+<t:LayoutMobile t:title="Jobexchange" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd" xmlns:p="tapestry:parameter">
+	 <ul data-role="listview" data-theme="d" data-dividertheme="d">  
+        <li>  
+            <t:pagelink page="mobile/JobSearch" data-transition="pop"> Stellen </t:pagelink>  
+        </li>  
+        <li>  
+            <a href="#" data-transition="pop"> Bewerber </a>
+        </li> 
+     </ul>
+</t:LayoutMobile>

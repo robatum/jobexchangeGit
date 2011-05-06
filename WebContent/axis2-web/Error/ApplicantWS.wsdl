@@ -1,0 +1,593 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:ns="http://webservice.jobexchange.agef.net" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ax21="http://entities.webservice.jobexchange.agef.net/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://webservice.jobexchange.agef.net">
+    <wsdl:documentation>
+		Please Type your service description here
+	</wsdl:documentation>
+    <wsdl:types>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://entities.webservice.jobexchange.agef.net/xsd">
+            <xs:complexType name="ApplicantDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="additionalRemarks" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="additionalSkills" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="applicantProfileId" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="applicantProfileOwnerId" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="computerSkills" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="computerSkillsComments" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="drivingLicence" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="drivingLicenceComments" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="durationOfContract" nillable="true" type="xs:string"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="furtherEducation" nillable="true" type="ax21:EducationDTO"/>
+                    <xs:element minOccurs="0" name="highestDegree" nillable="true" type="ax21:EducationDTO"/>
+                    <xs:element minOccurs="0" name="languageSkillsEnglish" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="languageSkillsGerman" nillable="true" type="xs:string"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="languageSkillsOther" nillable="true" type="ax21:LanguageSkillDTO"/>
+                    <xs:element minOccurs="0" name="locationRemarks" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="managementExperience" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="managementExperienceDuration" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="managementExperienceRemarks" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="managementExperienceSector" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="managementExperienceTeamSize" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="preferredFieldOfActivity" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="preferredLocation" nillable="true" type="ax21:CountryDTO"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="workExperience" nillable="true" type="ax21:WorkExperienceDTO"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="EducationDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="country" nillable="true" type="ax21:CountryDTO"/>
+                    <xs:element minOccurs="0" name="dateOfGraduation" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="degree" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="educationalInstitute" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="fieldSpecialization" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="instituteName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="location" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CountryDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="country" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="LanguageSkillDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="level" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="WorkExperienceDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="finished" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="jobDescription" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="jobTitle" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="sector" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="started" nillable="true" type="xs:dateTime"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="ApplicantContactDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="applicantContactOwnerId" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="applicantContactOwnerName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="contactNote" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="relatedApplicantProfileId" nillable="true" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="TerritoryDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="territory" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:ax22="http://entities.webservice.jobexchange.agef.net/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://webservice.jobexchange.agef.net">
+            <xs:import namespace="http://entities.webservice.jobexchange.agef.net/xsd"/>
+            <xs:element name="addApplicantProfile">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="applicantProfile" nillable="true" type="ax22:ApplicantDTO"/>
+                        <xs:element minOccurs="0" name="apdUserId" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addApplicantProfileResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="deleteApplicantProfile">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="apdUserId" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="deleteApplicantProfileResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="modifyApplicantProfile">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="applicantProfile" nillable="true" type="ax22:ApplicantDTO"/>
+                        <xs:element minOccurs="0" name="applicantProfileId" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="modifyApplicantProfileResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAutoCompleteList">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="expression" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAutoCompleteListResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getApplicantContacts">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="apdUserId" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getApplicantContactsResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax22:ApplicantContactDTO"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getReceivedApplicantContacts">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="apdUserId" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getReceivedApplicantContactsResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax22:ApplicantContactDTO"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getApplicantProfile">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="applicantProfileId" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getApplicantProfileResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax22:ApplicantDTO"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAllApplicantsResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax22:ApplicantDTO"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getApplicantsByCriteria">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="criteria" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="country" nillable="true" type="ax22:CountryDTO"/>
+                        <xs:element minOccurs="0" name="territory" nillable="true" type="ax22:TerritoryDTO"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getApplicantsByCriteriaResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax22:ApplicantDTO"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="contactApplicant">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="applicantProfileId" type="xs:long"/>
+                        <xs:element minOccurs="0" name="apdUserId" type="xs:long"/>
+                        <xs:element minOccurs="0" name="contactNote" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="getAllApplicantsRequest"/>
+    <wsdl:message name="getAllApplicantsResponse">
+        <wsdl:part name="parameters" element="ns:getAllApplicantsResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getReceivedApplicantContactsRequest">
+        <wsdl:part name="parameters" element="ns:getReceivedApplicantContacts"/>
+    </wsdl:message>
+    <wsdl:message name="getReceivedApplicantContactsResponse">
+        <wsdl:part name="parameters" element="ns:getReceivedApplicantContactsResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getApplicantProfileRequest">
+        <wsdl:part name="parameters" element="ns:getApplicantProfile"/>
+    </wsdl:message>
+    <wsdl:message name="getApplicantProfileResponse">
+        <wsdl:part name="parameters" element="ns:getApplicantProfileResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getAutoCompleteListRequest">
+        <wsdl:part name="parameters" element="ns:getAutoCompleteList"/>
+    </wsdl:message>
+    <wsdl:message name="getAutoCompleteListResponse">
+        <wsdl:part name="parameters" element="ns:getAutoCompleteListResponse"/>
+    </wsdl:message>
+    <wsdl:message name="modifyApplicantProfileRequest">
+        <wsdl:part name="parameters" element="ns:modifyApplicantProfile"/>
+    </wsdl:message>
+    <wsdl:message name="modifyApplicantProfileResponse">
+        <wsdl:part name="parameters" element="ns:modifyApplicantProfileResponse"/>
+    </wsdl:message>
+    <wsdl:message name="addApplicantProfileRequest">
+        <wsdl:part name="parameters" element="ns:addApplicantProfile"/>
+    </wsdl:message>
+    <wsdl:message name="addApplicantProfileResponse">
+        <wsdl:part name="parameters" element="ns:addApplicantProfileResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getApplicantContactsRequest">
+        <wsdl:part name="parameters" element="ns:getApplicantContacts"/>
+    </wsdl:message>
+    <wsdl:message name="getApplicantContactsResponse">
+        <wsdl:part name="parameters" element="ns:getApplicantContactsResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getApplicantsByCriteriaRequest">
+        <wsdl:part name="parameters" element="ns:getApplicantsByCriteria"/>
+    </wsdl:message>
+    <wsdl:message name="getApplicantsByCriteriaResponse">
+        <wsdl:part name="parameters" element="ns:getApplicantsByCriteriaResponse"/>
+    </wsdl:message>
+    <wsdl:message name="contactApplicantRequest">
+        <wsdl:part name="parameters" element="ns:contactApplicant"/>
+    </wsdl:message>
+    <wsdl:message name="deleteApplicantProfileRequest">
+        <wsdl:part name="parameters" element="ns:deleteApplicantProfile"/>
+    </wsdl:message>
+    <wsdl:message name="deleteApplicantProfileResponse">
+        <wsdl:part name="parameters" element="ns:deleteApplicantProfileResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="ApplicantWSPortType">
+        <wsdl:operation name="getAllApplicants">
+            <wsdl:input message="ns:getAllApplicantsRequest" wsaw:Action="urn:getAllApplicants"/>
+            <wsdl:output message="ns:getAllApplicantsResponse" wsaw:Action="urn:getAllApplicantsResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getReceivedApplicantContacts">
+            <wsdl:input message="ns:getReceivedApplicantContactsRequest" wsaw:Action="urn:getReceivedApplicantContacts"/>
+            <wsdl:output message="ns:getReceivedApplicantContactsResponse" wsaw:Action="urn:getReceivedApplicantContactsResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getApplicantProfile">
+            <wsdl:input message="ns:getApplicantProfileRequest" wsaw:Action="urn:getApplicantProfile"/>
+            <wsdl:output message="ns:getApplicantProfileResponse" wsaw:Action="urn:getApplicantProfileResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getAutoCompleteList">
+            <wsdl:input message="ns:getAutoCompleteListRequest" wsaw:Action="urn:getAutoCompleteList"/>
+            <wsdl:output message="ns:getAutoCompleteListResponse" wsaw:Action="urn:getAutoCompleteListResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="modifyApplicantProfile">
+            <wsdl:input message="ns:modifyApplicantProfileRequest" wsaw:Action="urn:modifyApplicantProfile"/>
+            <wsdl:output message="ns:modifyApplicantProfileResponse" wsaw:Action="urn:modifyApplicantProfileResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="addApplicantProfile">
+            <wsdl:input message="ns:addApplicantProfileRequest" wsaw:Action="urn:addApplicantProfile"/>
+            <wsdl:output message="ns:addApplicantProfileResponse" wsaw:Action="urn:addApplicantProfileResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getApplicantContacts">
+            <wsdl:input message="ns:getApplicantContactsRequest" wsaw:Action="urn:getApplicantContacts"/>
+            <wsdl:output message="ns:getApplicantContactsResponse" wsaw:Action="urn:getApplicantContactsResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getApplicantsByCriteria">
+            <wsdl:input message="ns:getApplicantsByCriteriaRequest" wsaw:Action="urn:getApplicantsByCriteria"/>
+            <wsdl:output message="ns:getApplicantsByCriteriaResponse" wsaw:Action="urn:getApplicantsByCriteriaResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="contactApplicant">
+            <wsdl:input message="ns:contactApplicantRequest" wsaw:Action="urn:contactApplicant"/>
+        </wsdl:operation>
+        <wsdl:operation name="deleteApplicantProfile">
+            <wsdl:input message="ns:deleteApplicantProfileRequest" wsaw:Action="urn:deleteApplicantProfile"/>
+            <wsdl:output message="ns:deleteApplicantProfileResponse" wsaw:Action="urn:deleteApplicantProfileResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="ApplicantWSSoap11Binding" type="ns:ApplicantWSPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="getAllApplicants">
+            <soap:operation soapAction="urn:getAllApplicants" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getReceivedApplicantContacts">
+            <soap:operation soapAction="urn:getReceivedApplicantContacts" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getApplicantProfile">
+            <soap:operation soapAction="urn:getApplicantProfile" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="modifyApplicantProfile">
+            <soap:operation soapAction="urn:modifyApplicantProfile" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAutoCompleteList">
+            <soap:operation soapAction="urn:getAutoCompleteList" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addApplicantProfile">
+            <soap:operation soapAction="urn:addApplicantProfile" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getApplicantContacts">
+            <soap:operation soapAction="urn:getApplicantContacts" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getApplicantsByCriteria">
+            <soap:operation soapAction="urn:getApplicantsByCriteria" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="contactApplicant">
+            <soap:operation soapAction="urn:contactApplicant" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+        </wsdl:operation>
+        <wsdl:operation name="deleteApplicantProfile">
+            <soap:operation soapAction="urn:deleteApplicantProfile" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="ApplicantWSSoap12Binding" type="ns:ApplicantWSPortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="getAllApplicants">
+            <soap12:operation soapAction="urn:getAllApplicants" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getReceivedApplicantContacts">
+            <soap12:operation soapAction="urn:getReceivedApplicantContacts" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getApplicantProfile">
+            <soap12:operation soapAction="urn:getApplicantProfile" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="modifyApplicantProfile">
+            <soap12:operation soapAction="urn:modifyApplicantProfile" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAutoCompleteList">
+            <soap12:operation soapAction="urn:getAutoCompleteList" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addApplicantProfile">
+            <soap12:operation soapAction="urn:addApplicantProfile" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getApplicantContacts">
+            <soap12:operation soapAction="urn:getApplicantContacts" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getApplicantsByCriteria">
+            <soap12:operation soapAction="urn:getApplicantsByCriteria" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="contactApplicant">
+            <soap12:operation soapAction="urn:contactApplicant" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+        </wsdl:operation>
+        <wsdl:operation name="deleteApplicantProfile">
+            <soap12:operation soapAction="urn:deleteApplicantProfile" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="ApplicantWSHttpBinding" type="ns:ApplicantWSPortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="getAllApplicants">
+            <http:operation location="ApplicantWS/getAllApplicants"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="getAllApplicants"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="getAllApplicants"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getReceivedApplicantContacts">
+            <http:operation location="ApplicantWS/getReceivedApplicantContacts"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="getReceivedApplicantContacts"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="getReceivedApplicantContacts"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getApplicantProfile">
+            <http:operation location="ApplicantWS/getApplicantProfile"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="getApplicantProfile"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="getApplicantProfile"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="modifyApplicantProfile">
+            <http:operation location="ApplicantWS/modifyApplicantProfile"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="modifyApplicantProfile"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="modifyApplicantProfile"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAutoCompleteList">
+            <http:operation location="ApplicantWS/getAutoCompleteList"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="getAutoCompleteList"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="getAutoCompleteList"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addApplicantProfile">
+            <http:operation location="ApplicantWS/addApplicantProfile"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="addApplicantProfile"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="addApplicantProfile"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getApplicantContacts">
+            <http:operation location="ApplicantWS/getApplicantContacts"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="getApplicantContacts"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="getApplicantContacts"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getApplicantsByCriteria">
+            <http:operation location="ApplicantWS/getApplicantsByCriteria"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="getApplicantsByCriteria"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="getApplicantsByCriteria"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="contactApplicant">
+            <http:operation location="ApplicantWS/contactApplicant"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="contactApplicant"/>
+            </wsdl:input>
+        </wsdl:operation>
+        <wsdl:operation name="deleteApplicantProfile">
+            <http:operation location="ApplicantWS/deleteApplicantProfile"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="deleteApplicantProfile"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="deleteApplicantProfile"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="ApplicantWS">
+        <wsdl:port name="ApplicantWSHttpSoap11Endpoint" binding="ns:ApplicantWSSoap11Binding">
+            <soap:address location="http://localhost:8080/jobexchange/services/ApplicantWS.ApplicantWSHttpSoap11Endpoint"/>
+        </wsdl:port>
+        <wsdl:port name="ApplicantWSHttpSoap12Endpoint" binding="ns:ApplicantWSSoap12Binding">
+            <soap12:address location="http://localhost:8080/jobexchange/services/ApplicantWS.ApplicantWSHttpSoap12Endpoint"/>
+        </wsdl:port>
+        <wsdl:port name="ApplicantWSHttpEndpoint" binding="ns:ApplicantWSHttpBinding">
+            <http:address location="http://localhost:8080/jobexchange/services/ApplicantWS.ApplicantWSHttpEndpoint"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

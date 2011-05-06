@@ -1,0 +1,916 @@
+/* CSS Document */
+body {
+	background-color: #EEF6EE;
+	text-decoration: none;
+	font-weight: normal;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	font-size: 11px;
+}
+
+.menuepunkte {
+	color: #245524;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 10px;
+	letter-spacing: 1px;
+	font-style: none;
+}
+
+.menuepunkte_strich {
+	color: #245524;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	text-decoration: none;
+	font-weight: medium;
+	font-size: 8px;
+	letter-spacing: 1px;
+	font-style: none;
+}
+
+.fliesstext {
+	color: #535453;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	font-weight: normal;
+	font-size: 11px;
+	font-style: none;
+	text-align: justify;
+}
+
+.fliesstext_weiss {
+	color: #ffffff;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	font-weight: normal;
+	font-size: 11px;
+	font-style: none;
+}
+
+.fliesstext_gross {
+	color: #535453;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	font-weight: normal;
+	font-size: 14px;
+	font-style: none;
+}
+
+.fliesstext_schwarz {
+	color: #000000;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	font-weight: normal;
+	font-size: 11px;
+	font-style: none;
+}
+
+.kalender_datum {
+	color: #2E5D2E;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	text-decoration: underline;
+	font-weight: bold;
+	font-size: 10px;
+	font-style: none;
+}
+
+.kalender_text {
+	color: #535453;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	text-decoration: none;
+	font-weight: normal;
+	font-size: 10px;
+	font-style: none;
+	margin-left: 0.5em;
+}
+
+.headline {
+	color: #487148;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 14px;
+	font-style: none;
+}
+
+.headline_pfad {
+	color: #b7cab7;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 11px;
+}
+
+.headline_pfad_welcome {
+	color: #ffffff;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 12px;
+}
+
+.baustelle {
+	color: #090909;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	font-stretch: ultra-condensed;
+	font-weight: normal;
+	font-size: 11px;
+	font-style: none;
+}
+
+.baustelle_head {
+	color: #090909;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	font-stretch: ultra-condensed;
+	font-weight: bold;
+	font-size: 17px;
+	font-style: none;
+}
+
+td {
+	color: #535453;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	text-decoration: none;
+	font-weight: normal;
+	font-size: 11px;
+	font-style: none;
+}
+
+td.menue {
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 10px;
+	background-color: #4D754D;
+	text-align: center;
+}
+
+td.untermenue {
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 10px;
+	background-color: #227711;
+	text-align: center;
+}
+
+td.getjob {
+	color: #ffffff;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	font-weight: bold;
+	font-size: 14px;
+	font-style: none;
+}
+
+th {
+	color: #ffffff;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	font-weight: bold;
+	font-size: 11px;
+	font-style: none;
+}
+
+th.getjob {
+	color: #ffffff;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	font-weight: bold;
+	font-size: 14px;
+	font-style: none;
+}
+
+h1 {
+	color: #535453;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	font-weight: bold;
+	font-size: 24px;
+	font-style: none;
+	text-align: left;
+}
+
+h2 {
+	color: #535453;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	font-weight: bold;
+	font-size: 21px;
+	font-style: none;
+	text-align: left;
+}
+
+h3 {
+	color: #535453;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	font-weight: bold;
+	font-size: 18px;
+	font-style: none;
+	text-align: left;
+}
+
+h4 {
+	color: #535453;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	font-weight: bold;
+	font-size: 15px;
+	font-style: none;
+	text-align: left;
+}
+
+h5 {
+	color: #535453;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	font-weight: bold;
+	font-size: 15px;
+	font-style: none;
+	text-align: left;
+}
+
+a {
+	text-decoration: none;
+	color: #333333;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+}
+
+a:link {
+	text-decoration: none;
+	color: #333333;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+}
+
+a:visited {
+	text-decoration: none;
+	color: #535453;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+}
+
+a:hover {
+	text-decoration: underline;
+	color: #666666;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+}
+
+a:active {
+	text-decoration: none;
+	color: #333333;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+}
+
+a.bright {
+	text-decoration: none;
+	color: #ffffff;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+}
+
+a.bright:link {
+	text-decoration: none;
+	color: #ffffff;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+}
+
+a.bright:visited {
+	text-decoration: none;
+	color: #aaaaaa;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+}
+
+a.bright:hover {
+	text-decoration: underline;
+	color: #cccccc;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+}
+
+a.bright:active {
+	text-decoration: none;
+	color: #999999;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+}
+
+a.calender:link {
+	text-decoration: none;
+	color: #333333;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+}
+
+a.calender:visited {
+	text-decoration: none;
+	color: #535453;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+}
+
+a.calender:hover {
+	text-decoration: underline;
+	color: #999999;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+}
+
+a.calender:active {
+	text-decoration: none;
+	color: #333333;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+}
+
+a.normal:link {
+	text-decoration: underline;
+	color: #245524;
+	font-weight: bold;
+	font-size: 10px;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+}
+
+a.normal:visited {
+	text-decoration: none;
+	color: #245524;
+	font-weight: bold;
+	font-size: 10px;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+}
+
+a.normal:hover {
+	Text-Decoration: underline;
+	color: #999999;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+}
+
+a.normal:active {
+	text-decoration: none;
+	color: #245524;
+	font-weight: bold;
+	font-size: 10px;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+}
+
+a.lm:link {
+	color: #D5E7D5;
+	font-weight: bold;
+	font-size: 10px;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+}
+
+a.lm:hover {
+	color: #ffffff;
+	font-weight: bold;
+	font-size: 10px;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+}
+
+a.lm:active {
+	color: #ffffff;
+	font-weight: bold;
+	font-size: 10px;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+}
+
+a.lm:visited {
+	color: #D5E7D5;
+	font-weight: bold;
+	font-size: 10px;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+}
+
+a.lm_active:link {
+	color: #ffffff;
+	font-weight: bold;
+	font-size: 10px;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+}
+
+a.lm_active:hover {
+	color: #D5E7D5;
+	font-weight: bold;
+	font-size: 10px;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+}
+
+a.lm_active:active {
+	color: #D5E7D5;
+	font-weight: bold;
+	font-size: 10px;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+}
+
+a.lm_active:visited {
+	color: #ffffff;
+	font-weight: bold;
+	font-size: 10px;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+}
+
+a.ul:link {
+	color: #ffffff;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	letter-spacing: 0.05em;
+	text-decoration: underline;
+	font-weight: bold;
+	font-size: 10px;
+	font-style: none;
+}
+
+a.ul:visited {
+	color: #ffffff;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	letter-spacing: 0.05em;
+	text-decoration: underline;
+	font-weight: bold;
+	font-size: 10px;
+	font-style: none;
+}
+
+a.ul:hover {
+	color: #b7cab7;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	letter-spacing: 0.05em;
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 10px;
+	font-style: none;
+}
+
+a.ul:active {
+	color: #ffffff;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	letter-spacing: 0.05em;
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 10px;
+	font-style: none;
+}
+
+a.ul_hl {
+	color: #b7cab7;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	letter-spacing: 0.05em;
+	font-weight: bold;
+	font-size: 12px;
+	font-style: none;
+}
+
+a.ul_hl:hover {
+	color: #ffffff;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	letter-spacing: 0.05em;
+	font-weight: bold;
+	font-size: 12px;
+	font-style: none;
+}
+
+a.ul_hl:visited {
+	color: #b7cab7;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	letter-spacing: 0.05em;
+	font-weight: bold;
+	font-size: 12px;
+	font-style: none;
+}
+
+a.ul_hl_last {
+	color: #ffffff;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	letter-spacing: 0.05em;
+	font-weight: bold;
+	font-size: 12px;
+	font-style: none;
+}
+
+a.ul_hl_last:hover {
+	color: #b7cab7;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	letter-spacing: 0.05em;
+	font-weight: bold;
+	font-size: 12px;
+	font-style: none;
+}
+
+a.ul_hl_last:visited {
+	color: #ffffff;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	letter-spacing: 0.05em;
+	font-weight: bold;
+	font-size: 12px;
+	font-style: none;
+}
+
+#header {
+	padding: 0px;
+	height: 71px;
+}
+
+#headerback {
+	height: 71px;
+	background-color: #FFF;
+	background-image: url(../images/leiste_oben_mitte.jpg);
+	background-repeat: repeat-x;
+	background-position: left top;
+}
+
+#header_left {
+	float: left;
+	width: 181px;
+}
+
+#header_left a:hover {
+	background-color: transparent;
+}
+
+#header_right {
+	float: right;
+	width: 549px;
+}
+
+input {
+	background-color: #ffffff;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	font-size: 10px;
+	color: #000000;
+	border: 1px #245524 solid;
+}
+
+select {
+	background-color: #ffffff;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	font-size: 10px;
+	color: #000000;
+	border: 1px #245524 solid;
+}
+
+table.Breite {
+	background-color: #eef6ee;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	font-size: 10px;
+	color: #000000;
+	border: 1px #245524 solid;
+}
+
+/*Karten*/
+DIV.map {
+	clear: both;
+	text-shadow: 0.2em 0.2em /* 0.2em */   silver
+}
+
+DIV.map_welt {
+	clear: both;
+	text-shadow: 0.2em 0.2em /* 0.2em */   silver
+}
+
+#p1 A,#p2 A,#p3 A,#p4 A,#p5 A,#p6 A,#p7 A,#p8 A,#p9 A,#p10 A {
+	text-decoration: none
+}
+
+/*#p1, #p1 A	{color: #245524; font: 10px; font-weight:bold; font-family:Verdana, Arial, Helvetica, Geneva, sans-serif; letter-spacing: -0.1em; text-decoration: none;}
+#p2, #p2 A   {color: #245524; font: 10px; font-weight:bold; font-family:Verdana, Arial, Helvetica, Geneva, sans-serif; letter-spacing: -0.1em; text-decoration: none;}
+#p3, #p3 A   {color: #AEACAC; font: 10px; font-weight:bold; font-family:Verdana, Arial, Helvetica, Geneva, sans-serif;letter-spacing: -0.1em; text-decoration: none;}
+#p7, #p7 A   {color: #AEACAC; font: 10px; font-weight:bold; font-family:Verdana, Arial, Helvetica, Geneva, sans-serif;letter-spacing: -0.1em; text-decoration: none;}
+#p5, #p5 A   {color: #AEACAC; font: 10px; font-weight:bold; font-family:Verdana, Arial, Helvetica, Geneva, sans-serif;letter-spacing: -0.1em; text-decoration: none;}
+#p6, #p6 A   {color: #AEACAC; font: 10px; font-weight:bold; font-family:Verdana, Arial, Helvetica, Geneva, sans-serif;letter-spacing: -0.1em; text-decoration: none;}
+#p8, #p8 A   {color: #AEACAC; font: 10px; font-weight:bold; font-family:Verdana, Arial, Helvetica, Geneva, sans-serif;letter-spacing: -0.1em; text-decoration: none;}
+#p10, #p10 A {color: #AEACAC; font: 10px; font-weight:bold; font-family:Verdana, Arial, Helvetica, Geneva, sans-serif;letter-spacing: -0.1em; text-decoration: none;}
+#w1, #w1 A   {color: #AEACAC; font: 10px; font-weight:bold; font-family:Verdana, Arial, Helvetica, Geneva, sans-serif;letter-spacing: -0.1em; text-decoration: none;}
+#w2, #w2 A   {color: #D5D8D5; font: 10px;letter-spacing: 1em; font-weight:bold; font-family:Verdana, Arial, Helvetica, Geneva, sans-serif;letter-spacing: -0.1em; text-decoration: none;}
+#w3, #w3 A   {color: #D5D8D5; font: 10px;letter-spacing: 1em; font-weight:bold; font-family:Verdana, Arial, Helvetica, Geneva, sans-serif;letter-spacing: -0.1em; text-decoration: none;}
+#w4, #w4 A {color: #D5D8D5; font: 10px;line-height:0.8em; letter-spacing: 1em; font-weight:bold; font-family:Verdana, Arial, Helvetica, Geneva, sans-serif;letter-spacing: -0.1em; text-decoration: none;}
+#w5, #w5 A {color: #D5D8D5; font: 10px;line-height:0.8em; letter-spacing: 1em; font-weight:bold; font-family:Verdana, Arial, Helvetica, Geneva, sans-serif;letter-spacing: -0.1em; text-decoration: none;}
+#af6, #af6 A   {color: #AEACAC; font: 10px; font-weight:bold; font-family:Verdana, Arial, Helvetica, Geneva, sans-serif;letter-spacing: -0.1em; text-decoration: none;}
+#af7, #af7 A   {color: #AEACAC; font: 10px; font-weight:bold; font-family:Verdana, Arial, Helvetica, Geneva, sans-serif;letter-spacing: -0.1em; text-decoration: none;}
+
+*/
+#p4,#p4 A {
+	color: #AEACAC;
+	font: 10px;
+	font-weight: bold;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	letter-spacing: -0.1em;
+	text-decoration: none;
+}
+
+#p9,#p9 A {
+	color: #AEACAC;
+	font: 10px;
+	font-weight: bold;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	letter-spacing: -0.1em;
+	text-decoration: none;
+}
+
+/*#p12, #p12 A   {color: #AEACAC; font: 10px; font-weight:bold; font-family:Verdana, Arial, Helvetica, Geneva, sans-serif;letter-spacing: -0.1em; text-decoration: none;}
+*/ /*
+#af1, #af4 A   {color: #AEACAC; font: 10px; font-weight:bold; font-family:Verdana, Arial, Helvetica, Geneva, sans-serif;letter-spacing: -0.1em; text-decoration: none;}
+#af2, #af4 A   {color: #AEACAC; font: 10px; font-weight:bold; font-family:Verdana, Arial, Helvetica, Geneva, sans-serif;letter-spacing: -0.1em; text-decoration: none;}
+#af3, #af4 A   {color: #AEACAC; font: 10px; font-weight:bold; font-family:Verdana, Arial, Helvetica, Geneva, sans-serif;letter-spacing: -0.1em; text-decoration: none;}
+#af4, #af4 A   {color: #AEACAC; font: 10px; font-weight:bold; font-family:Verdana, Arial, Helvetica, Geneva, sans-serif;letter-spacing: -0.1em; text-decoration: none;}
+#af8, #af8 A   {color: #AEACAC; font: 10px; font-weight:bold; font-family:Verdana, Arial, Helvetica, Geneva, sans-serif;letter-spacing: -0.1em; text-decoration: none;}
+#af9, #af9 A   {color: #AEACAC; font: 10px; font-weight:bold; font-family:Verdana, Arial, Helvetica, Geneva, sans-serif;letter-spacing: -0.1em; text-decoration: none;}
+#af10, #af10 A   {color: #AEACAC; font: 10px; font-weight:bold; font-family:Verdana, Arial, Helvetica, Geneva, sans-serif;letter-spacing: -0.1em; text-decoration: none;}
+#af11, #af11 A   {color: #AEACAC; font: 10px; font-weight:bold; font-family:Verdana, Arial, Helvetica, Geneva, sans-serif;letter-spacing: -0.1em; text-decoration: none;}
+#af12, #af12 A   {color: #AEACAC; font: 10px; font-weight:bold; font-family:Verdana, Arial, Helvetica, Geneva, sans-serif;letter-spacing: -0.1em; text-decoration: none;}
+#af13, #af13 A   {color: #AEACAC; font: 10px; font-weight:bold; font-family:Verdana, Arial, Helvetica, Geneva, sans-serif;letter-spacing: -0.1em; text-decoration: none;}
+#af14, #af14 A   {color: #AEACAC; font: 10px; font-weight:bold; font-family:Verdana, Arial, Helvetica, Geneva, sans-serif;letter-spacing: -0.1em; text-decoration: none;}
+#af15, #af15 A   {color: #AEACAC; font: 10px; font-weight:bold; font-family:Verdana, Arial, Helvetica, Geneva, sans-serif;letter-spacing: -0.1em; text-decoration: none;}
+*/
+a.asien:link {
+	color: #696969;
+	font: 10px;
+	font-weight: bold;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	letter-spacing: -0.1em;
+	text-decoration: none;
+}
+
+a.asien:visited {
+	color: #696969;
+	font: 10px;
+	font-weight: bold;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	letter-spacing: -0.1em;
+	text-decoration: none;
+}
+
+a.asien:hover {
+	color: #000000;
+	font: 10px;
+	font-weight: bold;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	letter-spacing: -0.1em;
+	text-decoration: none;
+}
+
+a.asien:active {
+	color: #696969;
+	font: 10px;
+	font-weight: bold;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	letter-spacing: -0.1em;
+	text-decoration: none;
+}
+
+a.welt:link {
+	color: #D5D8D5;
+	font: 10px;
+	letter-spacing: 1em;
+	font-weight: bold;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	letter-spacing: -0.1em;
+	text-decoration: none;
+}
+
+a.welt:visited {
+	color: #D5D8D5;
+	font: 10px;
+	letter-spacing: 1em;
+	font-weight: bold;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	letter-spacing: -0.1em;
+	text-decoration: none;
+}
+
+a.welt:hover {
+	color: #000000;
+	font: 10px;
+	letter-spacing: 1em;
+	font-weight: bold;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	letter-spacing: -0.1em;
+	text-decoration: none;
+}
+
+a.welt:active {
+	color: #D5D8D5;
+	font: 10px;
+	letter-spacing: 1em;
+	font-weight: bold;
+	font-family: Verdana, Arial, Helvetica, Geneva, sans-serif;
+	letter-spacing: -0.1em;
+	text-decoration: none;
+}
+
+#p1 {
+	text-align: right;
+	margin: -182px 342px 0px 0
+}
+
+#p2 {
+	text-align: right;
+	margin: -22px 229px 0px 0
+}
+
+#p3 {
+	text-align: right;
+	margin: -58px 195px 0px 0
+}
+
+#p4 {
+	text-align: right;
+	margin: 90px 228px 0px 0
+}  /*Laos*/
+#p5 {
+	text-align: right;
+	margin: -5px 322px 0px 0
+}  /*Indien*/
+#p6 {
+	text-align: right;
+	margin: -2px 282px 0px 0
+}  /*Thailand*/
+#p7 {
+	text-align: right;
+	margin: -10px 180px 0px 0
+}  /*Vietnam*/
+#p8 {
+	text-align: right;
+	margin: -10px 116px 0px 0
+}  /*Phillipienen*/
+#p9 {
+	text-align: right;
+	margin: -4px 174px 0px 0
+}  /*Kambodscha*/
+#p10 {
+	text-align: right;
+	margin: 10px 212px 0px 0
+}  /*Malaysia*/
+#p11 {
+	text-align: right;
+	margin: 12px 145px 0px 0
+}  /*Indonesien*/
+#p12 {
+	text-align: right;
+	margin: -204px 394px 0px 0
+}  /*Georgien*/
+#p13 {
+	text-align: right;
+	margin: 68px 348px 0px 0
+}  /*Pakistan*/
+#w1 {
+	text-align: right;
+	margin: -210px 113px 0px 0
+}
+
+#w2 {
+	text-align: right;
+	margin: 0px 217px 0px 0
+}
+
+#w3 {
+	text-align: right;
+	margin: 89px 237px 0px 0
+}
+
+#w4 {
+	text-align: right;
+	margin: -75px 202px 0px 0
+}
+
+#w5 {
+	text-align: right;
+	margin: 70px 320px 0px 0
+}
+
+#e0 {
+	text-align: right;
+	margin: -134px 188px 0px 0
+}
+
+#e1 {
+	text-align: right;
+	margin: 0px 215px 0px 0
+}
+
+#e2 {
+	text-align: right;
+	margin: -3px 220px 0px 0
+}
+
+#e3 {
+	text-align: right;
+	margin: -12px 159px 0px 0
+}
+
+#e4 {
+	text-align: right;
+	margin: -3px 139px 0px 0
+}
+
+#e5 {
+	text-align: right;
+	margin: -2px 145px 0px 0
+}
+
+#e6 {
+	text-align: right;
+	margin: -2px 139px 0px 0
+}
+
+#af1 {
+	text-align: right;
+	margin: -254px 118px 0px 0
+}  /*Aegypten*/
+#af2 {
+	text-align: right;
+	margin: 42px 126px 0px 0
+}  /*Sudan*/
+#af3 {
+	text-align: right;
+	margin: 85px 186px 0px 0
+}  /*Angola*/
+#af4 {
+	text-align: right;
+	margin: -4px 143px 0px 0
+}  /*Sambia*/
+#af5 {
+	text-align: right;
+	margin: -4px 76px 0px 0
+}  /*Mosambik*/
+#af6 {
+	text-align: right;
+	margin: -2px 106px 0px 0
+}  /*Simbabwe*/
+#af7 {
+	text-align: right;
+	margin: -8px 176px 0px 0
+}  /*Namibia*/
+#af8 {
+	text-align: right;
+	margin: -4px 134px 0px 0
+}  /*Botswana*/
+#af9 {
+	text-align: right;
+	margin: 20px 144px 0px 0
+}  /*Suedafrika*/
+#af10 {
+	text-align: right;
+	margin: -276px 190px 0px 0
+}  /*Tunesien*/
+#af11 {
+	text-align: right;
+	margin: 0px 252px 0px 0
+}  /*Marokko*/
+#af12 {
+	text-align: right;
+	margin: 53px 93px 0px 0
+}  /*Eritrea*/
+#af13 {
+	text-align: right;
+	margin: 17px 80px 0px 0
+}  /*Aethopien*/
+#af14 {
+	text-align: right;
+	margin: -8px 242px 0px 0
+}  /*Ghana*/
+#af15 {
+	text-align: right;
+	margin: -6px 183px 0px 0
+}  /*Kamerun*/
+#af16 {
+	text-align: right;
+	margin: -42px 206px 0px 0
+}  /*Nigeria*/
+#af17 {
+	text-align: right;
+	margin: 44px 164px 0px 0
+}  /*Kongo*/
+#af18 {
+	text-align: right;
+	margin: -30px 98px 0px 0
+}  /*Kenia*/
+#af19 {
+	text-align: right;
+	margin: 20px 96px 0px 0
+}  /*Tansania*/
+#no1 {
+	text-align: right;
+	margin: -189px 215px 0px 0
+}
+
+#no2 {
+	text-align: right;
+	margin: 14px 183px 0px 0
+}
+
+#no3 {
+	text-align: right;
+	margin: -13px 274px 0px 0
+}
+
+#no4 {
+	text-align: right;
+	margin: 71px 173px 0px 0
+}
+
+#no5 {
+	text-align: right;
+	margin: -115px 304px 0px 0
+}
+
+#lat1 {
+	text-align: right;
+	margin: -278px 220px 0px 0
+}
+
+#lat2 {
+	text-align: right;
+	margin: 65px 218px 0px 0
+}
+
+#lat3 {
+	text-align: right;
+	margin: 6px 161px 0px 0
+}
+
+#lat4 {
+	text-align: right;
+	margin: -40px 127px 0px 0
+}
+
+#lat5 {
+	text-align: right;
+	margin: 110px 216px 0px 0
+}

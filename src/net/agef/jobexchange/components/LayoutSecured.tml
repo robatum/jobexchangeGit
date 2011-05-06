@@ -1,0 +1,49 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>GETJOBS - German Experienced and/or Trained personnel JOB Service | ${title}</title>
+	
+		<!-- This link is the one that works at runtime -->
+		<link rel="stylesheet" type="text/css" href="${stylesheetLayout}"/>
+		<link rel="stylesheet" type="text/css" href="${stylesheetMenu}"/>
+		<link rel="stylesheet" type="text/css" href="${stylesheetComponent}"/>
+		<!--[if lte IE 7]>
+				<link rel="stylesheet" type="text/css" href="${stylesheetLayout}"/>
+				<link rel="stylesheet" type="text/css" href="${stylesheetMenu}"/>
+				<link rel="stylesheet" type="text/css" href="${stylesheetComponent}"/>
+				</style>
+		<![endif]-->
+	</head>
+	<body> 
+	
+	
+	
+	<table border="0" width="100%" cellpadding="2" cellspacing="0">
+  <tr>
+    <td width="40%" bgcolor="#B6CCB5" class="fliesstext_gross"> 
+      [<b><t:pagelink t:page="administration/overviewpage">${message:jobOffer_overview}</t:pagelink></b>]
+      
+    </td>
+  	<td width="60%" align="right"  bgcolor="#B6CCB5" class="fliesstext_gross">
+  		<t:ActionLink t:id="switchLocale">${localeLabel}</t:ActionLink> <b>| </b>
+  		<!-- <img src="${asset:context:/images/flag.gif}" width="25" height="18" /> -->
+  		<b>User:</b> ${loginUserName} <b>| </b> <t:ActionLink t:id="logout">logout</t:ActionLink>
+  	</td>
+  </tr>
+  <tr>
+   <td height="10">
+   </td>
+  </tr>
+ 
+  
+	<!-- Content -->
+	<t:body/>
+	<!-- Content End -->
+	
+	
+	  
+
+	</table>
+		<br />
+	</body>
+</html>

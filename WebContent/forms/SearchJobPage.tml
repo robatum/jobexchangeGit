@@ -1,0 +1,496 @@
+<t:Layout t:title="Job search" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd" xmlns:p="tapestry:parameter">
+  	<div class="fliesstext_gross">
+    	<b>${message:pleaseNotice}</b>
+  	</div>
+  	<br />
+	<div class="fliesstext">
+       Auf dieser Website veröffentlicht AGEF weltweite Stellenangebote für Absolventen und 
+       Fachkräfte aus Entwicklungs- und Schwellenländern, die in Deutschland studiert 
+       oder Arbeitserfahrung erworben haben. Deutsche Staatsbürger, die ggf. auch Interesse 
+       an den hier veröffentlichten Stellenangeboten haben, können sich mit dem in der 
+       Anzeige angegebenen Arbeitgeber in Verbindung setzen, um sich dort direkt zu bewerben. 
+       Weitergehende Informationen sowie die Weiterleitung von Bewerbungsunterlagen durch AGEF kann 
+       für sie aber nicht gewährt werden.
+    </div>
+  
+
+		<div>
+		<br />
+		<fieldset><legend><strong>${message:searchCriteria}</strong></legend>
+		<t:form t:id="beanForm">
+			<t:errors />
+		 	<div class="t-beaneditor">
+		 		<div class="t-beaneditor-row">
+    	<!--			<t:label for="territorySelect">${message:countrySelect}</t:label>
+    				<t:select t:id="territorySelect" value="territoryItem" model="territoryListSelectionModel" encoder="territoryListValueEncoder" t:mixins="chenillekit/OnEvent" event="change" onCompleteCallback="onSelectCompleteFunction" t:blankoption="always"/>
+					<t:select t:id="countrySelect" value="countryItem" model="countryListSelectionModel" encoder="countryListValueEncoder" t:mixins="chenillekit/OnEvent" event="change" t:blankoption="always"/>       				
+     	-->     		
+     	     		
+     	     		<p>
+     	     			<t:label for="territorySelect">${message:territorySelect}</t:label>
+         				<t:select t:id="territorySelect" value="territoryItem"  t:blankoption="always" model="territoryListSelectionModel" zone="countryZone" encoder="territoryListValueEncoder"/>
+     				</p>
+      
+				      <t:zone t:id="countryZone">
+				         <t:if test="territoryItem">
+				            <t:delegate to="countryBlock" />
+				         </t:if>
+				      </t:zone>
+				      
+				      <t:block id="countryBlock">
+				         <p>
+				        	<label>${message:countrySelect}</label>
+				            <t:select t:id="countrySelect" value="countryItem" model="countryListSelectionModel" encoder="countryListValueEncoder" t:blankoption="always"/>
+				         </p>
+				      </t:block>
+     	     		
+     	     		
+     	     		
+     	     		
+<!--        		${territoryItem}  + ${territoryItem?.nameEnglish}-->
+        		</div>
+		        <div class="t-beaneditor-row">
+					<t:label for="searchfield"/>
+            		<t:textfield t:id="searchField" value="searchField" size="50"/>
+		        	<div class="t-beaneditor-row">
+		        		<t:submit t:id="submit" value="${message:searchSubmit}"/>
+					</div>
+				</div>
+			</div>
+		</t:form>
+		</fieldset>	
+		
+		
+		
+		<fieldset><legend><strong>${message:searchResults}</strong></legend>
+	<!--		<t:ProgressiveDisplay update="show">-->
+			<t:grid t:source="jobSearchList" rowsPerPage="10" inPlace="false" row="jobData" t:id="jobGrid" t:model="jobGridModel">
+				<t:parameter name="resultsCell">
+					<table width="700px">
+					<tr>
+					<td width="50%">
+					<t:actionlink t:id="details" zone="detailsZone" context="jobData.jobOfferId">
+						(${jobOfferId}) - ${jobData?.jobDescription}
+					</t:actionlink><br />
+					</td>
+					<td width="50%">
+<!--						<div t:type="chenillekit/Tooltip" title="Info"  value="${jobData.organisationdescription}" effect="blind">-->
+ 							<t:if test="jobOfferIsAnonym">
+ 								Arbeitgeberbranche: ${jobData?.organisationIndustrySector?.SectorNameGerman}
+ 								<p:else>
+ 									${jobData.organisationname}
+ 								</p:else>
+ 							</t:if>
+<!--						</div>-->
+						<br />
+						
+						<div style="text-align:left; float: left;">
+							${jobData.countryOfEmployment.shortEnglishName}
+	    				</div>
+	    				
+<!--	    				<div style="text-align:right;">-->
+<!--	    					<t:actionlink t:id="moreLikeThisLink" context="jobData.jobOfferId">-->
+<!--	    						${message:moreLikeThis}-->
+<!--	    					</t:actionlink>-->
+<!--	    				</div>-->
+<!--	    				<div style="text-align:right;">-->
+<!--	    					<t:actionlink t:id="mapLink" context="jobData.jobOfferId">-->
+<!--	    						${message:showOnMap}-->
+<!--	    					</t:actionlink>	-->
+<!--	    				</div>-->
+	    				
+					</td>
+					</tr>
+					<tr>
+					<td colspan="2">
+						
+					<div t:type="chenillekit/SlidingPanel" subject="${message:readMore}" style="width: 100%;" closed="true">
+    				<div>
+        				<t:textoutput t:value="${jobData?.taskDescription}" />
+    				</div>
+					</div>
+					
+					</td>
+					</tr>
+					</table>
+	    		</t:parameter>
+			</t:grid>
+				<!--	</t:ProgressiveDisplay>-->
+		</fieldset>
+		<br />
+		
+		
+		<t:zone t:id="detailsZone"/>
+     	<t:block id="jobDetails">
+         	<div class="wrap">
+         	<div class="abschnitt-header">Informationen zur besetzenden Stelle</div>
+         	<div class="hr"> </div>
+				<!-- START PREVIEW BOX -->
+				<div class="preview-box" style="padding:0;">
+
+					<span class="field-name spalte1">Berufsfeld:</span>
+					<span class="field-value spalte2">${jobData?.occupationalField?.fieldNameGerman}</span>
+					<div class="nl"> </div>
+         	
+					<span class="field-name spalte1">Bezeichnung der Stelle:</span>
+					<span class="field-value spalte2">${jobData?.jobDescription}</span>
+					<div class="nl"> </div>
+				
+					<span class="field-name spalte1">Aufgabenbeschreibung:</span>
+					<span class="field-value spalte2"><t:textoutput t:value="${jobData?.taskDescription}" /></span>
+					<div class="nl"> </div>
+					
+					<span class="field-name spalte1">Anzahl der Stellen:</span>
+					<span class="field-value spalte2">${jobData?.numberOfJobs}</span>
+					<div class="nl"> </div>
+				
+					<span class="field-name spalte1">Land:</span>
+					<span class="field-value spalte2">${jobData?.countryOfEmployment?.shortEnglishName}</span>
+					<div class="nl"> </div>
+				
+					<span class="field-name spalte1">Ort der Beschäftigung:</span>
+					<span class="field-value spalte2">${jobData?.locationOfEmployment}</span>
+				
+					<div class="nl"> </div>
+				
+				
+					</div> 
+					<!-- END PREVIEW BOX -->
+					
+					<!-- MINDESTANFORDERUNGEN AN DIE AUSBILDUNG !-->
+					<div class="abschnitt-header">Mindestanforderungen an die Ausbildung</div><div class="hr"> </div>
+					
+					<!-- START PREVIEW BOX -->
+					<div class="preview-box" style="padding:0;">
+					
+						<span class="field-name spalte1">Mindestanforderungen an Ausbildungsgrad:</span>
+						<span class="field-value spalte2">${getEnumLabel(jobData?.minimumRequirementsForEducation)}</span>
+						<div class="nl"> </div>
+					
+						<span class="field-name spalte1">Weitere Bemerkungen zur Ausbildung des Bewerbers:</span>
+						<span class="field-value spalte2"><t:textoutput t:value="${jobData?.furtherCommentsRegardingEducation}" /></span>
+						<div class="nl"> </div>
+					
+					<!-- END PREVIEW BOX -->
+					</div>
+					
+					
+					<!-- GEWÜNSCHTER ERLERNTER BERUF !-->
+					<div class="abschnitt-header">Gewünschter erlernter Beruf</div><div class="hr"> </div>
+					
+					<!-- START PREVIEW BOX -->
+					<div class="preview-box" style="padding: 0pt;">
+					
+						<span class="field-name spalte1">Beruf:</span>
+						<span class="field-value spalte2">${jobData?.desiredProfession}</span>
+						<div class="nl"> </div>
+						
+						<span class="field-name spalte1">Alternativer Beruf:</span>
+						<span class="field-value spalte2">${jobData?.alternativeProfession}</span>
+						<div class="nl"> </div>
+					
+						<span class="field-name spalte1">Erforderliche Arbeitserfahrung:</span>
+						<span class="field-value spalte2">${getEnumLabel(jobData?.workExperience)}</span>
+						<div class="nl"> </div>
+					
+					</div> 
+					<!-- END PREVIEW BOX -->
+					
+					<!-- SPRACHKENNTNISSE !-->
+					<div class="abschnitt-header">Sprachkenntnisse</div><div class="hr"> </div>
+					<!-- START PREVIEW BOX -->
+					<div class="preview-box" style="padding: 0pt;">
+					
+					
+					
+						<span class="field-name spalte1">Deutsch:</span> 
+						<span class="field-value spalte2">${getEnumLabel(jobData?.languageSkillsGerman)}</span>
+						<div class="nl"> </div>
+					
+						<span class="field-name spalte1">Englisch:</span> 
+						<span class="field-value spalte2">${getEnumLabel(jobData?.languageSkillsEnglish)}</span>
+						<div class="nl"> </div>
+					
+					
+					</div> 
+					<!-- END PREVIEW BOX -->
+
+					
+					
+					
+					
+					<!-- BESONDERE KENNTNISSE, FÄHIGKEITEN UND ERFAHRUNGEN !-->
+					<div class="abschnitt-header">Besondere Kenntnisse, Fähigkeiten und Erfahrungen</div><div class="hr"> </div>
+					<!-- START PREVIEW BOX -->
+					<div class="preview-box" style="padding: 0pt;">
+					
+						<span class="field-name spalte1">PC Kenntnisse:</span>
+						<span class="field-value spalte2">${getEnumLabel(jobData?.computerSkills)}</span>
+						<div class="nl"> </div>
+						
+						<span class="field-name spalte1">PC Kenntnisse - Beschreibung:</span>
+						<span class="field-value spalte2"><t:textoutput t:value="${jobData?.computerSkillsComments}" /></span>
+						<div class="nl"> </div>
+						
+						<span class="field-name spalte1">Fahrerlaubnis:</span>
+						<span class="field-value spalte2">${getEnumLabel(jobData?.drivingLicence)}</span>
+						<div class="nl"> </div>
+					
+						<span class="field-name spalte1">Besondere Kenntnisse, Fähigkeiten und Erfahrungen:</span>
+						<span class="field-value spalte2"><t:textoutput t:value="${jobData?.specialKnowledge}" /></span>
+						<div class="nl"> </div>
+					
+						<span class="field-name spalte1">Weitere Anforderungen:</span>
+						<span class="field-value spalte2"><t:textoutput t:value="${jobData?.furtherRequirements}" /></span>
+						<div class="nl"> </div>
+					
+					</div> 
+					<!-- END PREVIEW BOX -->
+					
+					
+					<!-- BEGIN BEDINGUNGEN DES ARBEITSVERHÄLTNISSES !-->
+						<div class="abschnitt-header">Bedingungen des Arbeitsverhältnisses</div><div class="hr"> </div>
+						
+						<!-- START PREVIEW BOX -->
+					<div class="preview-box" style="padding: 0pt;">
+					
+						
+						<span class="field-name spalte1">Gewünschter Tätigkeitsbeginn:</span>
+						<span class="field-value spalte2"><span t:type="chenillekit/DateFormat" value="jobData?.possibleCommencementDate" pattern="literal:MM/dd/yyyy"/></span>
+						<div class="nl"> </div>
+						
+						<span class="field-name spalte1">Dauer des Arbeitsverhältnisses:</span>
+						<span class="field-value spalte2">${getEnumLabel(jobData?.durationOfContract)}</span>
+						<div class="nl"> </div>
+						
+						<span class="field-name spalte1">Arbeitszeit pro Woche:</span>
+						<span class="field-value spalte2">${jobData?.weeklyHoursOfWork}</span>
+						<div class="nl"> </div>
+						
+						<span class="field-name spalte1">Bezahlung:</span>
+						<span class="field-value spalte2">${jobData?.salary}</span>
+						<div class="nl"> </div>
+						
+						<span class="field-name spalte1">Sonstige Leistungen:</span>
+					
+						<span class="field-value spalte2"><t:textoutput t:value="${jobData?.miscellaneousServices}" /></span>
+						<div class="nl"> </div>
+						
+						<span class="field-name spalte1">Bemerkungen zur Bewerbung:</span> 
+						<span class="field-value spalte2"><t:textoutput t:value="${jobData?.commentsRegardingApplicationProcedure}" /></span>
+						<div class="nl"> </div>
+						
+						<t:if test="jobData?.applicationFormLink">
+							<span class="field-name spalte1">Link zum Bewerbungsformular:</span>
+							<span class="field-value spalte2"><a href="${jobData?.applicationFormLink}" target="_blank">Bewerberbungsformular (extern)</a></span>
+							<div class="nl"> </div>
+						</t:if>
+						
+						<span class="field-name spalte1">Laufzeit des Stellenangebots:</span>
+						<span class="field-value spalte2"><span t:type="chenillekit/DateFormat" value="jobData?.jobOfferExpireDate" pattern="literal:MM/dd/yyyy"/></span>
+						<div class="nl"> </div>
+						
+						
+						
+					<!-- Art der Veröffentlichung !-->
+					<t:if test="jobOfferIsAnonym">
+						
+							<span class="field-name spalte1">Stellenangebot ID:</span>
+							<span class="field-value spalte2">${jobOfferId}</span>
+							<div class="nl"> </div>
+							
+							<span class="field-name spalte1">Arbeitgeberbranche:</span>
+							<span class="field-value spalte2">${jobData?.organisationIndustrySector?.SectorNameGerman}</span>
+							<div class="nl"> </div>
+						
+							<span class="field-name spalte1">Hinweis:</span>
+							<span class="field-value spalte2">
+								Der Arbeitgeber wünscht keine direkte Veröffentlichung seiner Kontaktdaten. Sollten Sie Interesse an
+								dem hier veröffentlichten Stellenangebot haben und das Feld <b>Bemerkungen zur Bewerbung</b> keine anderweitigen 
+								Informationen enthalten, so wenden Sie sich bitte unter Angabe der Stellenangebots ID: <b>${jobOfferId}</b> 
+								und des Stellentitels: <b>${jobData.jobDescription}</b> an folgende eMailadresse: beratung[at]agef.de .
+							</span>
+							<div class="nl"> </div>
+            			<p:else>
+            			
+            					<!-- Organisation !-->
+							<div class="abschnitt-header">Firma / Organisation</div><div class="hr"> </div>
+								<!-- START PREVIEW BOX -->
+								<div class="preview-box" style="padding:0;">
+									
+									
+								<span class="field-name spalte1">Organisationsname:</span>
+								<span class="field-value spalte2">${jobData?.OrganisationName}</span>
+								<div class="nl"> </div>
+									
+								<span class="field-name spalte1">Organisationsbeschreibung:</span>
+								<span class="field-value spalte2">${jobData?.OrganisationDescription}</span>
+								<div class="nl"> </div>
+									
+								<span class="field-name spalte1">Arbeitgeberbranche:</span>
+								<span class="field-value spalte2">${jobData?.organisationIndustrySector?.SectorNameGerman}</span>
+								<div class="nl"> </div>
+							
+									
+									</div> 
+								<!-- END PREVIEW BOX -->
+									
+								<!-- Kontaktperson !-->
+								<t:if test="jobData?.ContactPerson">	
+									<div class="abschnitt-header">Kontaktperson</div><div class="hr"> </div>
+									
+									<!-- START PREVIEW BOX -->
+									<div class="preview-box" style="padding:0;">
+									
+									<t:if test="jobData?.ContactPerson?.Addresses">	
+										<span class="field-name spalte1">Anrede:</span>
+										<span class="field-value spalte2">${getEnumLabel(jobData?.ContactPerson?.Addresses)}</span>
+										<div class="nl"> </div>
+									</t:if>	
+										
+									<t:if test="jobData?.ContactPerson?.FamilyName">	
+										<span class="field-name spalte1">Familienname:</span>
+										<span class="field-value spalte2">${jobData?.ContactPerson?.FamilyName}</span>
+										<div class="nl"> </div>
+									</t:if>
+									
+									<t:if test="jobData?.ContactPerson?.GivenName">	
+										<span class="field-name spalte1">Vorname(n):</span>
+										<span class="field-value spalte2">${jobData?.ContactPerson?.GivenName}</span>
+										<div class="nl"> </div>
+									</t:if>
+										
+									<t:if test="jobData?.ContactPerson?.GivenName">		
+										<span class="field-name spalte1">Position:</span>
+										<span class="field-value spalte2">${jobData?.ContactPerson?.Position}</span>
+										<div class="nl"> </div>
+									</t:if>
+										
+									<t:if test="jobData?.ContactPerson?.EmailBusiness">	
+										<span class="field-name spalte1">eMail:</span>
+										<span class="field-value spalte2">${jobData?.ContactPerson?.EmailBusiness}</span>
+										<div class="nl"> </div>
+									</t:if>	
+										
+									<t:if test="jobData?.ContactPerson?.Internet">		
+										<span class="field-name spalte1">Internetauftritt:</span>
+										<span class="field-value spalte2">${jobData?.ContactPerson?.Internet}</span>
+										<div class="nl"> </div>
+									</t:if>
+									</div> 
+									<!-- END PREVIEW BOX -->
+								</t:if>
+									
+								<!-- Anschrift der Kontaktperson  !-->
+								<t:if test="jobData?.CurrentContactAddress">				
+									<div class="abschnitt-header">Anschrift der Kontaktperson</div><div class="hr"> </div>
+									
+									<!-- START PREVIEW BOX -->
+									<div class="preview-box"  style="padding:0;">
+										
+									<t:if test="jobData?.CurrentContactAddress?.Address1">		
+										<span class="field-name spalte1">Adresse 1:</span>
+										<span class="field-value spalte2">${jobData?.CurrentContactAddress?.Address1}</span>
+										<div class="nl"> </div>
+									</t:if>
+									
+									<t:if test="jobData?.CurrentContactAddress?.Address2">		
+										<span class="field-name spalte1">Adresse 2:</span>
+										<span class="field-value spalte2">${jobData?.CurrentContactAddress?.Address2}</span>
+										<div class="nl"> </div>	
+									</t:if>
+										
+									<t:if test="jobData?.CurrentContactAddress?.City">
+										<span class="field-name spalte1">Ort:</span>
+										<span class="field-value spalte2">${jobData?.CurrentContactAddress?.City}</span>
+										<div class="nl"> </div>
+									</t:if>
+									
+									<t:if test="jobData?.CurrentContactAddress?.FederalState">	
+										<span class="field-name spalte1">Bundesland:</span>
+										<span class="field-value spalte2">${jobData?.CurrentContactAddress?.FederalState}</span>
+										<div class="nl"> </div>
+									</t:if>
+									
+									<t:if test="jobData?.CurrentContactAddress?.ZipCode">	
+										<span class="field-name spalte1">PLZ:</span>
+										<span class="field-value spalte2">${jobData?.CurrentContactAddress?.ZipCode}</span>
+										<div class="nl"> </div>	
+									</t:if>
+										
+									<t:if test="jobData?.CurrentContactAddress?.Country">	
+										<span class="field-name spalte1">Land:</span>
+										<span class="field-value spalte2">${jobData?.CurrentContactAddress?.Country?.shortEnglishName}</span>
+										<div class="nl"> </div>
+									</t:if>
+									
+									<t:if test="jobData?.CurrentContactAddress?.PhoneNumber">	
+										<span class="field-name spalte1">Telefon Nummer:</span>
+										<span class="field-value spalte2">${jobData?.CurrentContactAddress?.PhoneNumber}</span>
+										<div class="nl"> </div>
+									</t:if>
+									
+									<t:if test="jobData?.CurrentContactAddress?.MobileNumber">
+										<span class="field-name spalte1">Mobil Nummer:</span>
+										<span class="field-value spalte2">${jobData?.CurrentContactAddress?.MobileNumber}</span>
+										<div class="nl"> </div>
+									</t:if>
+									
+									<t:if test="jobData?.CurrentContactAddress?.FaxNumber">	
+										<span class="field-name spalte1">Fax Nummer:</span>
+										<span class="field-value spalte2">${jobData?.CurrentContactAddress?.FaxNumber}</span>
+										<div class="nl"> </div>
+									</t:if>
+									
+									</div> 
+								<!-- END PREVIEW BOX -->
+								</t:if>
+							<!-- END Adresse !-->
+            					
+            			</p:else>
+        			</t:if>
+					
+					</div> 
+					<!-- END PREVIEW BOX -->
+			<!-- END BEDINGUNGEN DES ARBEITSVERHÄLTNISSES !-->
+         	</div>
+			<script type="text/javascript">
+     			showWindow();
+     		</script>
+     	</t:block>
+		
+	</div>
+	
+	<div t:id="detailwindow" />
+    
+    
+ <!--   <script type="text/javascript">  
+
+			function onSelectCompleteFunction(response) {
+				var json = response.result; 
+				var array = $A(json)
+				var counter = 0;
+				document.forms['beanForm'].countrySelect.options.length = 0;
+				//alert(response.result[1]);
+				array.each(function(item){  
+					document.forms['beanForm'].countrySelect.options[counter] = new Option(item[1],item[0]);
+					counter++;
+				})
+			}
+
+    </script>
+-->    
+    <script type="text/javascript"> 
+    function showWindow()
+    {
+        ${detailwindow.componentResources.id}.setTitle("Stellen Details")
+        ${detailwindow.componentResources.id}.setContent("detailsZone",false,false)
+        ${detailwindow.componentResources.id}.showCenter(true)
+
+        
+    }
+
+    </script>  
+    
+    
+</t:Layout>

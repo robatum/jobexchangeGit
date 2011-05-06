@@ -1,0 +1,34 @@
+<t:LayoutSecured t:title="Manage Job Offers" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+        <tr>
+    		<td colspan="2">
+        <fieldset><legend><strong>Your Job Offers</strong></legend>
+			<t:grid t:source="jobOfferList" rowsPerPage="10" inPlace="false" row="jobOfferData" t:id="jobOfferGrid" t:model="jobOfferGridModel">
+				<t:parameter name="IdCell">
+	    			${jobOfferData.jobofferid}
+	    		</t:parameter>
+				<t:parameter name="onlineStateCell">
+	    			<t:actionlink t:id="onlineState" context="jobOfferData.jobOfferId">
+	    				<t:if test="jobOfferData.onlineStatus">
+	    					online
+	    					<t:parameter name="else">
+	    						offline
+	    					</t:parameter>
+	    				</t:if>
+
+	    			</t:actionlink>
+	    		</t:parameter>
+				<t:parameter name="modifyCell">
+	    			<t:pagelink t:page="administration/addjobofferpage" context="jobOfferData.id">
+	    				modify
+	    			</t:pagelink>
+	    		</t:parameter>
+				<t:parameter name="deleteCell">
+	    			<t:actionlink t:id="delete" context="jobOfferData.jobOfferId">
+	    				delete
+	    			</t:actionlink>
+	    		</t:parameter>
+			</t:grid>
+		</fieldset>
+			</td>
+  		</tr>
+</t:LayoutSecured>

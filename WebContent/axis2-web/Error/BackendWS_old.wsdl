@@ -1,0 +1,724 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:ns="http://webservice.jobexchange.agef.net" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ax23="http://entities.webservice.jobexchange.agef.net/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://webservice.jobexchange.agef.net">
+    <wsdl:documentation>
+		Please Type your service description here
+	</wsdl:documentation>
+    <wsdl:types>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://entities.webservice.jobexchange.agef.net/xsd">
+            <xs:complexType name="UserDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="addresses" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="alternativeAddress" nillable="true" type="ax23:AddressDTO"/>
+                    <xs:element minOccurs="0" name="citizenship1" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="citizenship2" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="cobraUserId" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="currentAddress" nillable="true" type="ax23:AddressDTO"/>
+                    <xs:element minOccurs="0" name="dataProvider" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="dateOfBirth" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="emailBusiness" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="emailPrivate" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="familyName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="fathersName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="givenName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="internet" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="nationality" nillable="true" type="ax23:CountryDTO"/>
+                    <xs:element minOccurs="0" name="title" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="userId" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="userRole" nillable="true" type="ax23:AbstractUserRoleDTO"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="AddressDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="address1" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="address2" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="city" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="country" nillable="true" type="ax23:CountryDTO"/>
+                    <xs:element minOccurs="0" name="faxNumber" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="federalState" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="mobileNumber" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="phoneNumber" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="zipCode" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CountryDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="country" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="AbstractUserRoleDTO">
+                <xs:sequence/>
+            </xs:complexType>
+            <xs:complexType name="AlumniRoleDTO">
+                <xs:complexContent>
+                    <xs:extension base="ax23:AbstractUserRoleDTO">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="organisationDescription" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="organisationName" nillable="true" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="ApplicantDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="additionalRemarks" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="additionalSkills" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="applicantProfileId" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="applicantProfileOwnerId" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="computerSkills" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="computerSkillsComments" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="drivingLicence" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="drivingLicenceComments" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="durationOfContract" nillable="true" type="xs:string"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="furtherEducation" nillable="true" type="ax23:EducationDTO"/>
+                    <xs:element minOccurs="0" name="highestDegree" nillable="true" type="ax23:EducationDTO"/>
+                    <xs:element minOccurs="0" name="languageSkillsEnglish" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="languageSkillsGerman" nillable="true" type="xs:string"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="languageSkillsOther" nillable="true" type="ax23:LanguageSkillDTO"/>
+                    <xs:element minOccurs="0" name="locationRemarks" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="managementExperience" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="managementExperienceDuration" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="managementExperienceRemarks" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="managementExperienceSector" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="managementExperienceTeamSize" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="preferredFieldOfActivity" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="preferredLocation" nillable="true" type="ax23:CountryDTO"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="workExperience" nillable="true" type="ax23:WorkExperienceDTO"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="EducationDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="country" nillable="true" type="ax23:CountryDTO"/>
+                    <xs:element minOccurs="0" name="dateOfGraduation" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="degree" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="educationalInstitute" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="fieldSpecialization" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="instituteName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="location" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="LanguageSkillDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="level" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="WorkExperienceDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="finished" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="jobDescription" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="jobTitle" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="sector" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="started" nillable="true" type="xs:dateTime"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="JobDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="alternativeProfession" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="applicationExpireDate" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="attachmentLocation" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="cobraJobId" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="commentsRegardingApplicationProcedure" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="computerSkills" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="computerSkillsComments" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="contactPerson" nillable="true" type="ax23:ContactPersonDTO"/>
+                    <xs:element minOccurs="0" name="contactPersonAddress" nillable="true" type="ax23:AddressDTO"/>
+                    <xs:element minOccurs="0" name="countryOfEmployment" nillable="true" type="ax23:CountryDTO"/>
+                    <xs:element minOccurs="0" name="currency" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="desiredProfession" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="drivingLicence" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="durationOfContract" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="furtherComments" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="furtherCommentsRegardingEducation" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="furtherRequirements" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="jobDescription" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="jobOfferExpireDate" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="jobOfferId" type="xs:long"/>
+                    <xs:element minOccurs="0" name="jobOfferOwner" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="languageSkillsEnglish" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="languageSkillsGerman" nillable="true" type="xs:string"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="languageSkillsOther" nillable="true" type="ax23:LanguageSkillDTO"/>
+                    <xs:element minOccurs="0" name="locationOfEmployment" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="minimumRequirementsForEducation" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="miscellaneousServices" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="numberOfJobs" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="organisationDescription" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="organisationName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="possibleCommencementDate" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="preferredPublication" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="salary" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="specialKnowledge" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="taskDescription" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="weeklyHoursOfWork" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="workExperience" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="ContactPersonDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="addresses" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="emailBusiness" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="familyName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="fathersName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="givenName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="internet" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="position" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="title" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="OrganisationRoleDTO">
+                <xs:complexContent>
+                    <xs:extension base="ax23:AbstractUserRoleDTO">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="organisationDescription" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="organisationName" nillable="true" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:ax24="http://entities.webservice.jobexchange.agef.net/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://webservice.jobexchange.agef.net">
+            <xs:import namespace="http://entities.webservice.jobexchange.agef.net/xsd"/>
+            <xs:element name="addAlumniUser">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="user" nillable="true" type="ax24:UserDTO"/>
+                        <xs:element minOccurs="0" name="cobraSuperId" type="xs:long"/>
+                        <xs:element minOccurs="0" name="userRole" nillable="true" type="ax24:AlumniRoleDTO"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addAlumniUserResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addApplicantProfileByCobraId">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="applicantProfile" nillable="true" type="ax24:ApplicantDTO"/>
+                        <xs:element minOccurs="0" name="cobraUserId" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addApplicantProfileByCobraIdResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addJobOfferByCobraId">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="jobOffer" nillable="true" type="ax24:JobDTO"/>
+                        <xs:element minOccurs="0" name="cobraUserId" type="xs:long"/>
+                        <xs:element minOccurs="0" name="cobraJobId" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addJobOfferByCobraIdResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addOrganisationUser">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="user" nillable="true" type="ax24:UserDTO"/>
+                        <xs:element minOccurs="0" name="cobraSuperId" type="xs:long"/>
+                        <xs:element minOccurs="0" name="userRole" nillable="true" type="ax24:OrganisationRoleDTO"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addOrganisationUserResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="deleteApplicantProfileByCobraId">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="cobraUserId" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="deleteApplicantProfileByCobraIdResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="deleteJobOfferByCobraId">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="cobraJobId" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="deleteJobOfferByCobraIdResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="deleteUserByCobraId">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="cobraUserId" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="deleteUserByCobraIdResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="modifyApplicantProfileByCobraId">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="applicantProfile" nillable="true" type="ax24:ApplicantDTO"/>
+                        <xs:element minOccurs="0" name="cobraUserId" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="modifyApplicantProfileByCobraIdResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="modifyJobOfferByCobraId">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="jobOffer" nillable="true" type="ax24:JobDTO"/>
+                        <xs:element minOccurs="0" name="cobraSuperId" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="modifyJobOfferByCobraIdResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="modifyUserByCobraId">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="user" nillable="true" type="ax24:UserDTO"/>
+                        <xs:element minOccurs="0" name="cobraSuperId" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="modifyUserByCobraIdResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="deleteJobOfferByCobraIdRequest">
+        <wsdl:part name="parameters" element="ns:deleteJobOfferByCobraId"/>
+    </wsdl:message>
+    <wsdl:message name="deleteJobOfferByCobraIdResponse">
+        <wsdl:part name="parameters" element="ns:deleteJobOfferByCobraIdResponse"/>
+    </wsdl:message>
+    <wsdl:message name="deleteUserByCobraIdRequest">
+        <wsdl:part name="parameters" element="ns:deleteUserByCobraId"/>
+    </wsdl:message>
+    <wsdl:message name="deleteUserByCobraIdResponse">
+        <wsdl:part name="parameters" element="ns:deleteUserByCobraIdResponse"/>
+    </wsdl:message>
+    <wsdl:message name="modifyJobOfferByCobraIdRequest">
+        <wsdl:part name="parameters" element="ns:modifyJobOfferByCobraId"/>
+    </wsdl:message>
+    <wsdl:message name="modifyJobOfferByCobraIdResponse">
+        <wsdl:part name="parameters" element="ns:modifyJobOfferByCobraIdResponse"/>
+    </wsdl:message>
+    <wsdl:message name="addApplicantProfileByCobraIdRequest">
+        <wsdl:part name="parameters" element="ns:addApplicantProfileByCobraId"/>
+    </wsdl:message>
+    <wsdl:message name="addApplicantProfileByCobraIdResponse">
+        <wsdl:part name="parameters" element="ns:addApplicantProfileByCobraIdResponse"/>
+    </wsdl:message>
+    <wsdl:message name="modifyApplicantProfileByCobraIdRequest">
+        <wsdl:part name="parameters" element="ns:modifyApplicantProfileByCobraId"/>
+    </wsdl:message>
+    <wsdl:message name="modifyApplicantProfileByCobraIdResponse">
+        <wsdl:part name="parameters" element="ns:modifyApplicantProfileByCobraIdResponse"/>
+    </wsdl:message>
+    <wsdl:message name="addJobOfferByCobraIdRequest">
+        <wsdl:part name="parameters" element="ns:addJobOfferByCobraId"/>
+    </wsdl:message>
+    <wsdl:message name="addJobOfferByCobraIdResponse">
+        <wsdl:part name="parameters" element="ns:addJobOfferByCobraIdResponse"/>
+    </wsdl:message>
+    <wsdl:message name="deleteApplicantProfileByCobraIdRequest">
+        <wsdl:part name="parameters" element="ns:deleteApplicantProfileByCobraId"/>
+    </wsdl:message>
+    <wsdl:message name="deleteApplicantProfileByCobraIdResponse">
+        <wsdl:part name="parameters" element="ns:deleteApplicantProfileByCobraIdResponse"/>
+    </wsdl:message>
+    <wsdl:message name="addAlumniUserRequest">
+        <wsdl:part name="parameters" element="ns:addAlumniUser"/>
+    </wsdl:message>
+    <wsdl:message name="addAlumniUserResponse">
+        <wsdl:part name="parameters" element="ns:addAlumniUserResponse"/>
+    </wsdl:message>
+    <wsdl:message name="modifyUserByCobraIdRequest">
+        <wsdl:part name="parameters" element="ns:modifyUserByCobraId"/>
+    </wsdl:message>
+    <wsdl:message name="modifyUserByCobraIdResponse">
+        <wsdl:part name="parameters" element="ns:modifyUserByCobraIdResponse"/>
+    </wsdl:message>
+    <wsdl:message name="addOrganisationUserRequest">
+        <wsdl:part name="parameters" element="ns:addOrganisationUser"/>
+    </wsdl:message>
+    <wsdl:message name="addOrganisationUserResponse">
+        <wsdl:part name="parameters" element="ns:addOrganisationUserResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="BackendWSPortType">
+        <wsdl:operation name="deleteJobOfferByCobraId">
+            <wsdl:input message="ns:deleteJobOfferByCobraIdRequest" wsaw:Action="urn:deleteJobOfferByCobraId"/>
+            <wsdl:output message="ns:deleteJobOfferByCobraIdResponse" wsaw:Action="urn:deleteJobOfferByCobraIdResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="deleteUserByCobraId">
+            <wsdl:input message="ns:deleteUserByCobraIdRequest" wsaw:Action="urn:deleteUserByCobraId"/>
+            <wsdl:output message="ns:deleteUserByCobraIdResponse" wsaw:Action="urn:deleteUserByCobraIdResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="modifyJobOfferByCobraId">
+            <wsdl:input message="ns:modifyJobOfferByCobraIdRequest" wsaw:Action="urn:modifyJobOfferByCobraId"/>
+            <wsdl:output message="ns:modifyJobOfferByCobraIdResponse" wsaw:Action="urn:modifyJobOfferByCobraIdResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="addApplicantProfileByCobraId">
+            <wsdl:input message="ns:addApplicantProfileByCobraIdRequest" wsaw:Action="urn:addApplicantProfileByCobraId"/>
+            <wsdl:output message="ns:addApplicantProfileByCobraIdResponse" wsaw:Action="urn:addApplicantProfileByCobraIdResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="modifyApplicantProfileByCobraId">
+            <wsdl:input message="ns:modifyApplicantProfileByCobraIdRequest" wsaw:Action="urn:modifyApplicantProfileByCobraId"/>
+            <wsdl:output message="ns:modifyApplicantProfileByCobraIdResponse" wsaw:Action="urn:modifyApplicantProfileByCobraIdResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="addJobOfferByCobraId">
+            <wsdl:input message="ns:addJobOfferByCobraIdRequest" wsaw:Action="urn:addJobOfferByCobraId"/>
+            <wsdl:output message="ns:addJobOfferByCobraIdResponse" wsaw:Action="urn:addJobOfferByCobraIdResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="deleteApplicantProfileByCobraId">
+            <wsdl:input message="ns:deleteApplicantProfileByCobraIdRequest" wsaw:Action="urn:deleteApplicantProfileByCobraId"/>
+            <wsdl:output message="ns:deleteApplicantProfileByCobraIdResponse" wsaw:Action="urn:deleteApplicantProfileByCobraIdResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="addAlumniUser">
+            <wsdl:input message="ns:addAlumniUserRequest" wsaw:Action="urn:addAlumniUser"/>
+            <wsdl:output message="ns:addAlumniUserResponse" wsaw:Action="urn:addAlumniUserResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="modifyUserByCobraId">
+            <wsdl:input message="ns:modifyUserByCobraIdRequest" wsaw:Action="urn:modifyUserByCobraId"/>
+            <wsdl:output message="ns:modifyUserByCobraIdResponse" wsaw:Action="urn:modifyUserByCobraIdResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="addOrganisationUser">
+            <wsdl:input message="ns:addOrganisationUserRequest" wsaw:Action="urn:addOrganisationUser"/>
+            <wsdl:output message="ns:addOrganisationUserResponse" wsaw:Action="urn:addOrganisationUserResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="BackendWSSoap11Binding" type="ns:BackendWSPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="deleteUserByCobraId">
+            <soap:operation soapAction="urn:deleteUserByCobraId" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteJobOfferByCobraId">
+            <soap:operation soapAction="urn:deleteJobOfferByCobraId" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addApplicantProfileByCobraId">
+            <soap:operation soapAction="urn:addApplicantProfileByCobraId" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="modifyJobOfferByCobraId">
+            <soap:operation soapAction="urn:modifyJobOfferByCobraId" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="modifyApplicantProfileByCobraId">
+            <soap:operation soapAction="urn:modifyApplicantProfileByCobraId" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addJobOfferByCobraId">
+            <soap:operation soapAction="urn:addJobOfferByCobraId" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteApplicantProfileByCobraId">
+            <soap:operation soapAction="urn:deleteApplicantProfileByCobraId" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addAlumniUser">
+            <soap:operation soapAction="urn:addAlumniUser" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addOrganisationUser">
+            <soap:operation soapAction="urn:addOrganisationUser" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="modifyUserByCobraId">
+            <soap:operation soapAction="urn:modifyUserByCobraId" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="BackendWSSoap12Binding" type="ns:BackendWSPortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="deleteUserByCobraId">
+            <soap12:operation soapAction="urn:deleteUserByCobraId" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteJobOfferByCobraId">
+            <soap12:operation soapAction="urn:deleteJobOfferByCobraId" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addApplicantProfileByCobraId">
+            <soap12:operation soapAction="urn:addApplicantProfileByCobraId" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="modifyJobOfferByCobraId">
+            <soap12:operation soapAction="urn:modifyJobOfferByCobraId" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="modifyApplicantProfileByCobraId">
+            <soap12:operation soapAction="urn:modifyApplicantProfileByCobraId" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addJobOfferByCobraId">
+            <soap12:operation soapAction="urn:addJobOfferByCobraId" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteApplicantProfileByCobraId">
+            <soap12:operation soapAction="urn:deleteApplicantProfileByCobraId" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addAlumniUser">
+            <soap12:operation soapAction="urn:addAlumniUser" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addOrganisationUser">
+            <soap12:operation soapAction="urn:addOrganisationUser" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="modifyUserByCobraId">
+            <soap12:operation soapAction="urn:modifyUserByCobraId" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="BackendWSHttpBinding" type="ns:BackendWSPortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="deleteUserByCobraId">
+            <http:operation location="BackendWS/deleteUserByCobraId"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="deleteUserByCobraId"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="deleteUserByCobraId"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteJobOfferByCobraId">
+            <http:operation location="BackendWS/deleteJobOfferByCobraId"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="deleteJobOfferByCobraId"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="deleteJobOfferByCobraId"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addApplicantProfileByCobraId">
+            <http:operation location="BackendWS/addApplicantProfileByCobraId"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="addApplicantProfileByCobraId"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="addApplicantProfileByCobraId"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="modifyJobOfferByCobraId">
+            <http:operation location="BackendWS/modifyJobOfferByCobraId"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="modifyJobOfferByCobraId"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="modifyJobOfferByCobraId"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="modifyApplicantProfileByCobraId">
+            <http:operation location="BackendWS/modifyApplicantProfileByCobraId"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="modifyApplicantProfileByCobraId"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="modifyApplicantProfileByCobraId"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addJobOfferByCobraId">
+            <http:operation location="BackendWS/addJobOfferByCobraId"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="addJobOfferByCobraId"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="addJobOfferByCobraId"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteApplicantProfileByCobraId">
+            <http:operation location="BackendWS/deleteApplicantProfileByCobraId"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="deleteApplicantProfileByCobraId"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="deleteApplicantProfileByCobraId"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addAlumniUser">
+            <http:operation location="BackendWS/addAlumniUser"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="addAlumniUser"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="addAlumniUser"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addOrganisationUser">
+            <http:operation location="BackendWS/addOrganisationUser"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="addOrganisationUser"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="addOrganisationUser"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="modifyUserByCobraId">
+            <http:operation location="BackendWS/modifyUserByCobraId"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="modifyUserByCobraId"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="modifyUserByCobraId"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="BackendWS">
+        <wsdl:port name="BackendWSHttpSoap11Endpoint" binding="ns:BackendWSSoap11Binding">
+            <soap:address location="http://localhost:8080/jobexchange/services/BackendWS.BackendWSHttpSoap11Endpoint"/>
+        </wsdl:port>
+        <wsdl:port name="BackendWSHttpSoap12Endpoint" binding="ns:BackendWSSoap12Binding">
+            <soap12:address location="http://localhost:8080/jobexchange/services/BackendWS.BackendWSHttpSoap12Endpoint"/>
+        </wsdl:port>
+        <wsdl:port name="BackendWSHttpEndpoint" binding="ns:BackendWSHttpBinding">
+            <http:address location="http://localhost:8080/jobexchange/services/BackendWS.BackendWSHttpEndpoint"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

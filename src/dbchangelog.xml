@@ -1,0 +1,381 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+
+	<changeSet author="Daniel" id="trunk-1">
+		<addColumn tableName="User">
+			<column name="inwentUserId" type="BIGINT">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+	</changeSet>
+	
+	<changeSet author="daniel" id="trunk-2">
+		<addColumn tableName="User">
+			<column name="elggUserId" type="BIGINT">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet author="Andreas" id="bewerberprofil-1">
+
+		<addColumn tableName="applicants">
+			<column name="currentStatus" type="VARCHAR(50)">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+
+		<addColumn tableName="applicants">
+			<column name="lookingFor" type="LONGTEXT">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+
+		<addColumn tableName="applicants">
+			<column name="offering" type="LONGTEXT">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+
+	</changeSet>
+
+<!--	<changeSet author="daniel" id="bewerberprofil-2">-->
+<!--		<createTable tableName="WorkUserType">-->
+<!--			<column autoIncrement="true" name="id" type="BIGINT">-->
+<!--				<constraints nullable="false" primaryKey="true" />-->
+<!--			</column>-->
+<!--			<column name="applicant_id" type="BIGINT">-->
+<!--				<constraints nullable="true" />-->
+<!--			</column>-->
+<!--			<column name="workType" type="VARCHAR(50)">-->
+<!--				<constraints nullable="false" />-->
+<!--			</column>-->
+<!--		</createTable>-->
+<!--		-->
+<!--		<addColumn tableName="applicants">-->
+<!--			<column name="availability" type="VARCHAR(255)"></column>-->
+<!--		</addColumn>-->
+<!--		-->
+<!--	</changeSet>-->
+<!--	-->
+<!--	<changeSet author="daniel" id="bewerberprofil-3">-->
+<!--		<addColumn tableName="applicants">-->
+<!--			<column name="referencesAndCertificates" type="VARCHAR(255)" />-->
+<!--			<column name="referencesAndCertificatesComments" type="LONGTEXT" />-->
+<!---->
+<!--			<column name="furtherOnlineActivities" type="VARCHAR(255)" />-->
+<!--			<column name="furtherOnlineActivitiesComments" type="LONGTEXT" />-->
+<!---->
+<!--			<column name="publications" type="VARCHAR(255)" />-->
+<!--			<column name="publicationsComments" type="LONGTEXT" />-->
+<!--			-->
+<!--			<column name="publicationType" type="VARCHAR(255)" />-->
+<!--			<column name="photo" type="VARCHAR(255)" />-->
+<!--		</addColumn>-->
+<!--		-->
+<!--		<addColumn tableName="WorkExperience">-->
+<!--			<column name="untilToday" type="VARCHAR(255)" />-->
+<!--			<column name="company" type="VARCHAR(255)" />-->
+<!--			<column name="homepage" type="VARCHAR(255)" />-->
+<!--		</addColumn>-->
+<!--		-->
+<!--		<addColumn tableName="Education">-->
+<!--			<column name="untilToday" type="VARCHAR(255)" />-->
+<!--			<column name="field" type="VARCHAR(255)" />-->
+<!--		</addColumn>-->
+<!--			-->
+<!--	</changeSet>-->
+<!--	-->
+<!--	<changeSet author="daniel" id="bewerberprofil-4">-->
+<!--		<addColumn tableName="applicants">-->
+<!--			<column name="profilePhoto" type="VARCHAR(255)"></column>-->
+<!--		</addColumn>-->
+<!--	</changeSet>-->
+<!--	-->
+<!--	<changeSet author="daniel" id="bewerberprofil-5">-->
+<!--		<addColumn tableName="WorkExperience">-->
+<!--			<column name="managementExperience" type="VARCHAR(255)"></column>-->
+<!--		</addColumn>-->
+<!--	</changeSet>-->
+<!--	-->
+<!--	<changeSet author="daniel" id="bewerberprofil-6">-->
+<!--		<addColumn tableName="Education">-->
+<!--			<column name="started" type="DATETIME"></column>		-->
+<!--		</addColumn>-->
+<!--	</changeSet>-->
+<!--	-->
+<!--	<changeSet author="daniel" id="bewerberprofil-7">-->
+<!--		<addColumn tableName="WorkUserType">-->
+<!--			<column name="version" type="BIGINT"></column>-->
+<!--			<column name="created" type="DATETIME"></column>-->
+<!--			<column name="modified" type="DATETIME"></column>-->
+<!--		</addColumn>-->
+<!--	</changeSet>-->
+<!--	-->
+<!--	<changeSet author="daniel" id="bewerberprofil-8">-->
+<!--		<addColumn tableName="WorkUserType">-->
+<!--			<column name="OPTLOCK" type="BIGINT"></column>-->
+<!--		</addColumn>-->
+<!--	</changeSet>-->
+<!--	-->
+<!--	<changeSet author="daniel" id="bewerberprofil-9">-->
+<!--		<addColumn tableName="WorkUserType">-->
+<!--			<column name="INDEX_COL" type="BIGINT"></column>-->
+<!--		</addColumn>-->
+<!--	</changeSet>-->
+<!--	-->
+<!--	<changeSet author="daniel" id="bewerberprofil-10">-->
+<!--		<update tableName="Education">-->
+<!--			<column name="fieldSpecialization" type="LONGTEXT"></column>-->
+<!--		</update>-->
+<!--	</changeSet>-->
+<!--	-->
+<!--	<changeSet author="daniel" id="bewerberprofil-11">-->
+<!--		<modifyColumn tableName="Education">-->
+<!--			<column name="fieldSpecialization" type="LONGTEXT"></column>-->
+<!--		</modifyColumn>-->
+<!--	</changeSet>-->
+<!--	-->
+	
+	<changeSet author="Andreas" id="Suchhistorie-1">
+		
+		<createTable tableName="SearchHistoryJobs">
+			<column autoIncrement="true" name="id" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			
+			<column name="queryString" type="VARCHAR(255)">
+				<constraints nullable="true" />
+			</column>
+			<column name="queryContinent" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="queryCountry" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+			
+		</createTable>
+		<sql>ALTER TABLE `SearchHistoryJobs` ENGINE = InnoDB;</sql>
+	</changeSet>
+
+	
+	<changeSet author="Andreas" id="Suchhistorie-2">
+		<addColumn tableName="SearchHistoryJobs">
+			<column name="created" type="DATETIME">
+				<constraints nullable="true" />
+			</column>
+			<column name="modified" type="DATETIME">
+				<constraints nullable="true" />
+			</column>
+			<column name="OPTLOCK" type="BIGINT">
+				<constraints nullable="true" />
+			</column>
+			<column name="queryResultAmount" type="INTEGER">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+		
+		<dropColumn tableName="SearchHistoryJobs" columnName="queryContinent"/>
+		<dropColumn tableName="SearchHistoryJobs" columnName="queryCountry"/>
+		
+		<addColumn tableName="SearchHistoryJobs">
+			<column name="queryContinent_id" type="BIGINT">
+				<constraints nullable="true" />
+			</column>
+			<column name="queryCountry_id" type="BIGINT">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+</changeSet>
+	
+	
+	<changeSet author="Andreas" id="Suchhistorie-3">
+		<createTable tableName="SearchHistoryApplicant">
+			<column autoIncrement="true" name="id" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="created" type="DATETIME">
+				<constraints nullable="true" />
+			</column>
+			<column name="modified" type="DATETIME">
+				<constraints nullable="true" />
+			</column>
+			<column name="OPTLOCK" type="BIGINT">
+				<constraints nullable="true" />
+			</column>
+			<column name="queryResultAmount" type="INTEGER">
+				<constraints nullable="true" />
+			</column>
+			<column name="queryString" type="VARCHAR(255)">
+				<constraints nullable="true" />
+			</column>
+			<column name="queryContinent_id" type="BIGINT">
+				<constraints nullable="true" />
+			</column>
+			<column name="queryCountry" type="BIGINT">
+				<constraints nullable="true" />
+			</column>
+			
+		</createTable>
+		<sql>ALTER TABLE `SearchHistoryApplicant` ENGINE = InnoDB;</sql>
+	</changeSet>
+	
+	<changeSet author="Andreas" id="Suchhistorie-4">
+		<dropColumn tableName="SearchHistoryApplicant" columnName="queryCountry"/>
+		<addColumn tableName="SearchHistoryApplicant">
+			<column name="queryCountry_id" type="BIGINT">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+		
+		<addForeignKeyConstraint 
+				constraintName="fk_searchHistorApplicant_Continent"
+    			baseTableName="SearchHistoryApplicant" 
+    			baseColumnNames="queryContinent_id"
+    			referencedTableName="static_territories" 
+    			referencedColumnNames="id"
+    			onDelete="RESTRICT"
+    			onUpdate="RESTRICT"
+		/>
+		
+		<addForeignKeyConstraint 
+				constraintName="fk_searchHistorApplicant_Country"
+    			baseTableName="SearchHistoryApplicant" 
+    			baseColumnNames="queryCountry_id"
+    			referencedTableName="static_countries" 
+    			referencedColumnNames="id"
+    			onDelete="RESTRICT"
+    			onUpdate="RESTRICT"
+		/>
+		<addForeignKeyConstraint 
+				constraintName="fk_searchHistorJobs_Continent"
+    			baseTableName="SearchHistoryJobs" 
+    			baseColumnNames="queryContinent_id"
+    			referencedTableName="static_territories" 
+    			referencedColumnNames="id"
+    			onDelete="RESTRICT"
+    			onUpdate="RESTRICT"
+		/>
+		
+		<addForeignKeyConstraint 
+				constraintName="fk_searchHistorJobs_Country"
+    			baseTableName="SearchHistoryJobs" 
+    			baseColumnNames="queryCountry_id"
+    			referencedTableName="static_countries" 
+    			referencedColumnNames="id"
+    			onDelete="RESTRICT"
+    			onUpdate="RESTRICT"
+		/>
+		
+	</changeSet>
+	
+	
+	
+	<changeSet author="Andreas" id="Suchhistorie-5">
+		<sql>ALTER TABLE `SearchHistoryApplicant` 
+							DEFAULT CHARSET=utf8 
+							COLLATE=utf8_general_ci;
+		</sql>
+		<sql>ALTER TABLE `SearchHistoryJobs` 
+							DEFAULT CHARSET=utf8 
+							COLLATE=utf8_general_ci;
+		</sql>
+	</changeSet>
+	
+	<changeSet author="Andreas" id="Zugriffshistorie-1">
+		<createTable tableName="AccessHistoryApplicant">
+			<column autoIncrement="true" name="id" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="created" type="DATETIME">
+				<constraints nullable="true" />
+			</column>
+			<column name="modified" type="DATETIME">
+				<constraints nullable="true" />
+			</column>
+			<column name="OPTLOCK" type="BIGINT">
+				<constraints nullable="true" />
+			</column>
+			<column name="accessedApplicantProfile_id" type="BIGINT">
+				<constraints nullable="true" />
+			</column>
+			
+		</createTable>
+		
+		
+		<sql>ALTER TABLE `AccessHistoryApplicant` 
+							ENGINE = InnoDB 
+							DEFAULT CHARSET=utf8 
+							COLLATE=utf8_general_ci;
+		</sql>
+		
+		<addForeignKeyConstraint 
+				constraintName="fk_accessHistoryApplicant_Applicants"
+    			baseTableName="AccessHistoryApplicant" 
+    			baseColumnNames="accessedApplicantProfile_id"
+    			referencedTableName="applicants" 
+    			referencedColumnNames="id"
+    			onDelete="RESTRICT"
+    			onUpdate="RESTRICT"
+		/>
+		
+		
+		<createTable tableName="AccessHistoryJobs">
+			<column autoIncrement="true" name="id" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="created" type="DATETIME">
+				<constraints nullable="true" />
+			</column>
+			<column name="modified" type="DATETIME">
+				<constraints nullable="true" />
+			</column>
+			<column name="OPTLOCK" type="BIGINT">
+				<constraints nullable="true" />
+			</column>
+			<column name="accessedJobProfile_id" type="BIGINT">
+				<constraints nullable="true" />
+			</column>
+			
+		</createTable>
+		
+		
+		<sql>ALTER TABLE `AccessHistoryJobs` 
+							ENGINE = InnoDB 
+							DEFAULT CHARSET=utf8 
+							COLLATE=utf8_general_ci;
+		</sql>
+		
+		<addForeignKeyConstraint 
+				constraintName="fk_accessHistoryJobs_Jobs"
+    			baseTableName="AccessHistoryJobs" 
+    			baseColumnNames="accessedJobProfile_id"
+    			referencedTableName="jobs" 
+    			referencedColumnNames="id"
+    			onDelete="RESTRICT"
+    			onUpdate="RESTRICT"
+		/>
+	</changeSet>
+	
+	<changeSet author="daniel" id="neueLaenderInStaticCountry">
+		<sql>
+		INSERT INTO `static_countries` (`id`,`OPTLOCK`,`territory_fk`,`cn_iso_3`,`cn_iso_nr`,`cn_parent_tr_iso_nr`,`cn_official_name_local`,`cn_official_name_en`,`cn_capital`,`cn_tldomain`,`cn_currency_iso_3`,`cn_currency_iso_nr`,`cn_phone`,`cn_eu_member`,`cn_short_local`,`cn_short_en`,`cn_uno_member`) VALUES 
+		(244, 0, 4, 'MNE', 499, 150, 'Republike Crne Gore', 'Republic of Montenegro', 'Podgorica', 'me', 'EUR', 978, 382, 0, 'Crna Gora', 'Montenegro', 1),
+		(245, 0, 4, 'SRB', 688, 150, 'Republika Srbija', 'Republic of Serbia', 'Belgrade', 'rs', 'RSD', 941, 381, 0, 'Srbija', 'Serbia', 1),
+		(246, 0, 4, '', 999, 150, 'Република Косово', 'Republic of Kosova', 'Priština', 'ko', 'EUR', 978, 381, 0, 'Косово', 'Kosova', 0);
+		</sql>
+	</changeSet>
+	
+	
+	
+	<changeSet author="daniel" id="neueLaenderInStaticCountry">
+		<sql>
+		INSERT INTO `static_countries` (`id`,`OPTLOCK`,`territory_fk`,`cn_iso_3`,`cn_iso_nr`,`cn_parent_tr_iso_nr`,`cn_official_name_local`,`cn_official_name_en`,`cn_capital`,`cn_tldomain`,`cn_currency_iso_3`,`cn_currency_iso_nr`,`cn_phone`,`cn_eu_member`,`cn_short_local`,`cn_short_en`,`cn_uno_member`) VALUES 
+		(244, 0, 4, 'MNE', 499, 150, 'Republike Crne Gore', 'Republic of Montenegro', 'Podgorica', 'me', 'EUR', 978, 382, 0, 'Crna Gora', 'Montenegro', 1),
+		(245, 0, 4, 'SRB', 688, 150, 'Republika Srbija', 'Republic of Serbia', 'Belgrade', 'rs', 'RSD', 941, 381, 0, 'Srbija', 'Serbia', 1),
+		(246, 0, 4, '', 999, 150, 'Република Косово', 'Republic of Kosova', 'Priština', 'ko', 'EUR', 978, 381, 0, 'Косово', 'Kosova', 0);
+		</sql>
+	</changeSet>
+</databaseChangeLog>
