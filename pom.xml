@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project>
-
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>jobexchange</groupId>
@@ -29,6 +29,7 @@
 				<update.schema>true</update.schema>
 			</properties>
 		</profile>
+		
 		
 		
 		<profile>
@@ -247,11 +248,12 @@
 			<version>1.3.0</version>
 		</dependency>
 
-		<!-- <dependency> -->
-		<!-- <groupId>org.opensymphony.quartz</groupId> -->
-		<!-- <artifactId>quartz</artifactId> -->
-		<!-- <version>1.6.5</version> -->
-		<!-- </dependency> -->
+<!-- 		<dependency> -->
+<!-- 		<groupId>org.opensymphony.quartz</groupId> -->
+<!-- 		<artifactId>quartz</artifactId> -->
+<!-- 		<version>1.6.0</version> -->
+<!-- 		</dependency> -->
+
 
 		<!-- -->
 		<!-- <dependency> -->
@@ -435,11 +437,11 @@
 <!-- 			<name>T5Components Maven Repository</name> -->
 <!-- 			<url>http://87.193.218.134:8080/t5components/maven-repository</url> -->
 <!-- 		</repository> -->
-		<repository>
-			<id>jboss-repository-mirror</id>
-			<name>jboss-repository</name>
-			<url>http://repository.jboss.org/maven2</url>
-		</repository>
+<!-- 		<repository> -->
+<!-- 			<id>jboss-repository-mirror</id> -->
+<!-- 			<name>jboss-repository</name> -->
+<!-- 			<url>http://repository.jboss.org/maven2</url> -->
+<!-- 		</repository> -->
 		<repository>
 			<id>org.apache.tapestry</id>
 			<name>hlship tap5 Release Repo</name>
@@ -448,14 +450,17 @@
 		</repository>
 
 
+
 		<repository>
-			<id>jboss</id>
-			<url>http://repository.jboss.com/maven2</url>
+			<id>repository.jboss.org</id>
+<!-- 			<url>http://repository.jboss.org/nexus/content/groups/public-jboss/</url> -->
+<!-- 			<url>http://repository.jboss.com/maven2</url> -->
+				<url>https://repository.jboss.org/nexus/content/repositories/central/</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
 			<snapshots>
-				<enabled>false</enabled>
+				<enabled>true</enabled>
 			</snapshots>
 		</repository>
 
@@ -473,10 +478,11 @@
 <!-- 			<url>http://tapestry.formos.com/maven-repository</url> -->
 <!-- 		</repository> -->
 
-		<repository>
-			<id>repository.jboss.com</id>
-			<url>http://repository.jboss.com/maven2/</url>
-		</repository>
+<!-- 		<repository> -->
+<!-- 			<id>repository.maven.org</id> -->
+<!-- 			<url>http://repo1.maven.org/maven2/</url> -->
+<!-- 		</repository> -->
+
 
 	</repositories>
 
@@ -489,13 +495,10 @@
 		<tapestry-release-version>5.1.0.5</tapestry-release-version>
 		<spring-release-version>2.0.8</spring-release-version>
 		<hibernate-release-version>3.3.2.GA</hibernate-release-version>
-		<hibernate-search-release-version>3.1.1.GA
-		</hibernate-search-release-version>
-		<hibernate-annotations-release-version>3.4.0.GA
-		</hibernate-annotations-release-version>
+		<hibernate-search-release-version>3.1.1.GA</hibernate-search-release-version>
+		<hibernate-annotations-release-version>3.4.0.GA</hibernate-annotations-release-version>
 		<lucene.version>2.4.0</lucene.version>
-		<tapestry-spring-security-release-version>2.1.0
-		</tapestry-spring-security-release-version>
+		<tapestry-spring-security-release-version>2.1.0</tapestry-spring-security-release-version>
 		<chenillekit-release-version>1.2.0</chenillekit-release-version>
 
 
