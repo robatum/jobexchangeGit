@@ -150,7 +150,7 @@ public class Applicant extends AbstractEntity{
 	
 	public Applicant(User applicantProfileOwner){
 		this.applicantProfileOwner = applicantProfileOwner;
-		System.out.println("ApplicantClass user: "+this.applicantProfileOwner.getApdUserId()+"--"+this.applicantProfileOwner.getFamilyName());
+		System.out.println("ApplicantClass user: "+this.applicantProfileOwner.getPortalUserId()+"--"+this.applicantProfileOwner.getFamilyName());
 		this.onlineStatus = true;
 	}
 	

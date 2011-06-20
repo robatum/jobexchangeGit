@@ -106,7 +106,7 @@ public class ApplicantWS {
 		if(applicants!= null){
 			Iterator<Applicant> it = applicants.iterator();
 			while(it.hasNext()){
-				applicantsDTO.add(aa.createDTOWithAPDId(it.next()));
+				applicantsDTO.add(aa.createDTOWithPortalId(it.next()));
 			}
 		}
 		return applicantsDTO.toArray(new ApplicantDTO[0]);
@@ -115,13 +115,13 @@ public class ApplicantWS {
 	/**
 	 * Die Methode 'setApplicantProfileOnlineState' setzt den aktuellen Online Status eines Bewerberprofils.
 	 * 
-	 * @param Erwartet die APD User Id und den neuen OnlineStatus als Parameter.
+	 * @param Erwartet die Portal User Id und den neuen OnlineStatus als Parameter.
 	 * @return Gibt ein Objekt vom Typ Boolean zurueck. Im Erfolgsfall traegt dieses den Wert 'true' im Fehlerfall 'false'.
 	 */
-	public Boolean setApplicantProfileOnlineState(Long apdUserId, Boolean onlineState){
-		logger.info("Set applicantProfile onlineState by apdUserId: "+apdUserId +"---"+onlineState);
+	public Boolean setApplicantProfileOnlineState(Long portalUserId, Boolean onlineState){
+		logger.info("Set applicantProfile onlineState by portalUserId: "+portalUserId +"---"+onlineState);
 		try {
-			Applicant applicant = aw.getApplicantDataByAPDUserId(apdUserId);
+			Applicant applicant = aw.getApplicantDataByPortalUserId(portalUserId);
 			aw.setApplicantProfileOnlineStatus(applicant, onlineState);
 		} catch (ObjectNotSavedException e) {
 			e.printStackTrace();
@@ -143,15 +143,15 @@ public class ApplicantWS {
 	/**
 	 * Die Methode 'getApplicantProfileOnlineState' gibt den aktuellen Online Status eines Bewerberprofils zurück.
 	 * 
-	 * @param Erwartet die APD User Id .
+	 * @param Erwartet die Portal User Id .
 	 * @return Gibt ein Objekt vom Typ Boolean zurueck. Im Erfolgsfall traegt dieses den Wert 'true' oder 'false' im Fehlerfall 'null'.
 	 */
-	public Boolean getApplicantProfileOnlineState(Long apdUserId){
-		System.out.println("Get applicantProfile onlineState by apdUserId: "+apdUserId );
+	public Boolean getApplicantProfileOnlineState(Long portalUserId){
+		System.out.println("Get applicantProfile onlineState by portalUserId: "+portalUserId );
 		Applicant applicant;
 		
 		try {
-			applicant = aw.getApplicantDataByAPDUserId(apdUserId);
+			applicant = aw.getApplicantDataByPortalUserId(portalUserId);
 		} catch (APDUserNotFoundException e) {
 			e.printStackTrace();
 			return null;
@@ -205,7 +205,7 @@ public class ApplicantWS {
 			return null;
 		}
 		
-		return aa.createDTOWithAPDId(applicant);
+		return aa.createDTOWithPortalId(applicant);
 		
 	}
 	
@@ -214,13 +214,13 @@ public class ApplicantWS {
 	 * Die Methode 'getApplicantProfileByUserId' gibt das Bewerber/Experten Profil eines spezifischen 
 	 * Nutzers zurueck.
 	 * 
-	 * @param Erwartet die APD User Id als Parameter.
+	 * @param Erwartet die Portal User Id als Parameter.
 	 * @return Gibt ein Objekt der Klasse ApplicantDTO zurueck.
 	 */
-	public ApplicantDTO getApplicantProfileByUserId(Long apdUserId) {
-		logger.info("Get applicantProfile by apdUser: "+apdUserId);
+	public ApplicantDTO getApplicantProfileByUserId(Long portalUserId) {
+		logger.info("Get applicantProfile by portalUser: "+portalUserId);
 		try {
-			return aa.createDTOWithAPDId(aw.getApplicantDataByAPDUserId(apdUserId));
+			return aa.createDTOWithPortalId(aw.getApplicantDataByPortalUserId(portalUserId));
 		} catch (APDUserNotFoundException e) {
 			e.printStackTrace();
 			return null;
@@ -239,10 +239,10 @@ public class ApplicantWS {
 	 * @param Erwartet die APD User Id als Parameter.
 	 * @return Gibt ein Objekt vom Typ Boolean zurueck. Im Erfolgsfall traegt dieses den Wert 'true' im Fehlerfall 'false'.
 	 */
-	public Boolean checkForApplicantProfile(Long apdUserId) {
-		logger.info("Check for applicantProfile by apdUser: "+apdUserId);
+	public Boolean checkForApplicantProfile(Long portalUserId) {
+		logger.info("Check for applicantProfile by portalUser: "+portalUserId);
 		try {
-			if(aw.getApplicantDataByAPDUserId(apdUserId) != null){
+			if(aw.getApplicantDataByPortalUserId(portalUserId) != null){
 				return true;
 			} else return false;
 		} catch (APDUserNotFoundException e) {
@@ -261,9 +261,9 @@ public class ApplicantWS {
 	 * @return Gibt ein Objekt vom Typ Long zurueck. Im Erfolgsfall traegt dieses den Wert des ApplicantProfiles im Fehlerfall '0'.
 	 * 
 	 */
-	public Long addApplicantProfile(ApplicantDTO applicantProfile, Long apdUserId){
-		logger.info("Adding applicantProfile to db - apdUser: " + apdUserId);
-		applicantProfile.setApplicantProfileOwnerId(apdUserId);
+	public Long addApplicantProfile(ApplicantDTO applicantProfile, Long portalUserId, Byte[] portalId){
+		logger.info("Adding applicantProfile to db - portalUserId: " + portalUserId);
+		applicantProfile.setApplicantProfileOwnerId(portalUserId);
 		
 		Long applicantProfileId = new Long(0);
 		try {
@@ -288,39 +288,39 @@ public class ApplicantWS {
 		return applicantProfileId;
 	}
 	
-	/**
-	 * Die Methode 'addApplicantProfile' ermoeglicht es zu einem bestehendem Nutzer ein neues Bewerber-/Expertenprofil hinzuzufuegen.
-	 * 
-	 * @param Erwartet ein Objekt der Klasse ApplicantDTO mit allen relevanten Profildaten sowie die APD User Id
-	 * @return Gibt ein Objekt vom Typ Long zurueck. Im Erfolgsfall traegt dieses den Wert des ApplicantProfiles im Fehlerfall '0'.
-	 * 
-	 */
-	public Long addInwentApplicantProfile(ApplicantDTO applicantProfile, Long inwentUserId){
-		logger.info("Adding applicantProfile to db - inwentUser: " + inwentUserId);
-		applicantProfile.setApplicantProfileOwnerId(inwentUserId);
-		
-		Long applicantProfileId = new Long(0);
-		try {
-			applicantProfileId = aw.addApplicantData(aa.createDomainObjByInwentId(applicantProfile));
-		} catch (InwentUserNotFoundException e) {
-			e.printStackTrace();
-			return new Long(0);
-		} catch (IndustrySectorNotFoundException e) {
-			e.printStackTrace();
-			return new Long(0);
-		} catch (ApplicantProfileAlreadyExistException e) {
-			e.printStackTrace();
-			return new Long(0);
-		} catch (EnumValueNotFoundException e) {
-			e.printStackTrace();
-			return new Long(0);
-		} catch (CountryNotFoundException e) {
-			e.printStackTrace();
-			return new Long(0);
-		} 
-		logger.info("Applicant profile was successfully saved with ProfileId: "+applicantProfileId);
-		return applicantProfileId;
-	}
+//	/**
+//	 * Die Methode 'addApplicantProfile' ermoeglicht es zu einem bestehendem Nutzer ein neues Bewerber-/Expertenprofil hinzuzufuegen.
+//	 * 
+//	 * @param Erwartet ein Objekt der Klasse ApplicantDTO mit allen relevanten Profildaten sowie die APD User Id
+//	 * @return Gibt ein Objekt vom Typ Long zurueck. Im Erfolgsfall traegt dieses den Wert des ApplicantProfiles im Fehlerfall '0'.
+//	 * 
+//	 */
+//	public Long addInwentApplicantProfile(ApplicantDTO applicantProfile, Long inwentUserId){
+//		logger.info("Adding applicantProfile to db - inwentUser: " + inwentUserId);
+//		applicantProfile.setApplicantProfileOwnerId(inwentUserId);
+//		
+//		Long applicantProfileId = new Long(0);
+//		try {
+//			applicantProfileId = aw.addApplicantData(aa.createDomainObjByInwentId(applicantProfile));
+//		} catch (InwentUserNotFoundException e) {
+//			e.printStackTrace();
+//			return new Long(0);
+//		} catch (IndustrySectorNotFoundException e) {
+//			e.printStackTrace();
+//			return new Long(0);
+//		} catch (ApplicantProfileAlreadyExistException e) {
+//			e.printStackTrace();
+//			return new Long(0);
+//		} catch (EnumValueNotFoundException e) {
+//			e.printStackTrace();
+//			return new Long(0);
+//		} catch (CountryNotFoundException e) {
+//			e.printStackTrace();
+//			return new Long(0);
+//		} 
+//		logger.info("Applicant profile was successfully saved with ProfileId: "+applicantProfileId);
+//		return applicantProfileId;
+//	}
 	
 	
 	/**	 
@@ -364,10 +364,10 @@ public class ApplicantWS {
 	 * @return Gibt ein Objekt vom Typ Boolean zurueck. Im Erfolgsfall traegt dieses den Wert 'true' im Fehlerfall 'false'.
 	 * 
 	 */
-	public Boolean deleteApplicantProfile(Long apdUserId){
-		logger.info("Delete applicantProfile for apdUser: "+apdUserId);
+	public Boolean deleteApplicantProfile(Long portalUserId){
+		logger.info("Delete applicantProfile for apdUser: "+portalUserId);
 		try {
-			aw.deleteApplicantData(apdUserId);
+			aw.deleteApplicantData(portalUserId);
 		} catch (APDUserNotFoundException e) {
 			e.printStackTrace();
 			return false;
@@ -385,19 +385,19 @@ public class ApplicantWS {
 	 * @return Gibt ein Objekt vom Typ Boolean zurueck. Im Erfolgsfall traegt dieses den Wert 'true' im Fehlerfall 'false'.
 	 * 
 	 */
-	public Boolean deleteInwentApplicantProfile(Long inwentUserId){
-		logger.info("Delete applicantProfile for inwentUser: "+inwentUserId);
-		try {
-			aw.deleteApplicantDataByInwentUserId(inwentUserId);
-		} catch (InwentUserNotFoundException e) {
-			e.printStackTrace();
-			return false;
-		} catch (ApplicantProfileNotFoundException e) {
-			e.printStackTrace();
-			return false;
-		}
-		return true;
-	}
+//	public Boolean deleteInwentApplicantProfile(Long inwentUserId){
+//		logger.info("Delete applicantProfile for inwentUser: "+inwentUserId);
+//		try {
+//			aw.deleteApplicantDataByInwentUserId(inwentUserId);
+//		} catch (InwentUserNotFoundException e) {
+//			e.printStackTrace();
+//			return false;
+//		} catch (ApplicantProfileNotFoundException e) {
+//			e.printStackTrace();
+//			return false;
+//		}
+//		return true;
+//	}
 	
 	
 //	/**
@@ -441,7 +441,7 @@ public class ApplicantWS {
 	 * @param Erwartet den Such-String als Parameter.
 	 * @return Gibt ein Array von Objekten der Klasse ApplicantDTO zurueck.
 	 */
-	public ApplicantDTO[] getApplicantsByCriteria(String criteria, CountryDTO country, TerritoryDTO territory){
+	public ApplicantDTO[] getApplicantsByCriteria(String criteria, CountryDTO country, TerritoryDTO territory, Byte[] portalId){
 		logger.info("Get applicantProfile By Criteria: "+criteria);
 		Collection<Applicant> applicants;
 		try {
@@ -457,7 +457,7 @@ public class ApplicantWS {
 		if(applicants!= null){
 			Iterator<Applicant> it = applicants.iterator();
 			while(it.hasNext()){
-				applicantsDTO.add(aa.createDTOWithAPDId(it.next()));
+				applicantsDTO.add(aa.createDTOWithPortalId(it.next()));
 			}
 		}
 		return applicantsDTO.toArray(new ApplicantDTO[0]);
@@ -473,7 +473,7 @@ public class ApplicantWS {
 	 *  @param Erwartet den Such-String, das Land bzw. den Kontinent sowie die Angaben für die Paginierung - Anzahl der zurückzugebenen Ergebnisse und den Startwert der Ergebnisse als Parameter.
 	 * @return Gibt ein Array von Objekten der Klasse ApplicantDTO zurueck.
 	 */
-	public ApplicantsSearchResultDTO[] getApplicantsSearchResultsByCriteria(String criteria, CountryDTO country, TerritoryDTO territory, Integer resultsAmount, Integer pageIndexStart){
+	public ApplicantsSearchResultDTO[] getApplicantsSearchResultsByCriteria(String criteria, CountryDTO country, TerritoryDTO territory, Integer resultsAmount, Integer pageIndexStart, Byte[] portalId){
 		logger.info("getApplicantsSearchResultsByCriteria():Get applicantProfile By Criteria: "+criteria);
 		Collection<ApplicantsSearchResultDTO> applicants;
 		try {
@@ -502,7 +502,7 @@ public class ApplicantWS {
 	 *  @param Erwartet den Such-String, das Land bzw. den Kontinent sowie die Angaben für die Paginierung - Anzahl der zurückzugebenen Ergebnisse und den Startwert der Ergebnisse als Parameter.
 	 * @return Gibt ein Array von Objekten der Klasse ApplicantDTO zurueck.
 	 */
-	public ApplicantDTO[] getApplicantsByExtendedCriteria(String criteria, CountryDTO country, TerritoryDTO territory, String[] availability, WorkUserTypeDTO[] workUserTypeDTO, String[] occupationalField, String managementExperience, Integer resultsAmount, Integer pageIndexStart){
+	public ApplicantDTO[] getApplicantsByExtendedCriteria(String criteria, CountryDTO country, TerritoryDTO territory, String[] availability, WorkUserTypeDTO[] workUserTypeDTO, String[] occupationalField, String managementExperience, Integer resultsAmount, Integer pageIndexStart, Byte[] portalId){
 		logger.info("getApplicantsByExtendedCriteria(): Get applicantProfile By Criteria: "+criteria);
 		Collection<Applicant> applicants;
 	
@@ -540,7 +540,7 @@ public class ApplicantWS {
 		if(applicants!= null){
 			Iterator<Applicant> it = applicants.iterator();
 			while(it.hasNext()){
-				applicantsDTO.add(aa.createDTOWithAPDId(it.next()));
+				applicantsDTO.add(aa.createDTOWithPortalId(it.next()));
 			}
 		}
 		return applicantsDTO.toArray(new ApplicantDTO[0]);
@@ -556,7 +556,7 @@ public class ApplicantWS {
 	 * @return Gibt die Anzahl der gefundenen Bewerber-/Expertenprofileeinen als Integer Wert zurueck.
 	 */
 	
-	public Integer getApplicantsSearchResultsAmountByExtendedCriteria(String criteria, CountryDTO country, TerritoryDTO territory, String[] availability, WorkUserTypeDTO[] workUserTypeDTO, String[] occupationalField, String managementExperience){
+	public Integer getApplicantsSearchResultsAmountByExtendedCriteria(String criteria, CountryDTO country, TerritoryDTO territory, String[] availability, WorkUserTypeDTO[] workUserTypeDTO, String[] occupationalField, String managementExperience, Byte[] portalId){
 		logger.info("Get applicantProfile Amount By Extended Criteria: "+criteria);
 		int resultSize;
 		
@@ -600,7 +600,7 @@ public class ApplicantWS {
 	 * @return Gibt die Anzahl der gefundenen Bewerber-/Expertenprofileeinen als Integer Wert zurueck.
 	 */
 	
-	public Integer getApplicantsSearchResultsAmountByCriteria(String criteria, CountryDTO country, TerritoryDTO territory){
+	public Integer getApplicantsSearchResultsAmountByCriteria(String criteria, CountryDTO country, TerritoryDTO territory, Byte[] portalId){
 		logger.info("Get applicantProfile Amount By Criteria: "+criteria);
 		Collection<ApplicantsSearchResultDTO> applicants;
 		try {

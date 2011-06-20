@@ -108,11 +108,11 @@ public class JobWorkerHandler implements JobWorker{
 	
 	
 	@Override
-	public Collection<JobImpl> getJobOffersByAPDUser(Long apdUserId) throws APDUserNotFoundException {
-		User user = userDAO.findAPDUserByID(apdUserId);
+	public Collection<JobImpl> getJobOffersByPortalUser(Long portalUserId) throws APDUserNotFoundException {
+		User user = userDAO.findPortalUserByID(portalUserId);
 		if(user!=null){
 			return jobDAO.findJobOffersByUser(user.getId());
-		} else throw new APDUserNotFoundException(apdUserId.toString());
+		} else throw new APDUserNotFoundException(portalUserId.toString());
 	}
 
 	public Long addJobOffer(JobImpl jobOffer) throws ObjectNotSavedException, PassedAttributeIsNullException{
@@ -797,7 +797,7 @@ public class JobWorkerHandler implements JobWorker{
 	}
 	
 	// TODO Implement apply to Job
-	public void applyToJobOffer(Long jobOfferId, Long userGuid, String contactNote) throws JobOfferNotFoundException, APDUserNotFoundException, ObjectNotSavedException{
+	public void applyToJobOffer(Long jobOfferId, Long portalUserId, String contactNote) throws JobOfferNotFoundException, APDUserNotFoundException, ObjectNotSavedException{
 			JobImpl job;
 			try {
 				job = jobDAO.doRetrieve(jobOfferId, true);
@@ -807,7 +807,7 @@ public class JobWorkerHandler implements JobWorker{
 			}
 			User user;
 			try {
-				user = userDAO.findAPDUserByID(userGuid);
+				user = userDAO.findPortalUserByID(portalUserId);
 			} catch (Exception e) {
 				e.printStackTrace();
 				throw new APDUserNotFoundException();
@@ -822,9 +822,9 @@ public class JobWorkerHandler implements JobWorker{
 	}
 	
 	
-	public Collection<JobApplication> getReceivedJobOfferApplications(Long apdUserId) throws APDUserNotFoundException{
+	public Collection<JobApplication> getReceivedJobOfferApplications(Long portalUserId) throws APDUserNotFoundException{
 		List<JobApplication> jobApplications = new ArrayList<JobApplication>();
-		Collection<JobImpl> jobOffers = getJobOffersByAPDUser(apdUserId);
+		Collection<JobImpl> jobOffers = getJobOffersByPortalUser(portalUserId);
 		Iterator<JobImpl> it = jobOffers.iterator();
 		while(it.hasNext()){
 			JobImpl job = it.next();
@@ -903,10 +903,10 @@ public class JobWorkerHandler implements JobWorker{
 	}
 
 	@Override
-	public Collection<JobImpl> getJobOffersByAPDUserAndCriteria(Long apdUserId, JobActiveEnum jobActive, Country country, Territory territory, int numberOfResults, int indexStart) throws APDUserNotFoundException {
-		User user = userDAO.findAPDUserByID(apdUserId);
+	public Collection<JobImpl> getJobOffersByPortalUserAndCriteria(Long portalUserId, JobActiveEnum jobActive, Country country, Territory territory, int numberOfResults, int indexStart) throws APDUserNotFoundException {
+		User user = userDAO.findPortalUserByID(portalUserId);
 		if(user!=null){
 			return jobDAO.findJobOffersByUserAndCriteria(user.getId(), jobActive, country, territory, numberOfResults, indexStart);
-		} else throw new APDUserNotFoundException(apdUserId.toString());
+		} else throw new APDUserNotFoundException(portalUserId.toString());
 	}
 }

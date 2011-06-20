@@ -49,10 +49,10 @@ public class UserAssemblerWorker implements UserAssembler{
 			if(user.getAddresses()!=null){
 				dto.setAddresses(user.getAddresses().toString());
 			}
-			dto.setApdUserId(user.getApdUserId());
+//			dto.setApdUserId(user.getApdUserId());
 			dto.setCobraUserId(user.getCobraSuperId());
-			dto.setInwentUserId(user.getInwentUserId());
-			dto.setElggUserId(user.getElggUserId());
+			dto.setPortalUserId(user.getPortalUserId());
+			dto.setPortalId(user.getPortalId().byteValue());
 			dto.setCurrentAddress(ada.createDTO(user.getCurrentContactAddress()));
 			dto.setAlternativeAddress(ada.createDTO(user.getAlternativeContactAddress()));
 			dto.setCitizenship1(user.getCitizenship1());
@@ -128,9 +128,9 @@ public class UserAssemblerWorker implements UserAssembler{
 				user.setAddresses(AddressEnum.fromValue(dto.getAddresses()));
 			}
 			user.setCobraSuperId(dto.getCobraUserId());
-			user.setApdUserId(dto.getApdUserId());
-			user.setInwentUserId(dto.getInwentUserId());
-			user.setElggUserId(dto.getElggUserId());
+//			user.setApdUserId(dto.getApdUserId());
+			user.setPortalUserId(dto.getPortalUserId());
+			user.setPortalId(dto.getPortalId().longValue());
 			user.setAddress1(ada.createDomainObj(dto.getCurrentAddress()));
 			user.setAddress2(ada.createDomainObj(dto.getAlternativeAddress()));
 			user.setCitizenship1(dto.getCitizenship1());
@@ -154,8 +154,8 @@ public class UserAssemblerWorker implements UserAssembler{
 	}
 
 	@Override
-	public User updateDomainObjByApdId(UserDTO dto, Long apdUserId) throws APDUserNotFoundException, EnumValueNotFoundException, CountryNotFoundException {
-		User user = userDAO.findAPDUserByID(apdUserId);
+	public User updateDomainObjByApdId(UserDTO dto, Long portalUserId) throws APDUserNotFoundException, EnumValueNotFoundException, CountryNotFoundException {
+		User user = userDAO.findPortalUserByID(portalUserId);
 		
 		if(dto.getUserRole()instanceof OrganisationRoleDTO){
 			if(dto.getUserRole()!= null){
@@ -184,7 +184,8 @@ public class UserAssemblerWorker implements UserAssembler{
 			}
 //			user.setApdUserId(dto.getUserId()); // nicht updaten, da unveraenderlich
 			user.setCobraSuperId(dto.getCobraUserId());
-			user.setElggUserId(dto.getElggUserId());
+//			user.setPortalUserId(dto.getPortalUserId()); // nicht updaten, da unveraenderlich
+			dto.setPortalId(user.getPortalId().byteValue());
 			user.setAddress1(ada.updateDomainObj(dto.getCurrentAddress(),user.getAddress1()));
 			user.setAddress2(ada.updateDomainObj(dto.getAlternativeAddress(),user.getAddress2()));
 			user.setCitizenship1(dto.getCitizenship1());
@@ -238,8 +239,8 @@ public class UserAssemblerWorker implements UserAssembler{
 			if(dto.getAddresses() != null){
 				user.setAddresses(AddressEnum.fromValue(dto.getAddresses()));
 			}
-			user.setApdUserId(dto.getApdUserId());
-			//user.setCobraSuperId(dto.getCobraUserId());
+//			user.setApdUserId(dto.getApdUserId()); 
+			//user.setCobraSuperId(dto.getCobraUserId()); // nicht updaten, da unveraenderlich
 			user.setAddress1(ada.updateDomainObj(dto.getCurrentAddress(),user.getAddress1()));
 			user.setAddress2(ada.updateDomainObj(dto.getAlternativeAddress(),user.getAddress2()));
 			user.setCitizenship1(dto.getCitizenship1());
@@ -265,8 +266,8 @@ public class UserAssemblerWorker implements UserAssembler{
 	
 
 	@Override
-	public User updateDomainObjRole(AbstractUserRoleDTO dto, Long userId) throws APDUserNotFoundException, EnumValueNotFoundException {
-		User user = userDAO.findAPDUserByID(userId);
+	public User updateDomainObjRole(AbstractUserRoleDTO dto, Long portalUserId) throws APDUserNotFoundException, EnumValueNotFoundException {
+		User user = userDAO.findPortalUserByID(portalUserId);
 		
 		if(dto instanceof OrganisationRoleDTO){
 			if(dto != null){

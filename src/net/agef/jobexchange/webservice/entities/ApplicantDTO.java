@@ -96,7 +96,7 @@ public class ApplicantDTO{
 	/**
 	 * @return the applicantProfileOwnerId
 	 * 
-	 * Liefert die Id des Besitzers des aktuellen Bewerberprofils also die APD User ID. 
+	 * Liefert die Id des Besitzers des aktuellen Bewerberprofils also die Portal User ID. 
 	 * Wenn diese Id null ist, dann wurde das Stellenangebot ueber das AGEF Backend eingestellt. 
 	 */
 	public Long getApplicantProfileOwnerId() {
@@ -105,7 +105,7 @@ public class ApplicantDTO{
 	/**
 	 * @param applicantProfileOwnerId the applicantProfileOwnerId to set
 	 * 
-	 * Setzt die Id des Besitzers des aktuellen Bewerberprofils also die APD User ID
+	 * Setzt die Id des Besitzers des aktuellen Bewerberprofils also die Portal User ID
 	 */
 	public void setApplicantProfileOwnerId(Long applicantProfileOwnerId) {
 		this.applicantProfileOwnerId = applicantProfileOwnerId;

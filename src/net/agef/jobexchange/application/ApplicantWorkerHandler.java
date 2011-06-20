@@ -120,15 +120,15 @@ public class ApplicantWorkerHandler implements ApplicantWorker {
 	
 
 	@Override
-	public Applicant getApplicantDataByAPDUserId(Long apdUserId) throws APDUserNotFoundException, ApplicantProfileNotFoundException {
-		User user = userDAO.findAPDUserByID(apdUserId);
+	public Applicant getApplicantDataByPortalUserId(Long portalUserId) throws APDUserNotFoundException, ApplicantProfileNotFoundException {
+		User user = userDAO.findPortalUserByID(portalUserId);
 		if (user != null) {
 			if (user.getApplicantProfile() != null) {
 				return user.getApplicantProfile();
 			} else
 				throw new ApplicantProfileNotFoundException();
 		} else
-			throw new APDUserNotFoundException(apdUserId.toString());
+			throw new APDUserNotFoundException(portalUserId.toString());
 	}
 
 	@Override
@@ -219,9 +219,23 @@ public class ApplicantWorkerHandler implements ApplicantWorker {
 
 	}
 
+//	@Override
+//	public void deleteApplicantDataByInwentUserId(Long inwentUserId) throws InwentUserNotFoundException, ApplicantProfileNotFoundException {
+//		User user = userDAO.findInwentUserByID(inwentUserId);
+//		if (user != null) {
+//			try {
+//				applicantDAO.doDelete(user.getApplicantProfile());
+//			} catch (Exception e) {
+//				throw new ApplicantProfileNotFoundException();
+//			}
+//		} else
+//			throw new InwentUserNotFoundException();
+//
+//	}
+
 	@Override
-	public void deleteApplicantDataByInwentUserId(Long inwentUserId) throws InwentUserNotFoundException, ApplicantProfileNotFoundException {
-		User user = userDAO.findInwentUserByID(inwentUserId);
+	public void deleteApplicantData(Long portalUserId) throws APDUserNotFoundException, ApplicantProfileNotFoundException {
+		User user = userDAO.findPortalUserByID(portalUserId);
 		if (user != null) {
 			try {
 				applicantDAO.doDelete(user.getApplicantProfile());
@@ -229,21 +243,7 @@ public class ApplicantWorkerHandler implements ApplicantWorker {
 				throw new ApplicantProfileNotFoundException();
 			}
 		} else
-			throw new InwentUserNotFoundException();
-
-	}
-
-	@Override
-	public void deleteApplicantData(Long userId) throws APDUserNotFoundException, ApplicantProfileNotFoundException {
-		User user = userDAO.findAPDUserByID(userId);
-		if (user != null) {
-			try {
-				applicantDAO.doDelete(user.getApplicantProfile());
-			} catch (Exception e) {
-				throw new ApplicantProfileNotFoundException();
-			}
-		} else
-			throw new APDUserNotFoundException(userId.toString());
+			throw new APDUserNotFoundException(portalUserId.toString());
 	}
 
 	@Override

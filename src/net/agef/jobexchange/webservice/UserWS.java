@@ -83,13 +83,14 @@ public class UserWS {
 	 * @param Erwartet ein Objekt der Klasse UserDTO mit allen relevanten Nutzerdaten, die APD User Id sowie eine Instanz der konkreten Nutzerrolle.
 	 * @return Gibt ein Objekt vom Typ Boolean zurueck. Im Erfolgsfall traegt dieses den Wert 'true' im Fehlerfall 'false'.
 	 */
-	public Boolean addAlumniUser(UserDTO user, Long apdUserId, AlumniRoleDTO userRole){
-		logger.info("Adding alumniUser by apdUserId: "+apdUserId);
+	public Boolean addAlumniUser(UserDTO user, Long portalUserId, Byte[] portalId, AlumniRoleDTO userRole){
+		logger.info("Adding alumniUser by portalUserId: "+portalUserId);
 		try {
-			User us = uw.getUserByAPDId(apdUserId);
+			User us = uw.getUserByPortalId(portalUserId);
 			logger.info(us);
 		} catch (APDUserNotFoundException e) {
-			user.setApdUserId(apdUserId);
+			user.setPortalUserId(portalUserId);
+			user.setPortalId(portalId[0]);
 			user.setUserRole(userRole);
 			try {
 				uw.addUser(ua.createDomainObj(user),this.dataProvider);
@@ -114,48 +115,48 @@ public class UserWS {
 		
 	}
 	
-	/**
-	 * Die Methode 'addAlumniUser' dient dazu einen neuen Nutzer mit Alumnirolle in der Jobboerse zu registrieren. Die Registrierung eines Nutzers ist Grundlage fuer alle 
-	 * weiteren Operationen wie das Hinzufuegen eines Bewerberprofils oder das Veroeffentlichen eines Stellenangebotes.
-	 * 
-	 * Wichtig ist hierbei das die konkrete Rolle die der Nutzer innerhalb der APD einnimmt (also entweder Alumni oder Organisation) korrekt uebergeben wird.
-	 * Dies geschieht indem dem Parameter 'userRole' eine konkrete Instanz der Klasse AlumniRoleDTO (fuer die Alumni Rolle)
-	 * uebergeben wird.
-	 * 
-	 * @param Erwartet ein Objekt der Klasse UserDTO mit allen relevanten Nutzerdaten, die APD User Id sowie eine Instanz der konkreten Nutzerrolle.
-	 * @return Gibt ein Objekt vom Typ Boolean zurueck. Im Erfolgsfall traegt dieses den Wert 'true' im Fehlerfall 'false'.
-	 */
-	public Boolean addInwentAlumniUser(UserDTO user, Long inwentUserId, AlumniRoleDTO userRole){
-		logger.info("Adding alumniUser by inwentUserId: "+inwentUserId);
-		try {
-			User us = uw.getUserByInwentId(inwentUserId);
-			logger.info(us);
-		} catch (InwentUserNotFoundException e) {
-			user.setInwentUserId(inwentUserId);
-			logger.info("Inwent User mit ID " + user.getInwentUserId());
-			user.setUserRole(userRole);
-			try {
-				uw.addUser(ua.createDomainObj(user),this.dataProvider);
-			} catch (EnumValueNotFoundException e1) {
-				e1.printStackTrace();
-				return false;
-			} catch (CountryNotFoundException e2) {
-				e2.printStackTrace();
-				return false;
-			} catch (ObjectNotSavedException e3) {
-				e3.printStackTrace();
-				return false;
-			} catch (PassedAttributeIsNullException e4) {
-				e4.printStackTrace();
-				return false;
-			}
-			return true;
-		}
-		logger.info("Adding inwentAlumniUser by inwentUserId failed, user already exist!");
-		return false;
-			
-		
-	}
+//	/**
+//	 * Die Methode 'addAlumniUser' dient dazu einen neuen Nutzer mit Alumnirolle in der Jobboerse zu registrieren. Die Registrierung eines Nutzers ist Grundlage fuer alle 
+//	 * weiteren Operationen wie das Hinzufuegen eines Bewerberprofils oder das Veroeffentlichen eines Stellenangebotes.
+//	 * 
+//	 * Wichtig ist hierbei das die konkrete Rolle die der Nutzer innerhalb der APD einnimmt (also entweder Alumni oder Organisation) korrekt uebergeben wird.
+//	 * Dies geschieht indem dem Parameter 'userRole' eine konkrete Instanz der Klasse AlumniRoleDTO (fuer die Alumni Rolle)
+//	 * uebergeben wird.
+//	 * 
+//	 * @param Erwartet ein Objekt der Klasse UserDTO mit allen relevanten Nutzerdaten, die APD User Id sowie eine Instanz der konkreten Nutzerrolle.
+//	 * @return Gibt ein Objekt vom Typ Boolean zurueck. Im Erfolgsfall traegt dieses den Wert 'true' im Fehlerfall 'false'.
+//	 */
+//	public Boolean addInwentAlumniUser(UserDTO user, Long inwentUserId, AlumniRoleDTO userRole){
+//		logger.info("Adding alumniUser by inwentUserId: "+inwentUserId);
+//		try {
+//			User us = uw.getUserByInwentId(inwentUserId);
+//			logger.info(us);
+//		} catch (InwentUserNotFoundException e) {
+//			user.setInwentUserId(inwentUserId);
+//			logger.info("Inwent User mit ID " + user.getInwentUserId());
+//			user.setUserRole(userRole);
+//			try {
+//				uw.addUser(ua.createDomainObj(user),this.dataProvider);
+//			} catch (EnumValueNotFoundException e1) {
+//				e1.printStackTrace();
+//				return false;
+//			} catch (CountryNotFoundException e2) {
+//				e2.printStackTrace();
+//				return false;
+//			} catch (ObjectNotSavedException e3) {
+//				e3.printStackTrace();
+//				return false;
+//			} catch (PassedAttributeIsNullException e4) {
+//				e4.printStackTrace();
+//				return false;
+//			}
+//			return true;
+//		}
+//		logger.info("Adding inwentAlumniUser by inwentUserId failed, user already exist!");
+//		return false;
+//			
+//		
+//	}
 	
 	/**
 	 * Die Methode 'addOrganisationUser' dient dazu einen neuen Nutzer mit der Organisationsrolle in der Jobboerse zu registrieren. Die Registrierung eines Nutzers ist Grundlage fuer alle 
@@ -168,12 +169,13 @@ public class UserWS {
 	 * @param Erwartet ein Objekt der Klasse UserDTO mit allen relevanten Nutzerdaten, die APD User Id sowie eine Instanz der konkreten Nutzerrolle.
 	 * @return Gibt ein Objekt vom Typ Boolean zurueck. Im Erfolgsfall traegt dieses den Wert 'true' im Fehlerfall 'false'.
 	 */
-	public Boolean addOrganisationUser(UserDTO user, Long apdUserId, OrganisationRoleDTO userRole){
-		logger.info("Adding orgUser by apdUserId: "+apdUserId);
+	public Boolean addOrganisationUser(UserDTO user, Long portalUserId, Byte[] portalId, OrganisationRoleDTO userRole){
+		logger.info("Adding orgUser by portalUserId: "+portalUserId);
 		try {
-			uw.getUserByAPDId(apdUserId);
+			uw.getUserByPortalId(portalUserId);
 		} catch (APDUserNotFoundException e) {
-			user.setApdUserId(apdUserId);
+			user.setPortalUserId(portalUserId);
+			user.setPortalId(portalId[0]);
 			user.setUserRole(userRole);
 			try {
 				uw.addUser(ua.createDomainObj(user),this.dataProvider);
@@ -204,9 +206,10 @@ public class UserWS {
 	 * @param Erwartet ein Objekt der Klasse UserDTO mit allen relevanten Nutzerdaten sowie die APD User Id.
 	 * @return Gibt ein Objekt vom Typ Boolean zurueck. Im Erfolgsfall traegt dieses den Wert 'true' im Fehlerfall 'false'.
 	 */
-	public Boolean modifyUser(UserDTO user, Long apdUserId){
-		logger.info("Modify user by apdUserId: "+apdUserId);
-		user.setApdUserId(apdUserId);
+	public Boolean modifyUser(UserDTO user, Long portalUserId, Byte[] portalId){
+		logger.info("Modify user by portalUserId: "+portalUserId);
+		user.setPortalUserId(portalUserId);
+		user.setPortalId(portalId[0]);
 		try {
 //			uw.modifyUser(ua.updateDomainObj(user, user.getApdUserId()));
 			uw.modifyUser(ua.updateDomainObjByApdId(user, user.getApdUserId()));
@@ -256,11 +259,11 @@ public class UserWS {
 	 * @param Erwartet die APD User Id als Parameter.
 	 * @return Gibt ein Objekt vom Typ Boolean zurueck. Im Erfolgsfall traegt dieses den Wert 'true' im Fehlerfall 'false'.
 	 */
-	public Boolean deleteUser(Long apdUserId){
-		logger.info("Delete user by apdUserId: "+apdUserId);
+	public Boolean deleteUser(Long portalUserId){
+		logger.info("Delete user by portalUserId: "+portalUserId);
 		User user;
 		try {
-			user = uw.getUserByAPDId(apdUserId);
+			user = uw.getUserByPortalId(portalUserId);
 			uw.deleteUser(user);
 		} catch (APDUserNotFoundException e) {
 			e.printStackTrace();
@@ -284,10 +287,10 @@ public class UserWS {
 	 * @param Erwartet die APD User Id als Parameter.
 	 * @return Gibt ein Objekt vom Typ Boolean zurueck. Im Erfolgsfall traegt dieses den Wert 'true' im Fehlerfall 'false'.
 	 */
-	public Boolean checkIfUserExist(Long apdUserId) {
-		logger.info("Check if user exist by apdUserId: "+apdUserId);
+	public Boolean checkIfUserExist(Long portalUserId) {
+		logger.info("Check if user exist by portalUserId: "+portalUserId);
 		try {
-			if(uw.getUserByAPDId(apdUserId) != null){
+			if(uw.getUserByPortalId(portalUserId) != null){
 				return true;
 			} else return false;
 		} catch (APDUserNotFoundException e) {
@@ -296,25 +299,25 @@ public class UserWS {
 		}
 	}
 	
-	/**
-	 * 
-	 * Die Methode 'checkIfUserExist' überprüft ob eine konkreten Nutzer mit seinem Profil bereits in der Jobbörse
-	 * existiert.
-	 * 
-	 * @param Erwartet die APD User Id als Parameter.
-	 * @return Gibt ein Objekt vom Typ Boolean zurueck. Im Erfolgsfall traegt dieses den Wert 'true' im Fehlerfall 'false'.
-	 */
-	public Boolean checkIfInwentUserExist(Long inwentUserId) {
-		logger.info("Check if user exist by inwentUserId: "+inwentUserId);
-		try {
-			if(uw.getUserByInwentId(inwentUserId) != null){
-				return true;
-			} else return false;
-		} catch (InwentUserNotFoundException e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
+//	/**
+//	 * 
+//	 * Die Methode 'checkIfUserExist' überprüft ob eine konkreten Nutzer mit seinem Profil bereits in der Jobbörse
+//	 * existiert.
+//	 * 
+//	 * @param Erwartet die APD User Id als Parameter.
+//	 * @return Gibt ein Objekt vom Typ Boolean zurueck. Im Erfolgsfall traegt dieses den Wert 'true' im Fehlerfall 'false'.
+//	 */
+//	public Boolean checkIfInwentUserExist(Long inwentUserId) {
+//		logger.info("Check if user exist by inwentUserId: "+inwentUserId);
+//		try {
+//			if(uw.getUserByInwentId(inwentUserId) != null){
+//				return true;
+//			} else return false;
+//		} catch (InwentUserNotFoundException e) {
+//			e.printStackTrace();
+//			return false;
+//		}
+//	}
 	
 	
 	/**
@@ -324,10 +327,10 @@ public class UserWS {
 	 * @param Erwartet die APD User Id als Parameter.
 	 * @return Gibt ein Objekt vom Typ Boolean zurueck. Im Erfolgsfall traegt dieses den Wert 'true' im Fehlerfall 'false'.
 	 */
-	public Boolean switchContactAddress(Long apdUserId){
-		logger.info("Switch Contact Address by apdUserId: "+apdUserId);
+	public Boolean switchContactAddress(Long portalUserId){
+		logger.info("Switch Contact Address by portalUserId: "+portalUserId);
 		try {
-			uw.switchContactAddressByAPDUserId(apdUserId);
+			uw.switchContactAddressByPortalUserId(portalUserId);
 		} catch (APDUserNotFoundException e) {
 			e.printStackTrace();
 			return false;
@@ -341,13 +344,13 @@ public class UserWS {
 	/**
 	 * Die Methode 'changeUserRoleToAlumni' wechselt die Rolle eines Nutzers zur Alumni Rolle.
 	 * 
-	 * @param Erwartet die APD User Id und eine Instanz der Klasse AlumniRoleDTO als Parameter.
+	 * @param Erwartet die Portal User Id und eine Instanz der Klasse AlumniRoleDTO als Parameter.
 	 * @return Gibt ein Objekt vom Typ Boolean zurueck. Im Erfolgsfall traegt dieses den Wert 'true' im Fehlerfall 'false'.
 	 */
-	public Boolean changeUserRoleToAlumni(Long apdUserId, AlumniRoleDTO role){
-		logger.info("Change user role to alumni by apdUserId: "+apdUserId);
+	public Boolean changeUserRoleToAlumni(Long portalUserId, AlumniRoleDTO role){
+		logger.info("Change user role to alumni by portalUserId: "+portalUserId);
 		try {
-			ua.updateDomainObjRole(role, apdUserId);
+			ua.updateDomainObjRole(role, portalUserId);
 		} catch (APDUserNotFoundException e) {
 			e.printStackTrace();
 			return false;
@@ -364,13 +367,13 @@ public class UserWS {
 	/**
 	 * Die Methode 'changeUserRoleToOrganisation' wechselt die Rolle eines Nutzers zur Organisations Rolle.
 	 * 
-	 * @param Erwartet die APD User Id und eine Instanz der Klasse OrganisationRoleDTO als Parameter.
+	 * @param Erwartet die Portal User Id und eine Instanz der Klasse OrganisationRoleDTO als Parameter.
 	 * @return Gibt ein Objekt vom Typ Boolean zurueck. Im Erfolgsfall traegt dieses den Wert 'true' im Fehlerfall 'false'.
 	 */
-	public Boolean changeUserRoleToOrganisation(Long apdUserId, OrganisationRoleDTO role){
-		logger.info("Change user role to org by apdUserId: "+apdUserId);	
+	public Boolean changeUserRoleToOrganisation(Long portalUserId, OrganisationRoleDTO role){
+		logger.info("Change user role to org by apdUserId: "+portalUserId);	
 		try {
-			ua.updateDomainObjRole(role, apdUserId);
+			ua.updateDomainObjRole(role, portalUserId);
 		} catch (APDUserNotFoundException e) {
 			e.printStackTrace();
 			return false;

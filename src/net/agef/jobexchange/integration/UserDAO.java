@@ -3,11 +3,6 @@
  */
 package net.agef.jobexchange.integration;
 
-
-
-import net.agef.jobexchange.domain.Country;
-import net.agef.jobexchange.domain.JobActiveEnum;
-import net.agef.jobexchange.domain.Territory;
 import net.agef.jobexchange.domain.User;
 import org.apache.tapestry5.hibernate.annotations.CommitAfter;
 import org.chenillekit.hibernate.daos.GenericDAO;
@@ -20,7 +15,7 @@ public interface UserDAO extends GenericDAO<User, Long>{
 	
 	public User findCobraUserByID(Long cobraSuperID, boolean isOrganisationUser);
 	
-	public User findAPDUserByID(Long apdUserID);
+	public User findPortalUserByID(Long apdUserID);
 	
 	public User doRetrieve(Long userId, boolean detached);
 	
@@ -36,7 +31,7 @@ public interface UserDAO extends GenericDAO<User, Long>{
 	@CommitAfter
 	public void doDelete(Long  userId);
 
-	@CommitAfter
-	public User findInwentUserByID(Long applicantProfileOwnerId);
+//	@CommitAfter
+//	public User findInwentUserByID(Long applicantProfileOwnerId);
 	
 }

@@ -186,7 +186,7 @@ public class JobAssemblerWorker implements JobAssembler {
 
 		if (dto != null) {
 			if (dto.getJobOfferOwner() != null) {
-				job.setJobOfferOwner(userDAO.findAPDUserByID(dto.getJobOfferOwner()));
+				job.setJobOfferOwner(userDAO.findPortalUserByID(dto.getJobOfferOwner()));
 			}
 			if (dto.getCurrency() != null) {
 				Currency currency = jw.getCurrencyByNameOrIsoNumber(dto.getCurrency());

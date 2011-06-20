@@ -38,12 +38,12 @@ public class User extends AbstractEntity{
 	private Long apdUserId;
 	@Field(index=Index.UN_TOKENIZED, store=Store.NO)
 	private Long cobraSuperId;
+//	@Field(index=Index.UN_TOKENIZED, store=Store.NO)
+//	private Long inwentUserId;
 	@Field(index=Index.UN_TOKENIZED, store=Store.NO)
-	private Long inwentUserId;
+	private Long portalUserId;
 	@Field(index=Index.UN_TOKENIZED, store=Store.NO)
-	private Long elggUserId;
-	@Field(index=Index.UN_TOKENIZED, store=Store.NO)
-	private Short portalId;
+	private Long portalId;
 	private Long agefApplicantNumber;
 	@IndexedEmbedded
 	private DataProvider dataProvider;
@@ -164,28 +164,28 @@ public class User extends AbstractEntity{
 		this.cobraSuperId = cobraSuperId;
 	}
 	
+//	@NonVisual
+//	public void setInwentUserId(Long inwentUserId) {
+//		this.inwentUserId = inwentUserId;
+//	}
+//
+//	public Long getInwentUserId() {
+//		return inwentUserId;
+//	}
+
 	@NonVisual
-	public void setInwentUserId(Long inwentUserId) {
-		this.inwentUserId = inwentUserId;
+	public void setPortalUserId(Long portalUserId) {
+		this.portalUserId = portalUserId;
 	}
 
-	public Long getInwentUserId() {
-		return inwentUserId;
-	}
-
-	@NonVisual
-	public void setElggUserId(Long elggUserId) {
-		this.elggUserId = elggUserId;
-	}
-
-	public Long getElggUserId() {
-		return elggUserId;
+	public Long getPortalUserId() {
+		return portalUserId;
 	}
 
 	/**
 	 * @return the portalId
 	 */
-	public Short getPortalId() {
+	public Long getPortalId() {
 		return portalId;
 	}
 
@@ -193,7 +193,7 @@ public class User extends AbstractEntity{
 	 * @param portalId the portalId to set
 	 */
 	@NonVisual
-	public void setPortalId(Short portalId) {
+	public void setPortalId(Long portalId) {
 		this.portalId = portalId;
 	}
 

@@ -40,5 +40,5 @@ public interface ApplicantDAO extends GenericDAO<Applicant, Long>{
 	
 	public Applicant findApplicantProfileByCobraId(Long cobraUserId) throws ApplicantProfileNotFoundException;
 
-	public Applicant findApplicantProfileByInwentId(Long applicantProfileOwnerId) throws ApplicantProfileNotFoundException;
+//	public Applicant findApplicantProfileByInwentId(Long applicantProfileOwnerId) throws ApplicantProfileNotFoundException;
 }

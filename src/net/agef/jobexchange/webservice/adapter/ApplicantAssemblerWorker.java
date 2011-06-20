@@ -75,8 +75,8 @@ public class ApplicantAssemblerWorker implements ApplicantAssembler {
 	}
 
 	@Override
-	public ApplicantDTO createDTOWithAPDId(Applicant applicant) {
-		return createDTO(applicant, applicant.getApplicantProfileOwner().getApdUserId());
+	public ApplicantDTO createDTOWithPortalId(Applicant applicant) {
+		return createDTO(applicant, applicant.getApplicantProfileOwner().getPortalUserId());
 	}
 
 	@Override
@@ -88,14 +88,14 @@ public class ApplicantAssemblerWorker implements ApplicantAssembler {
 	 * Hilfsfunktion, die Codeduplizierung vermeidet und OwnerId anhand der in
 	 * der Signatur uebergebenen ID setzt.
 	 */
-	private ApplicantDTO createDTO(Applicant applicant, Long id) {
+	private ApplicantDTO createDTO(Applicant applicant, Long portalUserId) {
 		ApplicantDTO dto = new ApplicantDTO();
 
 		if (applicant != null) {
 			dto.setAdditionalRemarks(applicant.getAdditionalRemarks());
 			dto.setAdditionalSkills(applicant.getAdditionalSkills());
 			dto.setApplicantProfileId(applicant.getApplicantProfileId());
-			dto.setApplicantProfileOwnerId(id);
+			dto.setApplicantProfileOwnerId(portalUserId);
 			if (applicant.getComputerSkills() != null) {
 				dto.setComputerSkills(applicant.getComputerSkills().toString());
 			}
@@ -224,7 +224,7 @@ public class ApplicantAssemblerWorker implements ApplicantAssembler {
 	public Applicant createDomainObj(ApplicantDTO dto) throws APDUserNotFoundException, IndustrySectorNotFoundException, EnumValueNotFoundException, CountryNotFoundException {
 		User user;
 		try {
-			user = userDAO.findAPDUserByID(dto.getApplicantProfileOwnerId());
+			user = userDAO.findPortalUserByID(dto.getApplicantProfileOwnerId());
 		} catch (Exception e) {
 			throw new APDUserNotFoundException();
 		}
@@ -255,22 +255,22 @@ public class ApplicantAssemblerWorker implements ApplicantAssembler {
 	}
 	
 
-	@Override
-	public Applicant createDomainObjByInwentId(ApplicantDTO dto) throws InwentUserNotFoundException, IndustrySectorNotFoundException, EnumValueNotFoundException, CountryNotFoundException {
-		User user;
-		try {
-			user = userDAO.findInwentUserByID(dto.getApplicantProfileOwnerId());
-		} catch (Exception e) {
-			throw new InwentUserNotFoundException();
-		}
-		Applicant applicant;
-		if(user != null){
-			applicant = new Applicant(user);
-		} else throw new InwentUserNotFoundException();
-		
-		
-		return createDomainObjectFromApplicant(dto, applicant);
-	}
+//	@Override
+//	public Applicant createDomainObjByInwentId(ApplicantDTO dto) throws InwentUserNotFoundException, IndustrySectorNotFoundException, EnumValueNotFoundException, CountryNotFoundException {
+//		User user;
+//		try {
+//			user = userDAO.findInwentUserByID(dto.getApplicantProfileOwnerId());
+//		} catch (Exception e) {
+//			throw new InwentUserNotFoundException();
+//		}
+//		Applicant applicant;
+//		if(user != null){
+//			applicant = new Applicant(user);
+//		} else throw new InwentUserNotFoundException();
+//		
+//		
+//		return createDomainObjectFromApplicant(dto, applicant);
+//	}
 
 	/*
 	 * Hilfsmethode die duplizierten Code vermeidet und Domain Objekt erstellt
@@ -475,19 +475,19 @@ public class ApplicantAssemblerWorker implements ApplicantAssembler {
 		return updateDomainObj(dto, applicant);
 	}
 	
-	@Override
-	public Applicant updateDomainObjByInwentId(ApplicantDTO dto) throws ApplicantProfileNotFoundException, EnumValueNotFoundException, IndustrySectorNotFoundException, CountryNotFoundException{
-		Applicant applicant;
-		try {
-			// applicant =
-			// applicantDAO.findApplicantDataByProfileId(dto.getApplicantProfileId());
-			applicant = applicantDAO.findApplicantProfileByInwentId(dto.getApplicantProfileOwnerId());
-		} catch (ApplicantProfileNotFoundException e) {
-			applicant = null;
-		}
-		
-		return updateDomainObj(dto, applicant);
-	}
+//	@Override
+//	public Applicant updateDomainObjByInwentId(ApplicantDTO dto) throws ApplicantProfileNotFoundException, EnumValueNotFoundException, IndustrySectorNotFoundException, CountryNotFoundException{
+//		Applicant applicant;
+//		try {
+//			// applicant =
+//			// applicantDAO.findApplicantDataByProfileId(dto.getApplicantProfileId());
+//			applicant = applicantDAO.findApplicantProfileByInwentId(dto.getApplicantProfileOwnerId());
+//		} catch (ApplicantProfileNotFoundException e) {
+//			applicant = null;
+//		}
+//		
+//		return updateDomainObj(dto, applicant);
+//	}
 
 	
 	private Applicant updateDomainObj(ApplicantDTO dto, Applicant applicant) throws ApplicantProfileNotFoundException, EnumValueNotFoundException, IndustrySectorNotFoundException,

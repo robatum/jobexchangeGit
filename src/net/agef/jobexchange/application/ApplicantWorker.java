@@ -31,7 +31,7 @@ public interface ApplicantWorker {
 	public Collection<Applicant> getAllApplicants();
 
 	public Long addApplicantData(Applicant applicantData) throws ApplicantProfileAlreadyExistException;
-	public Applicant getApplicantDataByAPDUserId(Long apdUserId) throws APDUserNotFoundException, ApplicantProfileNotFoundException ;
+	public Applicant getApplicantDataByPortalUserId(Long apdUserId) throws APDUserNotFoundException, ApplicantProfileNotFoundException ;
 	public Applicant getApplicantDataByUserId(Long userId) throws ApplicantProfileNotFoundException, UserNotFoundException;
 	public Applicant getApplicantDataByProfileId(Long applicantProfileId) throws ApplicantProfileNotFoundException;
 
@@ -46,7 +46,7 @@ public interface ApplicantWorker {
 	public Collection<Applicant> getApplicantByCriteria(String criteria, Country country, Territory territory);
 	public Collection<ApplicantsSearchResultDTO> getApplicantByCriteria(String criteria, Country country, Territory territory, Integer resultAmount, Integer pageIndexStart, Boolean filterGetjobsResults);
 
-	void deleteApplicantDataByInwentUserId(Long inwentUserId) throws InwentUserNotFoundException, ApplicantProfileNotFoundException;
+//	void deleteApplicantDataByInwentUserId(Long inwentUserId) throws InwentUserNotFoundException, ApplicantProfileNotFoundException;
 
 	public Collection<Applicant> getApplicantByExtendedCriteria(String criteria, Country domainObj, Territory domainObj2, String[] availability, WorkUserType[] workTypes,
 			String[] occupationalField, String managementExperience, Integer resultsAmount, Integer pageIndexStart) throws EnumValueNotFoundException;

@@ -75,18 +75,18 @@ public class ApplicantDAOHibernate extends AbstractHibernateDAO<Applicant, Long>
 		} else return null;
 	}
 
-	@Override
-	public Applicant findApplicantProfileByInwentId(Long inwentUserId) throws ApplicantProfileNotFoundException {
-		List<Applicant> applicant = null;
-		try{
-			applicant = this.findByQuery("From Applicant a WHERE  a.applicantProfileOwner.inwentUserId = :inwentUserId", new QueryParameter("inwentUserId", inwentUserId));
-		}catch (Exception e){
-			throw new ApplicantProfileNotFoundException();
-		}
-		if (applicant !=null && !applicant.isEmpty()) {
-			return applicant.remove(0);
-		} else return null;
-	}
+//	@Override
+//	public Applicant findApplicantProfileByInwentId(Long inwentUserId) throws ApplicantProfileNotFoundException {
+//		List<Applicant> applicant = null;
+//		try{
+//			applicant = this.findByQuery("From Applicant a WHERE  a.applicantProfileOwner.inwentUserId = :inwentUserId", new QueryParameter("inwentUserId", inwentUserId));
+//		}catch (Exception e){
+//			throw new ApplicantProfileNotFoundException();
+//		}
+//		if (applicant !=null && !applicant.isEmpty()) {
+//			return applicant.remove(0);
+//		} else return null;
+//	}
 	
 //	@Override
 //	public Applicant doRefresh(Applicant app){
