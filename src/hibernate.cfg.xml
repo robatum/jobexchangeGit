@@ -25,7 +25,7 @@
 			    </property>
 		<!-- path to lucene cache -->
 		<property name="hibernate.search.default.indexBase">
-			C:\DEVELOPMENT\lucene6
+			C:\DEVELOPMENT\lucene8
 			    </property>
 		<property name="hibernate.search.default.optimizer.operation_limit.max">
 			1000
