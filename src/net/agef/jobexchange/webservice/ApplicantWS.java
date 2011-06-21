@@ -441,6 +441,7 @@ public class ApplicantWS {
 	 * @param Erwartet den Such-String, Angaben zu Kontinent und Land sowie ein Byte Array mit Angaben zur Portal Id als Parameter.
 	 * @return Gibt ein Array von Objekten der Klasse ApplicantDTO zurueck.
 	 */
+	@Deprecated
 	public ApplicantDTO[] getApplicantsByCriteria(String criteria, CountryDTO country, TerritoryDTO territory, Byte[] portalId){
 		logger.info("Get applicantProfile By Criteria: "+criteria);
 		Collection<Applicant> applicants;

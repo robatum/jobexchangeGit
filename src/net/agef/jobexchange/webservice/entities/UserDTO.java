@@ -15,6 +15,7 @@ import java.util.Calendar;
  */
 public class UserDTO {
 	
+	@Deprecated
 	private Long apdUserId;
 	private Long cobraUserId;
 	private Long portalUserId;
@@ -45,12 +46,14 @@ public class UserDTO {
 	/**
 	 * @return the userId
 	 */
+	@Deprecated
 	public Long getApdUserId() {
 		return apdUserId;
 	}
 	/**
 	 * @param userId the userId to set
 	 */
+	@Deprecated
 	public void setApdUserId(Long userId) {
 		this.apdUserId = userId;
 	}
