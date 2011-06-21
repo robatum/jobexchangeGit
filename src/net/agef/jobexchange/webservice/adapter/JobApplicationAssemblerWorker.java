@@ -36,7 +36,7 @@ public class JobApplicationAssemblerWorker implements JobApplicationAssembler{
 				dto.setRelatedJobDescription(application.getRelatedJob().getJobDescription());
 			}
 			if(application.getJobApplicationOwner()!=null)	{
-				dto.setApplicationOwnerId(application.getJobApplicationOwner().getApdUserId());
+				dto.setApplicationOwnerId(application.getJobApplicationOwner().getPortalUserId());
 				dto.setApplicationOwnerName(application.getJobApplicationOwner().getFullUserName());
 			}
 			dto.setContactNote(application.getContactNote());

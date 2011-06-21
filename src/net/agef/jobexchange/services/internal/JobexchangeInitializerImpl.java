@@ -2549,7 +2549,7 @@ public class JobexchangeInitializerImpl implements ApplicationInitializerFilter 
 			user.setAddress1(address);
 			// user.setCobraSuperId(new Long(2));
 			user.setNationality((Country) session.load(Country.class, new Long(54)));
-			user.setApdUserId(new Long(2)); // old user id 23
+			user.setPortalUserId(new Long(2)); // old user id 23
 
 			final IndustrySector industrySector = (IndustrySector) session.load(IndustrySector.class, new Long(2));
 
@@ -2567,7 +2567,7 @@ public class JobexchangeInitializerImpl implements ApplicationInitializerFilter 
 			user2.getUserRoleData().setOrganisationName("DAAD");
 			user2.getUserRoleData().setOrganisationDescription("Organisation zur Förderung des Akademischen Austauschs im Rahmen der Entwicklungszusammenarbeit");
 			user2.getUserRoleData().setIndustrySector(industrySector);
-			user2.setApdUserId(new Long(1));
+			user2.setPortalUserId(new Long(1));
 
 			final User user3 = new User();
 			user3.setTitle(TitleEnum.PROF_DR);

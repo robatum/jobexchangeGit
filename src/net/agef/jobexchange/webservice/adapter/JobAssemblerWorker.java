@@ -110,7 +110,7 @@ public class JobAssemblerWorker implements JobAssembler {
 			dto.setJobOfferExpireDate(DateUtil.date2Calendar(job.getJobOfferExpireDate()));
 			dto.setJobOfferId(job.getJobOfferId());
 			
-			dto.setJobOfferOwner(job.getJobOfferOwner().getApdUserId());
+			dto.setJobOfferOwner(job.getJobOfferOwner().getPortalUserId());
 			if(job.getLanguageSkillsEnglish()!=null){
 				dto.setLanguageSkillsEnglish(job.getLanguageSkillsEnglish().toString());
 			}

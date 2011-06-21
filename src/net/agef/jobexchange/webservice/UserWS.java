@@ -80,10 +80,10 @@ public class UserWS {
 	 * Dies geschieht indem dem Parameter 'userRole' eine konkrete Instanz der Klasse AlumniRoleDTO (fuer die Alumni Rolle)
 	 * uebergeben wird.
 	 * 
-	 * @param Erwartet ein Objekt der Klasse UserDTO mit allen relevanten Nutzerdaten, die APD User Id sowie eine Instanz der konkreten Nutzerrolle.
+	 * @param Erwartet ein Objekt der Klasse UserDTO mit allen relevanten Nutzerdaten, die Portal User Id, eine Instanz der konkreten Nutzerrolle sowie ein Byte Array mit Angaben zur Portal Id.
 	 * @return Gibt ein Objekt vom Typ Boolean zurueck. Im Erfolgsfall traegt dieses den Wert 'true' im Fehlerfall 'false'.
 	 */
-	public Boolean addAlumniUser(UserDTO user, Long portalUserId, Byte[] portalId, AlumniRoleDTO userRole){
+	public Boolean addAlumniUser(UserDTO user, Long portalUserId, AlumniRoleDTO userRole, Byte[] portalId){
 		logger.info("Adding alumniUser by portalUserId: "+portalUserId);
 		try {
 			User us = uw.getUserByPortalId(portalUserId);
@@ -166,10 +166,10 @@ public class UserWS {
 	 * Dies geschieht indem dem Parameter 'userRole' vom eine konkrete Instanz der Klasse
 	 * OrganisationRoleDTO (fuer die Organisations Rolle) uebergeben wird.
 	 * 
-	 * @param Erwartet ein Objekt der Klasse UserDTO mit allen relevanten Nutzerdaten, die APD User Id sowie eine Instanz der konkreten Nutzerrolle.
+	 * @param Erwartet ein Objekt der Klasse UserDTO mit allen relevanten Nutzerdaten, die Portal User Id, eine Instanz der konkreten Nutzerrolle sowie ein Byte Array mit Angaben zur Portal Id.
 	 * @return Gibt ein Objekt vom Typ Boolean zurueck. Im Erfolgsfall traegt dieses den Wert 'true' im Fehlerfall 'false'.
 	 */
-	public Boolean addOrganisationUser(UserDTO user, Long portalUserId, Byte[] portalId, OrganisationRoleDTO userRole){
+	public Boolean addOrganisationUser(UserDTO user, Long portalUserId, OrganisationRoleDTO userRole, Byte[] portalId){
 		logger.info("Adding orgUser by portalUserId: "+portalUserId);
 		try {
 			uw.getUserByPortalId(portalUserId);
@@ -203,7 +203,7 @@ public class UserWS {
 	/** 
 	 * Die Methode 'modifyUser' ermoeglicht es das bestehende Nutzerprofil eines bestehendem Nutzers zu modifizieren.
 	 * 
-	 * @param Erwartet ein Objekt der Klasse UserDTO mit allen relevanten Nutzerdaten sowie die APD User Id.
+	 * @param Erwartet ein Objekt der Klasse UserDTO mit allen relevanten Nutzerdaten, die Portal User Id sowie ein Byte Array mit Angaben zur portalId.
 	 * @return Gibt ein Objekt vom Typ Boolean zurueck. Im Erfolgsfall traegt dieses den Wert 'true' im Fehlerfall 'false'.
 	 */
 	public Boolean modifyUser(UserDTO user, Long portalUserId, Byte[] portalId){
@@ -256,7 +256,7 @@ public class UserWS {
 	 * Die Methode 'deleteUser' ermoeglicht es einen bestehenden Nutzer inklusive aller von ihm eingestellten Stellenangebote sowie eines
 	 * moeglicherweise vorhandenen Bewerber-/Expertenprofils zu loeschen.
 	 * 
-	 * @param Erwartet die APD User Id als Parameter.
+	 * @param Erwartet die Portal User Id als Parameter.
 	 * @return Gibt ein Objekt vom Typ Boolean zurueck. Im Erfolgsfall traegt dieses den Wert 'true' im Fehlerfall 'false'.
 	 */
 	public Boolean deleteUser(Long portalUserId){
@@ -284,7 +284,7 @@ public class UserWS {
 	 * Die Methode 'checkIfUserExist' überprüft ob eine konkreten Nutzer mit seinem Profil bereits in der Jobbörse
 	 * existiert.
 	 * 
-	 * @param Erwartet die APD User Id als Parameter.
+	 * @param Erwartet die Portal User Id als Parameter.
 	 * @return Gibt ein Objekt vom Typ Boolean zurueck. Im Erfolgsfall traegt dieses den Wert 'true' im Fehlerfall 'false'.
 	 */
 	public Boolean checkIfUserExist(Long portalUserId) {
@@ -324,7 +324,7 @@ public class UserWS {
 	 * Die Methode 'switchContactAddress' ermoeglicht es die aktive Kontaktadresse eines bestehenden Nutzer umzuschalten. Bei
 	 * jedem Aufruf wird die zur Zeit aktive Adresse zur sekundaeren Adresse und die bisher sekundaere Adresse zur aktiven Addresse.
 	 * 
-	 * @param Erwartet die APD User Id als Parameter.
+	 * @param Erwartet die Portal User Id als Parameter.
 	 * @return Gibt ein Objekt vom Typ Boolean zurueck. Im Erfolgsfall traegt dieses den Wert 'true' im Fehlerfall 'false'.
 	 */
 	public Boolean switchContactAddress(Long portalUserId){

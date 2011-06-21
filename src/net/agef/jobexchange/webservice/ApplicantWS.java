@@ -236,7 +236,7 @@ public class ApplicantWS {
 	 * Die Methode 'checkForApplicantProfile' überprüft ob für einem konkreten Nutzer bereits ein Bewerber-/Experten-
 	 * profil angelegt wurde oder nicht.
 	 * 
-	 * @param Erwartet die APD User Id als Parameter.
+	 * @param Erwartet die Portal User Id als Parameter.
 	 * @return Gibt ein Objekt vom Typ Boolean zurueck. Im Erfolgsfall traegt dieses den Wert 'true' im Fehlerfall 'false'.
 	 */
 	public Boolean checkForApplicantProfile(Long portalUserId) {
@@ -360,7 +360,7 @@ public class ApplicantWS {
 	/**
 	 * Die Methode 'deleteApplicantProfile' ermoeglicht es das bestehende Bewerber-/Expertenprofil eines bestehendem Nutzers zu loeschen.
 	 * 
-	 * @param Erwartet die APD User Id als Parameter.
+	 * @param Erwartet die Portal User Id als Parameter.
 	 * @return Gibt ein Objekt vom Typ Boolean zurueck. Im Erfolgsfall traegt dieses den Wert 'true' im Fehlerfall 'false'.
 	 * 
 	 */
@@ -438,7 +438,7 @@ public class ApplicantWS {
 	 * 
 	 * Die Methode 'getApplicantsByCriteria' liefert alle Bewerber-/Expertenprofile die auf die Suchanfrage passen zurueck.
 	 * 
-	 * @param Erwartet den Such-String als Parameter.
+	 * @param Erwartet den Such-String, Angaben zu Kontinent und Land sowie ein Byte Array mit Angaben zur Portal Id als Parameter.
 	 * @return Gibt ein Array von Objekten der Klasse ApplicantDTO zurueck.
 	 */
 	public ApplicantDTO[] getApplicantsByCriteria(String criteria, CountryDTO country, TerritoryDTO territory, Byte[] portalId){
@@ -470,7 +470,7 @@ public class ApplicantWS {
 	 * 
 	 * Die Methode 'getApplicantsSearchResultsByCriteria' liefert alle Bewerber-/Expertenprofile die auf die Suchanfrage passen zurueck.
 	 * 
-	 *  @param Erwartet den Such-String, das Land bzw. den Kontinent sowie die Angaben für die Paginierung - Anzahl der zurückzugebenen Ergebnisse und den Startwert der Ergebnisse als Parameter.
+	 *  @param Erwartet den Such-String, das Land bzw. den Kontinent sowie die Angaben für die Paginierung - Anzahl der zurückzugebenen Ergebnisse und den Startwert der Ergebnisse sowie ein Byte Array mit Angaben zur Portal Id als Parameter.
 	 * @return Gibt ein Array von Objekten der Klasse ApplicantDTO zurueck.
 	 */
 	public ApplicantsSearchResultDTO[] getApplicantsSearchResultsByCriteria(String criteria, CountryDTO country, TerritoryDTO territory, Integer resultsAmount, Integer pageIndexStart, Byte[] portalId){
@@ -499,7 +499,7 @@ public class ApplicantWS {
 	 * 
 	 * Die Methode 'getApplicantsSearchResultsByCriteria' liefert alle Bewerber-/Expertenprofile die auf die Suchanfrage passen zurueck.
 	 * 
-	 *  @param Erwartet den Such-String, das Land bzw. den Kontinent sowie die Angaben für die Paginierung - Anzahl der zurückzugebenen Ergebnisse und den Startwert der Ergebnisse als Parameter.
+	 *  @param Erwartet den Such-String, das Land bzw. den Kontinent sowie die Angaben für die Paginierung - Anzahl der zurückzugebenen Ergebnisse und den Startwert der Ergebnisse sowie ein Byte Array mit Angaben zur Portal Id als als Parameter.
 	 * @return Gibt ein Array von Objekten der Klasse ApplicantDTO zurueck.
 	 */
 	public ApplicantDTO[] getApplicantsByExtendedCriteria(String criteria, CountryDTO country, TerritoryDTO territory, String[] availability, WorkUserTypeDTO[] workUserTypeDTO, String[] occupationalField, String managementExperience, Integer resultsAmount, Integer pageIndexStart, Byte[] portalId){
@@ -552,7 +552,7 @@ public class ApplicantWS {
 	 * 
 	 * Die Methode 'getApplicantsSearchResultsAmountByExtendedCriteria' liefert die Anzahl alle Bewerber-/Expertenprofile die auf die erweiterte Suchanfrage passen zurueck.
 	 * 
-	 * @param Erwartet den Such-String, das Land bzw. den Kontinent sowie die erweiterten Suchkriterien als Parameter.
+	 * @param Erwartet den Such-String, das Land bzw. den Kontinent sowie die erweiterten Suchkriterien inkl. eines Byte Array mit Angaben zur Portal Id als Parameter.
 	 * @return Gibt die Anzahl der gefundenen Bewerber-/Expertenprofileeinen als Integer Wert zurueck.
 	 */
 	
@@ -596,7 +596,7 @@ public class ApplicantWS {
 	 * 
 	 * Die Methode 'getApplicantsSearchResultsAmountByCriteria' liefert die Anzahl alle Bewerber-/Expertenprofile die auf die Suchanfrage passen zurueck.
 	 * 
-	 * @param Erwartet den Such-String sowie das Land bzw. den Kontinent als Parameter.
+	 * @param Erwartet den Such-String sowie das Land bzw. den Kontinent sowie ein Byte Array mit Angaben zur Portal Id als Parameter.
 	 * @return Gibt die Anzahl der gefundenen Bewerber-/Expertenprofileeinen als Integer Wert zurueck.
 	 */
 	

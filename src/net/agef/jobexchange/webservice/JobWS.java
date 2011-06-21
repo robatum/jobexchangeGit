@@ -227,7 +227,7 @@ public class JobWS{
 				Iterator<JobImpl> it = jobList.iterator();
 				while(it.hasNext()){
 					JobImpl job = it.next();
-					if (job.getJobOfferOwner() != null && job.getJobOfferOwner().getApdUserId() != null &&  job.getJobOfferOwner().getApdUserId().equals(portalUserId)){
+					if (job.getJobOfferOwner() != null && job.getJobOfferOwner().getPortalUserId() != null &&  job.getJobOfferOwner().getPortalUserId().equals(portalUserId)){
 						return true;
 					}
 				}
