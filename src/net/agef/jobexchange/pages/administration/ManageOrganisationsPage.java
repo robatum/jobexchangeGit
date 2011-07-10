@@ -12,6 +12,7 @@ import net.agef.jobexchange.application.LoginUserWorker;
 import net.agef.jobexchange.application.UserWorker;
 import net.agef.jobexchange.domain.JobImpl;
 import net.agef.jobexchange.domain.LoginUser;
+import net.agef.jobexchange.domain.LoginUserRole;
 import net.agef.jobexchange.domain.OrganisationRoleData;
 import net.agef.jobexchange.domain.User;
 import net.agef.jobexchange.exceptions.LoginUserNotFoundException;
@@ -23,9 +24,12 @@ import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.beaneditor.BeanModel;
 import org.apache.tapestry5.corelib.components.Grid;
+import org.apache.tapestry5.grid.GridDataSource;
+import org.apache.tapestry5.hibernate.HibernateGridDataSource;
 import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.BeanModelSource;
+import org.hibernate.Session;
 import org.slf4j.Logger;
 
 /**
@@ -36,6 +40,9 @@ import org.slf4j.Logger;
 public class ManageOrganisationsPage {
 	@Inject
 	private Logger logger;
+	
+	@Inject 
+	private Session session;
 	
 	@Inject
 	private UserWorker uw;
@@ -78,7 +85,7 @@ public class ManageOrganisationsPage {
     }
     
     
-    public List<OrganisationRoleData> getOrganisationUserDataList() {
+    public GridDataSource getOrganisationUserDataList() {
     	if(luw.isLoggedInUser()){
     		try {
 				this.loginUser = luw.getLoggedInUser();
@@ -87,15 +94,20 @@ public class ManageOrganisationsPage {
 				luw.logoutUser();
 			}
     	}
+    	LoginUserRole lur = new LoginUserRole();
+    	lur.setAuthority("ROLE_ADMIN");
+    	if (loginUser.getGrantedAuthorities().contains(lur)){
+    		return new HibernateGridDataSource(session, OrganisationRoleData.class);
+    	}
     	List<OrganisationRoleData> userList = null;
-		try {
+    	try {
 			userList = uw.getOrganisationUserDataByLoginUser(this.loginUser);
 		} catch (PassedAttributeIsNullException e) {
 			e.printStackTrace();
 			logger.error("ManageOrgForm -- Login User Name could not be found in DB.");
 			luw.logoutUser();
 		}
-		return userList;
+		return (GridDataSource)userList;
 	}
     
     
