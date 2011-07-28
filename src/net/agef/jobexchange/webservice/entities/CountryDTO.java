@@ -19,6 +19,7 @@ public class CountryDTO {
 	}
 	
 	private String country;
+	@Deprecated
 	private Integer isoNumber;
 	
 	/**
@@ -44,6 +45,7 @@ public class CountryDTO {
 	/**
 	 * @param isoNumber the isoNumber to set
 	 */
+	@Deprecated
 	public void setIsoNumber(Integer isoNumber) {
 		this.isoNumber = isoNumber;
 	}
@@ -51,6 +53,7 @@ public class CountryDTO {
 	/**
 	 * @return the isoNumber
 	 */
+	@Deprecated
 	public Integer getIsoNumber() {
 		return isoNumber;
 	}

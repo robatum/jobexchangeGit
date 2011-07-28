@@ -212,7 +212,7 @@ public class UserWS {
 		user.setPortalId(portalId[0]);
 		try {
 //			uw.modifyUser(ua.updateDomainObj(user, user.getApdUserId()));
-			uw.modifyUser(ua.updateDomainObjByApdId(user, user.getApdUserId()));
+			uw.modifyUser(ua.updateDomainObjByPortalUserId(user, user.getPortalUserId()));
 		} catch (APDUserNotFoundException e) {
 			e.printStackTrace();
 			return false;

@@ -19,6 +19,7 @@ import net.agef.jobexchange.domain.Education;
 import net.agef.jobexchange.domain.ExperienceDurationEnum;
 import net.agef.jobexchange.domain.LanguageSkill;
 import net.agef.jobexchange.domain.LanguageSkillsEnum;
+import net.agef.jobexchange.domain.PortalIdentifierEnum;
 import net.agef.jobexchange.domain.PublicationTypeEnum;
 import net.agef.jobexchange.domain.TeamSizeEnum;
 import net.agef.jobexchange.domain.User;
@@ -92,6 +93,8 @@ public class ApplicantAssemblerWorker implements ApplicantAssembler {
 		ApplicantDTO dto = new ApplicantDTO();
 
 		if (applicant != null) {
+			dto.setPortalId((Byte[])applicant.getPortalIdList().toArray());
+			
 			dto.setAdditionalRemarks(applicant.getAdditionalRemarks());
 			dto.setAdditionalSkills(applicant.getAdditionalSkills());
 			dto.setApplicantProfileId(applicant.getApplicantProfileId());
@@ -281,6 +284,13 @@ public class ApplicantAssemblerWorker implements ApplicantAssembler {
 //			applicant.setAdditionalRemarks(dto.getAdditionalRemarks());
 //			applicant.setAdditionalSkills(dto.getAdditionalSkills());
 			applicant.setApplicantProfileId(dto.getApplicantProfileId());
+			if (dto.getPortalId()!=null){
+				List<PortalIdentifierEnum> portalIdentifierList = applicant.getPortalIdList();
+				for (int i = 0; i < dto.getPortalId().length; i++) {
+					portalIdentifierList.add(PortalIdentifierEnum.fromPortalId(dto.getPortalId()[i].intValue()));
+				}	
+				applicant.setPortalIdList(portalIdentifierList);
+			}
 
 			if (dto.getComputerSkills() != null) {
 				applicant.setComputerSkills(DecisionYesNoEnum.fromValue(dto.getComputerSkills()));
@@ -497,6 +507,21 @@ public class ApplicantAssemblerWorker implements ApplicantAssembler {
 			throw new ApplicantProfileNotFoundException();
 
 		if (dto != null) {
+			if (dto.getPortalId()!=null){
+				List<PortalIdentifierEnum> portalIdentifierList = applicant.getPortalIdList();
+				
+				while(portalIdentifierList.size() > dto.getPortalId().length){
+					portalIdentifierList.remove(portalIdentifierList.size() - 1);
+				}
+				
+				for (int i = 0; i < dto.getPortalId().length; i++) {
+					if (i < portalIdentifierList.size()) {
+						portalIdentifierList.set(i, PortalIdentifierEnum.fromPortalId(dto.getPortalId()[i].intValue()));
+					} else portalIdentifierList.add(i, PortalIdentifierEnum.fromPortalId(dto.getPortalId()[i].intValue()));
+				}	
+				applicant.setPortalIdList(portalIdentifierList);
+			}
+			
 			applicant.setAdditionalRemarks(dto.getAdditionalRemarks());
 			applicant.setAdditionalSkills(dto.getAdditionalSkills());
 			applicant.setApplicantProfileId(dto.getApplicantProfileId());

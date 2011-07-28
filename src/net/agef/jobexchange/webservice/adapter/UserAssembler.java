@@ -19,7 +19,7 @@ public interface UserAssembler {
 	
 	public UserDTO createDTO(User user); 
 	public User createDomainObj(UserDTO dto)throws EnumValueNotFoundException, CountryNotFoundException;
-	public User updateDomainObjByApdId(UserDTO dto, Long apdUserId)throws APDUserNotFoundException, EnumValueNotFoundException, CountryNotFoundException;
+	public User updateDomainObjByPortalUserId(UserDTO dto, Long portalUserId)throws APDUserNotFoundException, EnumValueNotFoundException, CountryNotFoundException;
 	public User updateDomainObjByCobraId(UserDTO dto, Long cobraUserId) throws CobraUserNotFoundException, EnumValueNotFoundException, CountryNotFoundException;
 	public User updateDomainObjRole(AbstractUserRoleDTO dto, Long userId)throws APDUserNotFoundException, EnumValueNotFoundException, CountryNotFoundException;
 

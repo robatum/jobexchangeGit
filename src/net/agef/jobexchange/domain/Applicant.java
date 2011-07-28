@@ -13,11 +13,13 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -30,6 +32,7 @@ import net.agef.jobexchange.services.lucene.ApplicantConcatClassBridge;
 import org.apache.tapestry5.beaneditor.DataType;
 import org.apache.tapestry5.beaneditor.NonVisual;
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CollectionOfElements;
 import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.IndexColumn;
 import org.hibernate.search.annotations.ClassBridge;
@@ -75,6 +78,21 @@ public class Applicant extends AbstractEntity{
 	@Field(index=Index.UN_TOKENIZED, store=Store.YES)
 	@DateBridge(resolution = Resolution.HOUR)
 	private Date applicantProfileExpireDate;
+	
+	/* PortalID Einfuehrung Sommer 2011 */
+	@IndexedEmbedded
+	private List<PortalIdentifierEnum> portalIdList = new ArrayList<PortalIdentifierEnum>(){
+		@Override
+		public Object[] toArray(){
+			Iterator<PortalIdentifierEnum> it = portalIdList.iterator();
+			Object[] portalIdValueList = new Object[portalIdList.size()];
+			while(it.hasNext()){
+				portalIdValueList[portalIdValueList.length+1] = it.next().portalId().byteValue();
+			}
+			return portalIdValueList;
+		}
+	};
+	/* PortalID Einfuehrung Sommer 2011 */
 	
 	/* Bewerberprofil Sommer 2010 */
 	private CurrentStatusEnum currentStatus;
@@ -343,6 +361,25 @@ public class Applicant extends AbstractEntity{
 	 */
 	public void setApplicantProfileExpireDate(Date applicantProfileExpireDate) {
 		this.applicantProfileExpireDate = applicantProfileExpireDate;
+	}
+
+	/**
+	 * @return the portalId
+	 */
+	
+	@CollectionOfElements(targetElement = PortalIdentifierEnum.class)
+	@JoinTable(name = "applicants_portalId", joinColumns = @JoinColumn(name = "applicant_fk"))
+	@Column(name = "portalIdentifier", nullable = true)
+	@Enumerated(EnumType.STRING)
+	public List<PortalIdentifierEnum> getPortalIdList() {
+		return portalIdList;
+	}
+
+	/**
+	 * @param portalId the portalId to set
+	 */
+	public void setPortalIdList(List<PortalIdentifierEnum> portalIdList) {
+		this.portalIdList = portalIdList;
 	}
 
 	/**

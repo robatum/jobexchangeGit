@@ -38,12 +38,10 @@ public class User extends AbstractEntity{
 	private Long apdUserId;
 	@Field(index=Index.UN_TOKENIZED, store=Store.NO)
 	private Long cobraSuperId;
-//	@Field(index=Index.UN_TOKENIZED, store=Store.NO)
-//	private Long inwentUserId;
 	@Field(index=Index.UN_TOKENIZED, store=Store.NO)
 	private Long portalUserId;
 	@Field(index=Index.UN_TOKENIZED, store=Store.NO)
-	private Long portalId;
+	private PortalIdentifierEnum portalId;
 	@Deprecated
 	private Long agefApplicantNumber;
 	@IndexedEmbedded
@@ -167,14 +165,6 @@ public class User extends AbstractEntity{
 		this.cobraSuperId = cobraSuperId;
 	}
 	
-//	@NonVisual
-//	public void setInwentUserId(Long inwentUserId) {
-//		this.inwentUserId = inwentUserId;
-//	}
-//
-//	public Long getInwentUserId() {
-//		return inwentUserId;
-//	}
 
 	@NonVisual
 	public void setPortalUserId(Long portalUserId) {
@@ -188,7 +178,7 @@ public class User extends AbstractEntity{
 	/**
 	 * @return the portalId
 	 */
-	public Long getPortalId() {
+	public PortalIdentifierEnum getPortalId() {
 		return portalId;
 	}
 
@@ -196,7 +186,7 @@ public class User extends AbstractEntity{
 	 * @param portalId the portalId to set
 	 */
 	@NonVisual
-	public void setPortalId(Long portalId) {
+	public void setPortalId(PortalIdentifierEnum portalId) {
 		this.portalId = portalId;
 	}
 

@@ -10,6 +10,7 @@ import net.agef.jobexchange.domain.AlumniRole;
 import net.agef.jobexchange.domain.EmployeeAmountEnum;
 import net.agef.jobexchange.domain.OrganisationRole;
 import net.agef.jobexchange.domain.OrganisationRoleData;
+import net.agef.jobexchange.domain.PortalIdentifierEnum;
 import net.agef.jobexchange.domain.TitleEnum;
 import net.agef.jobexchange.domain.User;
 import net.agef.jobexchange.exceptions.APDUserNotFoundException;
@@ -52,7 +53,9 @@ public class UserAssemblerWorker implements UserAssembler{
 //			dto.setApdUserId(user.getApdUserId());
 			dto.setCobraUserId(user.getCobraSuperId());
 			dto.setPortalUserId(user.getPortalUserId());
-			dto.setPortalId(user.getPortalId().byteValue());
+			if (user.getPortalId()!=null) {
+				dto.setPortalId(user.getPortalId().portalId().byteValue());
+			}			
 			dto.setCurrentAddress(ada.createDTO(user.getCurrentContactAddress()));
 			dto.setAlternativeAddress(ada.createDTO(user.getAlternativeContactAddress()));
 			dto.setCitizenship1(user.getCitizenship1());
@@ -130,7 +133,9 @@ public class UserAssemblerWorker implements UserAssembler{
 			user.setCobraSuperId(dto.getCobraUserId());
 //			user.setApdUserId(dto.getApdUserId());
 			user.setPortalUserId(dto.getPortalUserId());
-			user.setPortalId(dto.getPortalId().longValue());
+			if (dto.getPortalId() != null){
+				user.setPortalId(PortalIdentifierEnum.fromPortalId(dto.getPortalId().intValue()));
+			}
 			user.setAddress1(ada.createDomainObj(dto.getCurrentAddress()));
 			user.setAddress2(ada.createDomainObj(dto.getAlternativeAddress()));
 			user.setCitizenship1(dto.getCitizenship1());
@@ -154,7 +159,7 @@ public class UserAssemblerWorker implements UserAssembler{
 	}
 
 	@Override
-	public User updateDomainObjByApdId(UserDTO dto, Long portalUserId) throws APDUserNotFoundException, EnumValueNotFoundException, CountryNotFoundException {
+	public User updateDomainObjByPortalUserId(UserDTO dto, Long portalUserId) throws APDUserNotFoundException, EnumValueNotFoundException, CountryNotFoundException {
 		User user = userDAO.findPortalUserByID(portalUserId);
 		
 		if(dto.getUserRole()instanceof OrganisationRoleDTO){
@@ -185,7 +190,9 @@ public class UserAssemblerWorker implements UserAssembler{
 //			user.setApdUserId(dto.getUserId()); // nicht updaten, da unveraenderlich
 			user.setCobraSuperId(dto.getCobraUserId());
 //			user.setPortalUserId(dto.getPortalUserId()); // nicht updaten, da unveraenderlich
-			dto.setPortalId(user.getPortalId().byteValue());
+			if (dto.getPortalId() != null){
+				user.setPortalId(PortalIdentifierEnum.fromPortalId(dto.getPortalId().intValue()));
+			}
 			user.setAddress1(ada.updateDomainObj(dto.getCurrentAddress(),user.getAddress1()));
 			user.setAddress2(ada.updateDomainObj(dto.getAlternativeAddress(),user.getAddress2()));
 			user.setCitizenship1(dto.getCitizenship1());

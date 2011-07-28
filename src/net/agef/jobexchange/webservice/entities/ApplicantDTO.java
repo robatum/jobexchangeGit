@@ -5,13 +5,6 @@ package net.agef.jobexchange.webservice.entities;
 
 import java.util.Calendar;
 
-import net.agef.jobexchange.domain.DecisionYesNoEnum;
-import net.agef.jobexchange.domain.PublicationTypeEnum;
-
-import org.hibernate.search.annotations.Field;
-import org.hibernate.search.annotations.Index;
-import org.hibernate.search.annotations.Store;
-
 /**
  * 
  *
@@ -25,6 +18,9 @@ public class ApplicantDTO{
 	
 	private Long applicantProfileId;
 	private Long applicantProfileOwnerId;
+	/* PortalID Einfuehrung Sommer 2011 */
+	private Byte[] portalId;
+	/* PortalID Einfuehrung Sommer 2011 */
     private String durationOfContract;
     
     /* Bewerberprofil Sommer 2010 */
@@ -110,6 +106,22 @@ public class ApplicantDTO{
 	public void setApplicantProfileOwnerId(Long applicantProfileOwnerId) {
 		this.applicantProfileOwnerId = applicantProfileOwnerId;
 	}
+	/**
+	 * @return the portalId
+	 */
+	public Byte[] getPortalId() {
+		return portalId;
+	}
+
+
+	/**
+	 * @param portalId the portalId to set
+	 */
+	public void setPortalId(Byte[] portalId) {
+		this.portalId = portalId;
+	}
+
+
 	/**
 	 * @return the currentStatus
 	 */
