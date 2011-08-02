@@ -81,17 +81,7 @@ public class Applicant extends AbstractEntity{
 	
 	/* PortalID Einfuehrung Sommer 2011 */
 	@IndexedEmbedded
-	private List<PortalIdentifierEnum> portalIdList = new ArrayList<PortalIdentifierEnum>(){
-		@Override
-		public Object[] toArray(){
-			Iterator<PortalIdentifierEnum> it = portalIdList.iterator();
-			Object[] portalIdValueList = new Object[portalIdList.size()];
-			while(it.hasNext()){
-				portalIdValueList[portalIdValueList.length+1] = it.next().portalId().byteValue();
-			}
-			return portalIdValueList;
-		}
-	};
+	private List<PortalIdentifier> portalIdList = new ArrayList<PortalIdentifier>();
 	/* PortalID Einfuehrung Sommer 2011 */
 	
 	/* Bewerberprofil Sommer 2010 */
@@ -367,18 +357,18 @@ public class Applicant extends AbstractEntity{
 	 * @return the portalId
 	 */
 	
-	@CollectionOfElements(targetElement = PortalIdentifierEnum.class)
-	@JoinTable(name = "applicants_portalId", joinColumns = @JoinColumn(name = "applicant_fk"))
-	@Column(name = "portalIdentifier", nullable = true)
-	@Enumerated(EnumType.STRING)
-	public List<PortalIdentifierEnum> getPortalIdList() {
+	@OneToMany(cascade={CascadeType.ALL}, fetch = FetchType.EAGER)
+	@Cascade({org.hibernate.annotations.CascadeType.DELETE_ORPHAN})
+	@JoinColumn(name="applicantPortalId_fk")
+	@IndexColumn(name="INDEX_COL")
+	public List<PortalIdentifier> getPortalIdList() {
 		return portalIdList;
 	}
 
 	/**
 	 * @param portalId the portalId to set
 	 */
-	public void setPortalIdList(List<PortalIdentifierEnum> portalIdList) {
+	public void setPortalIdList(List<PortalIdentifier> portalIdList) {
 		this.portalIdList = portalIdList;
 	}
 

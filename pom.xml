@@ -499,6 +499,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 	<properties>
 		<tapestry-release-version>5.1.0.5</tapestry-release-version>
 		<spring-release-version>2.0.8</spring-release-version>
+		<!-- <hibernate-release-version>4.0.0.Beta4</hibernate-release-version> -->
 		<hibernate-release-version>3.3.2.GA</hibernate-release-version>
 		<hibernate-search-release-version>3.1.1.GA</hibernate-search-release-version>
 		<hibernate-annotations-release-version>3.4.0.GA</hibernate-annotations-release-version>

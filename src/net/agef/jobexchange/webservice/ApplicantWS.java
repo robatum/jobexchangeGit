@@ -427,7 +427,7 @@ public class ApplicantWS {
 	 *  @param Erwartet den Such-String, das Land bzw. den Kontinent sowie die Angaben für die Paginierung - Anzahl der zurückzugebenen Ergebnisse und den Startwert der Ergebnisse sowie ein Byte Array mit Angaben zur Portal Id als als Parameter.
 	 * @return Gibt ein Array von Objekten der Klasse ApplicantDTO zurueck.
 	 */
-	public ApplicantDTO[] getApplicantsByExtendedCriteria(String criteria, CountryDTO country, TerritoryDTO territory, String[] availability, WorkUserTypeDTO[] workUserTypeDTO, String[] occupationalField, String managementExperience, Integer resultsAmount, Integer pageIndexStart, Byte portalId){
+	public ApplicantDTO[] getApplicantsByExtendedCriteria(String criteria, CountryDTO country, TerritoryDTO territory, String[] availability, WorkUserTypeDTO[] workUserTypeDTO, String[] occupationalField, String managementExperience, Integer resultsAmount, Integer pageIndexStart, Byte[] portalId){
 		logger.info("getApplicantsByExtendedCriteria(): Get applicantProfile By ExtendedCriteria: "+criteria);
 		Collection<Applicant> applicants;
 		List<ApplicantDTO> applicantsDTO = new ArrayList<ApplicantDTO>();
@@ -451,17 +451,18 @@ public class ApplicantWS {
 		}
 		
 		try {
-			applicants = aw.getApplicantByExtendedCriteria(criteria, ca.getDomainObj(country), ta.getDomainObj(territory), availability, workTypes, occupationalField, managementExperience, resultsAmount, pageIndexStart);
+			applicants = aw.getApplicantByExtendedCriteria(criteria, ca.getDomainObj(country), ta.getDomainObj(territory), availability, workTypes, occupationalField, managementExperience, resultsAmount, pageIndexStart, portalId);
 			
 			if(applicants!= null){
 				Iterator<Applicant> it = applicants.iterator();
 				while(it.hasNext()){
 					Applicant tempApplicant = it.next();
-					if(portalId!=null){
-					 if (tempApplicant.getPortalIdList()!=null && tempApplicant.getPortalIdList().contains(PortalIdentifierEnum.fromPortalId(portalId.intValue()))) {
-						 applicantsDTO.add(aa.createDTOWithPortalId(tempApplicant));
-					 }	 
-					} else applicantsDTO.add(aa.createDTOWithPortalId(tempApplicant));
+//					if(portalId!=null){
+//					 if (tempApplicant.getPortalIdList()!=null && tempApplicant.getPortalIdList().contains(PortalIdentifierEnum.fromPortalId(portalId.intValue()))) {
+//						 applicantsDTO.add(aa.createDTOWithPortalId(tempApplicant));
+//					 }	 
+//					} else 
+					applicantsDTO.add(aa.createDTOWithPortalId(tempApplicant));
 				}
 			}	
 		} catch (CountryNotFoundException e) {
@@ -496,7 +497,7 @@ public class ApplicantWS {
 	 * @return Gibt die Anzahl der gefundenen Bewerber-/Expertenprofileeinen als Integer Wert zurueck.
 	 */
 	
-	public Integer getApplicantsSearchResultsAmountByExtendedCriteria(String criteria, CountryDTO country, TerritoryDTO territory, String[] availability, WorkUserTypeDTO[] workUserTypeDTO, String[] occupationalField, String managementExperience, Byte portalId){
+	public Integer getApplicantsSearchResultsAmountByExtendedCriteria(String criteria, CountryDTO country, TerritoryDTO territory, String[] availability, WorkUserTypeDTO[] workUserTypeDTO, String[] occupationalField, String managementExperience, Byte[] portalId){
 		logger.info("Get applicantProfile Amount By Extended Criteria: "+criteria);
 		int resultSize;
 		
@@ -519,7 +520,7 @@ public class ApplicantWS {
 		}
 		
 		try {
-			resultSize = aw.getApplicantsSearchResultsAmountByExtendedCriteria(criteria, ca.getDomainObj(country), ta.getDomainObj(territory), availability, workTypes, occupationalField, managementExperience);
+			resultSize = aw.getApplicantsSearchResultsAmountByExtendedCriteria(criteria, ca.getDomainObj(country), ta.getDomainObj(territory), availability, workTypes, occupationalField, managementExperience, portalId);
 		} catch (CountryNotFoundException e) {
 			e.printStackTrace();
 			return null;
@@ -540,7 +541,7 @@ public class ApplicantWS {
 	 * @return Gibt die Anzahl der gefundenen Bewerber-/Expertenprofileeinen als Integer Wert zurueck.
 	 */
 	
-	public Integer getApplicantsSearchResultsAmountByCriteria(String criteria, CountryDTO country, TerritoryDTO territory, Byte portalId){
+	public Integer getApplicantsSearchResultsAmountByCriteria(String criteria, CountryDTO country, TerritoryDTO territory, Byte[] portalId){
 		logger.info("Get applicantProfile Amount By Criteria: "+criteria);
 		Collection<ApplicantsSearchResultDTO> applicants;
 		try {

@@ -49,9 +49,9 @@ public interface ApplicantWorker {
 //	void deleteApplicantDataByInwentUserId(Long inwentUserId) throws InwentUserNotFoundException, ApplicantProfileNotFoundException;
 
 	public Collection<Applicant> getApplicantByExtendedCriteria(String criteria, Country domainObj, Territory domainObj2, String[] availability, WorkUserType[] workTypes,
-			String[] occupationalField, String managementExperience, Integer resultsAmount, Integer pageIndexStart) throws EnumValueNotFoundException;
+			String[] occupationalField, String managementExperience, Integer resultsAmount, Integer pageIndexStart, Byte[] portalId) throws EnumValueNotFoundException;
 
 	public int getApplicantsSearchResultsAmountByExtendedCriteria(String criteria, Country domainObj, Territory domainObj2, String[] availability, WorkUserType[] workTypes,
-			String[] occupationalField, String managementExperience);
+			String[] occupationalField, String managementExperience, Byte[] portalId);
 	
 }

@@ -55,13 +55,14 @@ public class ApplicantAssemblerWorker implements ApplicantAssembler {
 	private FieldOfOccupationWorker fieldOfOccupationWorker;
 	private IndustrySectorAssembler industrySectorAssembler;
 	private WorkUserTypeAssembler workTypeAssembler;
+	private PortalIdAssembler portalIdAssembler;
 	private UserDAO userDAO;
 	private ApplicantDAO applicantDAO;
 	private Logger logger;
 
 	public ApplicantAssemblerWorker(Logger logger, FieldOfOccupationWorker fieldOfOccupation, UserDAO userDAO, ApplicantDAO applicantDAO, CountryAssembler countryAssembler, LanguageSkillAssembler languageAssembler,
 			ContactPersonAssembler contactPersonAssembler, EducationAssembler educationAssembler, WorkExperienceAssembler workExperienceAssembler, IndustrySectorAssembler industryAssembler,
-			WorkUserTypeAssembler workTypeAssembler) {
+			WorkUserTypeAssembler workTypeAssembler, PortalIdAssembler portalIdAssembler) {
 		this.logger = logger;
 		this.countryAssembler = countryAssembler;
 		this.languageSkillAssembler = languageAssembler;
@@ -70,6 +71,7 @@ public class ApplicantAssemblerWorker implements ApplicantAssembler {
 		this.fieldOfOccupationWorker = fieldOfOccupation;
 		this.industrySectorAssembler = industryAssembler;
 		this.workTypeAssembler = workTypeAssembler;
+		this.portalIdAssembler = portalIdAssembler;
 		// this.aw = applicantWorker;
 		this.applicantDAO = applicantDAO;
 		this.userDAO = userDAO;
@@ -93,8 +95,9 @@ public class ApplicantAssemblerWorker implements ApplicantAssembler {
 		ApplicantDTO dto = new ApplicantDTO();
 
 		if (applicant != null) {
-			dto.setPortalId((Byte[])applicant.getPortalIdList().toArray());
-			
+			if (applicant.getPortalIdList() != null) {
+				dto.setPortalId(portalIdAssembler.createDTO(applicant.getPortalIdList()));
+			}
 			dto.setAdditionalRemarks(applicant.getAdditionalRemarks());
 			dto.setAdditionalSkills(applicant.getAdditionalSkills());
 			dto.setApplicantProfileId(applicant.getApplicantProfileId());
@@ -284,12 +287,8 @@ public class ApplicantAssemblerWorker implements ApplicantAssembler {
 //			applicant.setAdditionalRemarks(dto.getAdditionalRemarks());
 //			applicant.setAdditionalSkills(dto.getAdditionalSkills());
 			applicant.setApplicantProfileId(dto.getApplicantProfileId());
-			if (dto.getPortalId()!=null){
-				List<PortalIdentifierEnum> portalIdentifierList = applicant.getPortalIdList();
-				for (int i = 0; i < dto.getPortalId().length; i++) {
-					portalIdentifierList.add(PortalIdentifierEnum.fromPortalId(dto.getPortalId()[i].intValue()));
-				}	
-				applicant.setPortalIdList(portalIdentifierList);
+			if (dto.getPortalId()!=null && dto.getPortalId().length > 0){
+				applicant.setPortalIdList(portalIdAssembler.createDomainObj(dto.getPortalId()));
 			}
 
 			if (dto.getComputerSkills() != null) {
@@ -508,18 +507,7 @@ public class ApplicantAssemblerWorker implements ApplicantAssembler {
 
 		if (dto != null) {
 			if (dto.getPortalId()!=null){
-				List<PortalIdentifierEnum> portalIdentifierList = applicant.getPortalIdList();
-				
-				while(portalIdentifierList.size() > dto.getPortalId().length){
-					portalIdentifierList.remove(portalIdentifierList.size() - 1);
-				}
-				
-				for (int i = 0; i < dto.getPortalId().length; i++) {
-					if (i < portalIdentifierList.size()) {
-						portalIdentifierList.set(i, PortalIdentifierEnum.fromPortalId(dto.getPortalId()[i].intValue()));
-					} else portalIdentifierList.add(i, PortalIdentifierEnum.fromPortalId(dto.getPortalId()[i].intValue()));
-				}	
-				applicant.setPortalIdList(portalIdentifierList);
+				applicant.setPortalIdList(portalIdAssembler.updateDomainObj(dto.getPortalId(), applicant.getPortalIdList()));
 			}
 			
 			applicant.setAdditionalRemarks(dto.getAdditionalRemarks());

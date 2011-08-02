@@ -100,6 +100,8 @@ import net.agef.jobexchange.webservice.adapter.LanguageSkillAssembler;
 import net.agef.jobexchange.webservice.adapter.LanguageSkillAssemblerWorker;
 import net.agef.jobexchange.webservice.adapter.OccupationalFieldAssembler;
 import net.agef.jobexchange.webservice.adapter.OccupationalFieldAssemblerWorker;
+import net.agef.jobexchange.webservice.adapter.PortalIdAssembler;
+import net.agef.jobexchange.webservice.adapter.PortalIdAssemblerWorker;
 import net.agef.jobexchange.webservice.adapter.TerritoryAssembler;
 import net.agef.jobexchange.webservice.adapter.TerritoryAssemblerWorker;
 import net.agef.jobexchange.webservice.adapter.UserAssembler;
@@ -183,7 +185,7 @@ public class AppModule
     	binder.bind(OccupationalFieldAssembler.class, OccupationalFieldAssemblerWorker.class);
     	binder.bind(CurrencyAssembler.class, CurrencyAssemblerWorker.class);
     	binder.bind(JobSearchResultAssembler.class, JobSearchResultAssemblerWorker.class);
-    	
+    	binder.bind(PortalIdAssembler.class, PortalIdAssemblerWorker.class);
     	binder.bind(WorkUserTypeAssembler.class, WorkUserTypeAssemblerWorker.class);
     	
     	binder.bind(ApplicantDAO.class, ApplicantDAOHibernate.class);
