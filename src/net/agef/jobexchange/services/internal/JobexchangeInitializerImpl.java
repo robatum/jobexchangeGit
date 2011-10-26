@@ -49,10 +49,10 @@ public class JobexchangeInitializerImpl implements ApplicationInitializerFilter 
 	private String[] dataProviderGETJOBSIP = { "127.0.0.1" };
 
 	private boolean runFirst = false;
-	private boolean readSearchData = false;
+	private boolean readSearchData = true;
 	private boolean insertTestData = false;
 	private boolean contextStart = true;
-	private boolean addDataProviderIP = true;
+	private boolean addDataProviderIP = false;
 
 	private boolean runInitialization = runFirst || readSearchData || insertTestData || contextStart || addDataProviderIP;
 

@@ -153,7 +153,7 @@ public class AddJobOfferPage
 	
 	//@Persist("Flash")
 	@InjectSelectionModel(labelField = "shortEnglishName", idField = "id")
-    private List<Country> countryDummyList;
+    private List<Country> countryDummyList = new ArrayList<Country>();
 	
 	@InjectSelectionModel(labelField = "organisationName", idField = "owner.id")
     private List<OrganisationRoleData> orgUserDataList = new ArrayList<OrganisationRoleData>();
@@ -176,10 +176,9 @@ public class AddJobOfferPage
     private Territory territoryItem;
 	
 	@Property
-    //@Persist
 	private Country countryDummyItem;
 	
-	//@Property
+	@Property
 	@Persist
     private Country countryItem;
 	
@@ -234,7 +233,7 @@ public class AddJobOfferPage
     	this.salaryCurrencyList = currencyDAO.findAll();
     	//this.loginUser = null;
     	this.countryList = new ArrayList<Country>();
-    	this.countryDummyList = new ArrayList<Country>();
+    	//this.countryDummyList = new ArrayList<Country>();
     }
 
     
@@ -314,11 +313,13 @@ public class AddJobOfferPage
 			if(this.countryItem==null){
 				this.countryItem=this.loginUser.getLoginUserAddress().getCountry();
 			}
-			logger.info("CountryItem: "+countryItem.getShortEnglishName());
-    		this.territoryItem = this.countryItem.getParentTerritory();
-    		this.countryList = lw.getRelatedCountries(this.territoryItem);
-    		this.countryDummyList = this.countryList;
-    		this.countryDummyItem = this.countryItem;
+			if(this.countryItem!=null){
+				logger.info("CountryItem: "+countryItem.getShortEnglishName());
+				this.territoryItem = this.countryItem.getParentTerritory();
+				this.countryList = lw.getRelatedCountries(this.territoryItem);
+				this.countryDummyList = this.countryList;
+				this.countryDummyItem = this.countryItem;
+			}	
     	} else logger.info("CountryItem ist null");
     	
 	}

@@ -19,6 +19,7 @@ import javax.persistence.Transient;
 //import org.acegisecurity.GrantedAuthority;
 //import org.acegisecurity.userdetails.UserDetails;
 import org.apache.tapestry5.beaneditor.DataType;
+import org.apache.tapestry5.beaneditor.NonVisual;
 import org.apache.tapestry5.beaneditor.Validate;
 import org.hibernate.annotations.NaturalId;
 import org.springframework.security.GrantedAuthority;
@@ -230,14 +231,17 @@ public class LoginUser extends AbstractEntity implements UserDetails {
         getGrantedAuthorities().add(role);
     }
 
+    @NonVisual
     public void setAccountNonExpired(boolean accountNonExpired) {
         this.accountNonExpired = accountNonExpired;
     }
-
+    
+    @NonVisual
     public void setAccountNonLocked(boolean accountNonLocked) {
         this.accountNonLocked = accountNonLocked;
     }
 
+    @NonVisual
     public void setCredentialsNonExpired(boolean credentialsNonExpired) {
         this.credentialsNonExpired = credentialsNonExpired;
     }

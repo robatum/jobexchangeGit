@@ -6,10 +6,7 @@
 	<session-factory>
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/usr_web1_1?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8</property>
-		<!--
-			<property
-			name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-		-->
+
 		<property name="hibernate.dialect">net.agef.jobexchange.services.internal.MysqlDialectUtf8</property>
 		<property name="hibernate.connection.username">root</property>
 		<property name="hibernate.connection.password"></property>
@@ -30,8 +27,7 @@
 		<property name="hibernate.search.default.optimizer.operation_limit.max">
 			1000
 			    </property>
-			    
-				
+
 <!--        pool via c3p0 which knows how to reconnect to server and does it nicely -->
 <!--            <property name="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>-->
 <!--            <property name="hibernate.c3p0.acquire_increment">5</property>-->
@@ -45,12 +41,10 @@
 <!--			</property>-->
 <!--			<property name="hibernate.c3p0.acquireRetryAttempts">30</property>-->
 <!--			<property name="hibernate.c3p0.initialPoolSize">20</property>-->
-
-
-
-
-
-
+<!--			<property name="hibernate.c3p0.maxIdleTime">300</property>-->
+<!--			<property name="hibernate.c3p0.minPoolSize">10</property>-->
+<!--			<property name="hibernate.c3p0.maxPoolSize">100</property>-->
+<!--			<property name="hibernate.c3p0.idleConnectionTestPeriod">300</property>-->
 
 
 <!--        <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>-->
@@ -61,7 +55,7 @@
         <property name="c3p0.timeout">60</property>
         <property name="c3p0.max_size">100</property>
         <property name="c3p0.idleConnectionTestPeriod">100</property>       
-        <property name="c3p0.max_statements">0</property>
+         <property name="c3p0.max_statements">0</property>
         <property name="c3p0.propertyCycle">2</property>
         <property name="c3p0.autoCommitOnClose ">false</property>
         <property name="c3p0.numHelperThreads">3</property>
@@ -71,25 +65,11 @@
         <property name="c3p0.maxConnectionAge">120</property>
         <property name="c3p0.automaticTestTable">connection_test_table</property>
         <property name="c3p0.testConnectionOnCheckout">true</property>
-<!--        <property name="c3p0.preferredTestQuery">select 1;</property>-->
-<!--        <property name="connection.autocommit">true</property>-->
         <property name="connection.shutdown">false</property>
         <property name="connection.autoReconnectForPools">true</property>
         <property name="connection.autoReconnect">true</property>   
 
 
-
-
-
-
-		
-<!--			<property name="hibernate.c3p0.maxIdleTime">300</property>-->
-<!--			<property name="hibernate.c3p0.minPoolSize">10</property>-->
-<!--			<property name="hibernate.c3p0.maxPoolSize">100</property>-->
-<!--			<property name="hibernate.c3p0.idleConnectionTestPeriod">300</property>-->
-			<!--  import DTO entities -->
-<!--			<mapping resource="DTOentities.hbm.xml"/>-->
-			
  		</session-factory>
  		
  		

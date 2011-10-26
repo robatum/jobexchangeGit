@@ -238,7 +238,7 @@ public class ApplicantWorkerHandler implements ApplicantWorker {
 		if (applicant != null && onlineStatus != null && applicant.getOnlineStatus() != onlineStatus) {
 			applicant.setOnlineStatus(onlineStatus);
 			try {
-				System.out.println(applicant.getWorkUserTypes().size());
+				//System.out.println(applicant.getWorkUserTypes().size());
 				applicantDAO.doSave(applicant);
 			} catch (Exception e) {
 				e.printStackTrace();

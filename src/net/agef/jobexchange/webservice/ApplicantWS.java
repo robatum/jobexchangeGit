@@ -149,7 +149,7 @@ public class ApplicantWS {
 	 * @return Gibt ein Objekt vom Typ Boolean zurueck. Im Erfolgsfall traegt dieses den Wert 'true' oder 'false' im Fehlerfall 'null'.
 	 */
 	public Boolean getApplicantProfileOnlineState(Long portalUserId){
-		System.out.println("Get applicantProfile onlineState by portalUserId: "+portalUserId );
+		logger.info("Get applicantProfile onlineState by portalUserId: "+portalUserId );
 		Applicant applicant;
 		
 		try {

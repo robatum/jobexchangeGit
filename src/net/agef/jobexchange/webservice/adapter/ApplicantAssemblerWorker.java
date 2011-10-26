@@ -149,7 +149,7 @@ public class ApplicantAssemblerWorker implements ApplicantAssembler {
 
 			if (applicant.getWorkUserTypes() != null) {
 				WorkUserTypeDTO[] workTypeArray = new WorkUserTypeDTO[applicant.getWorkUserTypes().size()];
-				logger.info("# Anzahl WorkUserTypes: " + applicant.getWorkUserTypes().size());
+				//logger.info("# Anzahl WorkUserTypes: " + applicant.getWorkUserTypes().size());
 				int counter = 0;
 				for(WorkUserType workUserType : applicant.getWorkUserTypes()){	
 					workTypeArray[counter] = workTypeAssembler.createDTO(workUserType);

@@ -18,7 +18,7 @@ public class PortalIdAssemblerWorker implements PortalIdAssembler {
 		Integer counter = 0;
 		Byte[] portalIdValueList = new Byte[portalIdList.size()];
 		while(it.hasNext()){
-			System.out.println("Applicant: portalIdListe.toArray : konvertiere PortalID in Array");
+			//System.out.println("Applicant: portalIdListe.toArray : konvertiere PortalID in Array");
 			portalIdValueList[counter] = it.next().getPortalIdAsByte();
 			counter++;
 		}

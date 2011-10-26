@@ -178,6 +178,7 @@ public class User extends AbstractEntity{
 	/**
 	 * @return the portalId
 	 */
+	@Enumerated(EnumType.STRING)
 	public PortalIdentifierEnum getPortalId() {
 		return portalId;
 	}
