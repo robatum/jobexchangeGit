@@ -15,6 +15,7 @@ import net.agef.jobexchange.application.LoginUserWorker;
 import net.agef.jobexchange.application.UserWorker;
 import net.agef.jobexchange.domain.Address;
 import net.agef.jobexchange.domain.Country;
+import net.agef.jobexchange.domain.JobImpl;
 import net.agef.jobexchange.domain.LoginUser;
 import net.agef.jobexchange.domain.LoginUserRole;
 import net.agef.jobexchange.domain.Territory;
@@ -125,7 +126,9 @@ public class AddLoginUserPage {
 	@Persist
     private LoginUserRole loginUserRoleItem;
 	
-	private Boolean isModified = false;
+	@Property
+	@Persist("Flash")
+	private Boolean modified;
 	
 	@SuppressWarnings("unchecked")
 	private final BeanModel loginUserModel;
@@ -150,7 +153,7 @@ public class AddLoginUserPage {
     
     
     Object onActivate(LoginUser user){
-    	this.isModified = true;
+    	this.modified = true;
     	logger.info("OnActivate - modify");
     	if(luw.isLoggedInUser()){
     		try {
@@ -163,6 +166,9 @@ public class AddLoginUserPage {
 		if(this.loginUser == null){
 			return ManageLoginUserPage.class;
 		}
+		
+		if(loginUser.getGrantedAuthorities()!= null && loginUser.getGrantedAuthorities().size()>0)
+			this.loginUserRoleItem = loginUser.getGrantedAuthorities().toArray(new LoginUserRole[0])[0];
 		
 		this.loginUserAddress = loginUser.getLoginUserAddress();
 		if(this.countryItem==null){
@@ -191,11 +197,13 @@ public class AddLoginUserPage {
     
     public void onValidateForm() {
         LoginUser anotherUser = null;
-		try {
-			anotherUser = luw.getUserByName(this.loginUser.getUsername());
-		} catch (LoginUserNotFoundException e) {}
-        if (anotherUser != null ) {
-            form.recordError("User with the name '" + this.loginUser.getUsername() + "' already exists");
+        if(modified==null || !modified){
+        	try {
+        		anotherUser = luw.getUserByName(this.loginUser.getUsername());
+        	} catch (LoginUserNotFoundException e) {}
+        	if (anotherUser != null ) {
+        		form.recordError("User with the name '" + this.loginUser.getUsername() + "' already exists");
+        	}	
         }
     }
 	
@@ -226,12 +234,12 @@ public class AddLoginUserPage {
     
     
     public LoginUser onPassivate(){
-		if(isModified){
+		if(modified!=null && modified){
          return loginUser;
 		} else return null;
 		
 	}
-    
+   
     void cleanupRender() {
 		form.clearErrors();
 		// Clear the flash-persisted fields to prevent anomalies in onActivate when we hit refresh on page or browser button

@@ -63,5 +63,8 @@ of where to look for pages, components and mixins. -->
 <!--    	<servlet-name>AxisAdminServlet</servlet-name>-->
 <!--    	<url-pattern>/axis2-admin/*</url-pattern>-->
 <!--    </servlet-mapping>-->
+	<session-config>
+  		<session-timeout>180</session-timeout>
+  	</session-config>
 </web-app>
       

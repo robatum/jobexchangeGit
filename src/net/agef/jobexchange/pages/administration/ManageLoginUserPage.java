@@ -61,15 +61,16 @@ public class ManageLoginUserPage {
     private Messages messages;
 	
 	@Persist("Flash")
+	@Property
 	private LoginUser loginUser;
 	
 	@Component
 	@Property
     private Grid loginUserGrid;
 	
-	@Persist("Flash")
-	@Property
-	private OrganisationRoleData loginUserData;
+//	@Persist("Flash")
+//	@Property
+//	private OrganisationRoleData loginUserData;
 	
 	@SuppressWarnings("unchecked")
 	private final BeanModel loginUserGridModel;
@@ -108,7 +109,7 @@ public class ManageLoginUserPage {
     {
         
 			try {
-				uw.deleteUser(loginUserId);
+				luw.deleteLoginUser(loginUserId);
 			} catch (ObjectNotDeletedException e) {
 				e.printStackTrace();
 			} catch (PassedAttributeIsNullException e) {
@@ -127,10 +128,11 @@ public class ManageLoginUserPage {
     /**
 	 * @return the _model
 	 */
-//	@SuppressWarnings("unchecked")
-//	public BeanModel getOrganisationUserGridModel() {
-//		return organisationUserGridModel;
-//	}
+
+	@SuppressWarnings("rawtypes")
+	public BeanModel getLoginUserGridModel() {
+		return loginUserGridModel;
+	}
 //	
 //	public int getOrganisationUserJobOffers(){
 //		return organisationUserData.getOwner().getMyJobOffers().size();

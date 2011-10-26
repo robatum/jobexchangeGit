@@ -2,10 +2,10 @@
      	   <tr>
     		<td colspan="2">
       	   <fieldset><legend><strong>User Accounts</strong></legend>
-			<t:grid t:source="loginUserDataList" rowsPerPage="10" inPlace="false" row="loginUserData" t:id="loginUserGrid" t:model="loginUserGridModel">
+			<t:grid t:source="loginUserDataList" rowsPerPage="10" inPlace="false" row="loginUser" t:id="loginUserGrid" t:model="loginUserGridModel">
 				
 				<t:parameter name="modifyCell">
-	    			<t:pagelink t:page="administration/addLOGINUSERpage" context="loginUser.id">
+	    			<t:pagelink t:page="administration/addloginuserpage" context="loginUser.id">
 	    				modify
 	    			</t:pagelink>
 	    		</t:parameter>
