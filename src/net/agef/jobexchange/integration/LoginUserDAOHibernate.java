@@ -30,5 +30,10 @@ public class LoginUserDAOHibernate extends AbstractHibernateDAO<LoginUser, Long>
 		} else return null;
 	}
 	
+	@Override
+	public void doDelete(LoginUser loginUser) {	
+			super.doDelete(loginUser);
+	}
+	
 
 }
