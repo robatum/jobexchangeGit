@@ -85,7 +85,7 @@ public class ManageOrganisationsPage {
     }
     
     
-    public GridDataSource getOrganisationUserDataList() {
+    public Object getOrganisationUserDataList() {
     	if(luw.isLoggedInUser()){
     		try {
 				this.loginUser = luw.getLoggedInUser();
@@ -107,7 +107,7 @@ public class ManageOrganisationsPage {
 			logger.error("ManageOrgForm -- Login User Name could not be found in DB.");
 			luw.logoutUser();
 		}
-		return (GridDataSource)userList;
+		return userList;
 	}
     
     

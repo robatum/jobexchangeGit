@@ -961,5 +961,15 @@ public class JobImpl extends AbstractEntity {
 			return false;
 		return true;
 	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+
+	@Override
+	public int compareTo(Object obj) {
+		JobImpl other = (JobImpl) obj;
+		return (this.id < other.getId() ) ? -1: (this.id >other.getId()) ? 1:0;
+	}
 
 }
