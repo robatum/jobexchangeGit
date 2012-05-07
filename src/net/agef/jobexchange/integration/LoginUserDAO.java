@@ -21,4 +21,7 @@ public interface LoginUserDAO extends GenericDAO<LoginUser, Long>{
 	@CommitAfter
 	public LoginUser doSave(LoginUser loginUser);
 	
+	@CommitAfter
+	public void doDelete(LoginUser loginUser);
+	
 }

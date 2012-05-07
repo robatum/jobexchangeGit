@@ -1,12 +1,12 @@
 <t:LayoutSecured t:title="Add Login User" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
         <tr>
     		<td colspan="2">
-		<fieldset><legend><strong>${message:addOrganisation}</strong></legend>
+		<fieldset><legend><strong>${message:addLoginUser}</strong></legend>
 		<t:form t:id="beanForm">
 			<t:errors />
 		 	<div class="t-beaneditor">
 		 		<div class="t-beaneditor-row">
-		 			<p><h4>${message:organisationInformation}</h4></p>
+		 			<p><h4>${message:loginUserInformation}</h4></p>
     				<t:label for="loginUserRoleSelect"/>
     				<t:select t:id="loginUserRoleSelect" value="loginUserRoleItem" model="loginUserRoleListSelectionModel" encoder="loginuserRoleListValueEncoder" t:blankoption="always" validate="required"/>
 
@@ -31,7 +31,12 @@
 					</t:beaneditor>
 				</div>
 		        <div class="t-beaneditor-row">
-		 			<t:submit t:id="submit" value="${message:addOrganisation}"/>
+		 			<t:if test="modified">
+	    					<t:submit t:id="submit_m" value="${message:modifyLoginUser}"/>
+	    					<t:parameter name="else">
+	    						<t:submit t:id="submit_a" value="${message:addLoginUser}"/>
+	    					</t:parameter>
+	    			</t:if>
 				</div>
 			</div>
 		</t:form>

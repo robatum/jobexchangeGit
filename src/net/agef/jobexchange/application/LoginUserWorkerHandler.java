@@ -44,7 +44,7 @@ public class LoginUserWorkerHandler implements LoginUserWorker{
 	}
 	
 	
-	public void deleteJobOffer(Long loginUserId) throws ObjectNotDeletedException, PassedAttributeIsNullException{
+	public void deleteLoginUser(Long loginUserId) throws ObjectNotDeletedException, PassedAttributeIsNullException{
 		if (loginUserId != null) {
 			try {
 				loginUserDAO.doDelete(loginUserId);

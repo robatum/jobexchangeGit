@@ -15,10 +15,11 @@ import java.util.Calendar;
  */
 public class UserDTO {
 	
+	@Deprecated
 	private Long apdUserId;
 	private Long cobraUserId;
-	private Long inwentUserId;
-	private Long elggUserId;
+	private Long portalUserId;
+	private Byte portalId;
 	private String dataProvider;
 	
 	private String addresses;
@@ -45,12 +46,14 @@ public class UserDTO {
 	/**
 	 * @return the userId
 	 */
+	@Deprecated
 	public Long getApdUserId() {
 		return apdUserId;
 	}
 	/**
 	 * @param userId the userId to set
 	 */
+	@Deprecated
 	public void setApdUserId(Long userId) {
 		this.apdUserId = userId;
 	}
@@ -66,17 +69,17 @@ public class UserDTO {
 	public void setCobraUserId(Long cobraUserId) {
 		this.cobraUserId = cobraUserId;
 	}
-	public void setInwentUserId(Long inwentUserId) {
-		this.inwentUserId = inwentUserId;
+	public void setPortalUserId(Long portalUserId) {
+		this.portalUserId = portalUserId;
 	}
-	public Long getInwentUserId() {
-		return inwentUserId;
+	public Long getPortalUserId() {
+		return portalUserId;
 	}
-	public void setElggUserId(Long elggUserId) {
-		this.elggUserId = elggUserId;
+	public void setPortalId(Byte portalId) {
+		this.portalId = portalId;
 	}
-	public Long getElggUserId() {
-		return elggUserId;
+	public Byte getPortalId() {
+		return portalId;
 	}
 	/**
 	 * @return the dataProvider

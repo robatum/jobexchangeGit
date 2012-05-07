@@ -25,6 +25,7 @@ import net.agef.jobexchange.domain.Currency;
 import net.agef.jobexchange.domain.DataProvider;
 import net.agef.jobexchange.domain.JobImpl;
 import net.agef.jobexchange.domain.LoginUser;
+import net.agef.jobexchange.domain.LoginUserRole;
 import net.agef.jobexchange.domain.OccupationalField;
 import net.agef.jobexchange.domain.OrganisationRole;
 import net.agef.jobexchange.domain.OrganisationRoleData;
@@ -55,6 +56,7 @@ import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.beaneditor.BeanModel;
 import org.apache.tapestry5.corelib.components.BeanEditor;
 import org.apache.tapestry5.corelib.components.Form;
+import org.apache.tapestry5.hibernate.HibernateGridDataSource;
 import org.apache.tapestry5.hibernate.annotations.CommitAfter;
 import org.apache.tapestry5.internal.SelectModelImpl;
 import org.apache.tapestry5.ioc.Messages;
@@ -62,6 +64,12 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.json.JSONArray;
 import org.apache.tapestry5.json.JSONObject;
 import org.apache.tapestry5.services.BeanModelSource;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.ProjectionList;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 
 /**
@@ -72,6 +80,9 @@ public class AddJobOfferPage
 {
 	@Inject
 	private Logger logger;
+	
+	@Inject 
+	private Session session;
 	
 	@Inject
 	private JobWorker jw;
@@ -142,7 +153,7 @@ public class AddJobOfferPage
 	
 	//@Persist("Flash")
 	@InjectSelectionModel(labelField = "shortEnglishName", idField = "id")
-    private List<Country> countryDummyList;
+    private List<Country> countryDummyList = new ArrayList<Country>();
 	
 	@InjectSelectionModel(labelField = "organisationName", idField = "owner.id")
     private List<OrganisationRoleData> orgUserDataList = new ArrayList<OrganisationRoleData>();
@@ -165,10 +176,9 @@ public class AddJobOfferPage
     private Territory territoryItem;
 	
 	@Property
-    //@Persist
 	private Country countryDummyItem;
 	
-	//@Property
+	@Property
 	@Persist
     private Country countryItem;
 	
@@ -223,7 +233,7 @@ public class AddJobOfferPage
     	this.salaryCurrencyList = currencyDAO.findAll();
     	//this.loginUser = null;
     	this.countryList = new ArrayList<Country>();
-    	this.countryDummyList = new ArrayList<Country>();
+    	//this.countryDummyList = new ArrayList<Country>();
     }
 
     
@@ -238,7 +248,17 @@ public class AddJobOfferPage
 				luw.logoutUser();
 			}
     	} else luw.logoutUser();
-    	try {
+    	LoginUserRole lur = new LoginUserRole();
+    	lur.setAuthority("ROLE_ADMIN");
+    	if (loginUser.getGrantedAuthorities().contains(lur)){
+    		Criteria criteria = session.createCriteria(OrganisationRoleData.class);
+    		criteria.addOrder(Order.asc("organisationName"));
+//    		ProjectionList proList = Projections.projectionList();
+//            proList.add(Projections.property("organisationName"));
+//            proList.add(Projections.property("owner"),"id");
+//            criteria.setProjection(proList);
+    		this.orgUserDataList = criteria.list();
+    	} else try {
 			this.orgUserDataList = uw.getOrganisationUserDataByLoginUser(this.loginUser);
 		} catch (PassedAttributeIsNullException e) {
 			e.printStackTrace();
@@ -293,11 +313,13 @@ public class AddJobOfferPage
 			if(this.countryItem==null){
 				this.countryItem=this.loginUser.getLoginUserAddress().getCountry();
 			}
-			logger.info("CountryItem: "+countryItem.getShortEnglishName());
-    		this.territoryItem = this.countryItem.getParentTerritory();
-    		this.countryList = lw.getRelatedCountries(this.territoryItem);
-    		this.countryDummyList = this.countryList;
-    		this.countryDummyItem = this.countryItem;
+			if(this.countryItem!=null){
+				logger.info("CountryItem: "+countryItem.getShortEnglishName());
+				this.territoryItem = this.countryItem.getParentTerritory();
+				this.countryList = lw.getRelatedCountries(this.territoryItem);
+				this.countryDummyList = this.countryList;
+				this.countryDummyItem = this.countryItem;
+			}	
     	} else logger.info("CountryItem ist null");
     	
 	}

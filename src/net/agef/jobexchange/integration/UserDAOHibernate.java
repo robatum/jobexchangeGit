@@ -44,8 +44,8 @@ public class UserDAOHibernate extends AbstractHibernateDAO<User, Long> implement
 		return null;
 	}
 	
-	public User findAPDUserByID(Long apdUserID) {
-		List<User> user = this.findByQuery("From User u WHERE  u.apdUserId = :apdId", new QueryParameter("apdId", apdUserID));
+	public User findPortalUserByID(Long portalUserID) {
+		List<User> user = this.findByQuery("From User u WHERE  u.portalUserId = :portalId", new QueryParameter("portalId", portalUserID));
 		if (!user.isEmpty()) {
 			return user.remove(0);
 		} else return null;
@@ -60,14 +60,14 @@ public class UserDAOHibernate extends AbstractHibernateDAO<User, Long> implement
 		}
 	}
 
-	@Override
-	public User findInwentUserByID(Long applicantProfileOwnerId) {
-		try {
-			return (User) session.createCriteria(User.class).add(Restrictions.eq("inwentUserId", applicantProfileOwnerId)).uniqueResult();
-		}
-		catch (Exception e){
-			return null;
-		}
-	}
+//	@Override
+//	public User findInwentUserByID(Long applicantProfileOwnerId) {
+//		try {
+//			return (User) session.createCriteria(User.class).add(Restrictions.eq("inwentUserId", applicantProfileOwnerId)).uniqueResult();
+//		}
+//		catch (Exception e){
+//			return null;
+//		}
+//	}
 
 }

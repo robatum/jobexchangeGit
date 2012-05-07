@@ -2,13 +2,16 @@
         <tr>
     		<td colspan="2">
         <fieldset><legend><strong>Your Job Offers</strong></legend>
-			<t:grid t:source="jobOfferList" rowsPerPage="10" inPlace="false" row="jobOfferData" t:id="jobOfferGrid" t:model="jobOfferGridModel">
+			<t:grid t:source="jobOfferList" rowsPerPage="rowsPerPage" inPlace="false" row="jobOfferData" t:id="jobOfferGrid" t:model="jobOfferGridModel">
 				<t:parameter name="IdCell">
 	    			${jobOfferData.jobofferid}
 	    		</t:parameter>
+	    		<t:parameter name="organisationNameCell">
+	    			${organisationName}
+	    		</t:parameter>
 				<t:parameter name="onlineStateCell">
 	    			<t:actionlink t:id="onlineState" context="jobOfferData.jobOfferId">
-	    				<t:if test="jobOfferData.onlineStatus">
+	    				<t:if test="onlineState">
 	    					online
 	    					<t:parameter name="else">
 	    						offline

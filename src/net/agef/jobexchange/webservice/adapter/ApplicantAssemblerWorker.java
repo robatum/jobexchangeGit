@@ -19,6 +19,7 @@ import net.agef.jobexchange.domain.Education;
 import net.agef.jobexchange.domain.ExperienceDurationEnum;
 import net.agef.jobexchange.domain.LanguageSkill;
 import net.agef.jobexchange.domain.LanguageSkillsEnum;
+import net.agef.jobexchange.domain.PortalIdentifierEnum;
 import net.agef.jobexchange.domain.PublicationTypeEnum;
 import net.agef.jobexchange.domain.TeamSizeEnum;
 import net.agef.jobexchange.domain.User;
@@ -54,13 +55,14 @@ public class ApplicantAssemblerWorker implements ApplicantAssembler {
 	private FieldOfOccupationWorker fieldOfOccupationWorker;
 	private IndustrySectorAssembler industrySectorAssembler;
 	private WorkUserTypeAssembler workTypeAssembler;
+	private PortalIdAssembler portalIdAssembler;
 	private UserDAO userDAO;
 	private ApplicantDAO applicantDAO;
 	private Logger logger;
 
 	public ApplicantAssemblerWorker(Logger logger, FieldOfOccupationWorker fieldOfOccupation, UserDAO userDAO, ApplicantDAO applicantDAO, CountryAssembler countryAssembler, LanguageSkillAssembler languageAssembler,
 			ContactPersonAssembler contactPersonAssembler, EducationAssembler educationAssembler, WorkExperienceAssembler workExperienceAssembler, IndustrySectorAssembler industryAssembler,
-			WorkUserTypeAssembler workTypeAssembler) {
+			WorkUserTypeAssembler workTypeAssembler, PortalIdAssembler portalIdAssembler) {
 		this.logger = logger;
 		this.countryAssembler = countryAssembler;
 		this.languageSkillAssembler = languageAssembler;
@@ -69,14 +71,15 @@ public class ApplicantAssemblerWorker implements ApplicantAssembler {
 		this.fieldOfOccupationWorker = fieldOfOccupation;
 		this.industrySectorAssembler = industryAssembler;
 		this.workTypeAssembler = workTypeAssembler;
+		this.portalIdAssembler = portalIdAssembler;
 		// this.aw = applicantWorker;
 		this.applicantDAO = applicantDAO;
 		this.userDAO = userDAO;
 	}
 
 	@Override
-	public ApplicantDTO createDTOWithAPDId(Applicant applicant) {
-		return createDTO(applicant, applicant.getApplicantProfileOwner().getApdUserId());
+	public ApplicantDTO createDTOWithPortalId(Applicant applicant) {
+		return createDTO(applicant, applicant.getApplicantProfileOwner().getPortalUserId());
 	}
 
 	@Override
@@ -88,14 +91,17 @@ public class ApplicantAssemblerWorker implements ApplicantAssembler {
 	 * Hilfsfunktion, die Codeduplizierung vermeidet und OwnerId anhand der in
 	 * der Signatur uebergebenen ID setzt.
 	 */
-	private ApplicantDTO createDTO(Applicant applicant, Long id) {
+	private ApplicantDTO createDTO(Applicant applicant, Long portalUserId) {
 		ApplicantDTO dto = new ApplicantDTO();
 
 		if (applicant != null) {
+			if (applicant.getPortalIdList() != null) {
+				dto.setPortalId(portalIdAssembler.createDTO(applicant.getPortalIdList()));
+			}
 			dto.setAdditionalRemarks(applicant.getAdditionalRemarks());
 			dto.setAdditionalSkills(applicant.getAdditionalSkills());
 			dto.setApplicantProfileId(applicant.getApplicantProfileId());
-			dto.setApplicantProfileOwnerId(id);
+			dto.setApplicantProfileOwnerId(portalUserId);
 			if (applicant.getComputerSkills() != null) {
 				dto.setComputerSkills(applicant.getComputerSkills().toString());
 			}
@@ -143,7 +149,7 @@ public class ApplicantAssemblerWorker implements ApplicantAssembler {
 
 			if (applicant.getWorkUserTypes() != null) {
 				WorkUserTypeDTO[] workTypeArray = new WorkUserTypeDTO[applicant.getWorkUserTypes().size()];
-				logger.info("# Anzahl WorkUserTypes: " + applicant.getWorkUserTypes().size());
+				//logger.info("# Anzahl WorkUserTypes: " + applicant.getWorkUserTypes().size());
 				int counter = 0;
 				for(WorkUserType workUserType : applicant.getWorkUserTypes()){	
 					workTypeArray[counter] = workTypeAssembler.createDTO(workUserType);
@@ -224,7 +230,7 @@ public class ApplicantAssemblerWorker implements ApplicantAssembler {
 	public Applicant createDomainObj(ApplicantDTO dto) throws APDUserNotFoundException, IndustrySectorNotFoundException, EnumValueNotFoundException, CountryNotFoundException {
 		User user;
 		try {
-			user = userDAO.findAPDUserByID(dto.getApplicantProfileOwnerId());
+			user = userDAO.findPortalUserByID(dto.getApplicantProfileOwnerId());
 		} catch (Exception e) {
 			throw new APDUserNotFoundException();
 		}
@@ -255,22 +261,22 @@ public class ApplicantAssemblerWorker implements ApplicantAssembler {
 	}
 	
 
-	@Override
-	public Applicant createDomainObjByInwentId(ApplicantDTO dto) throws InwentUserNotFoundException, IndustrySectorNotFoundException, EnumValueNotFoundException, CountryNotFoundException {
-		User user;
-		try {
-			user = userDAO.findInwentUserByID(dto.getApplicantProfileOwnerId());
-		} catch (Exception e) {
-			throw new InwentUserNotFoundException();
-		}
-		Applicant applicant;
-		if(user != null){
-			applicant = new Applicant(user);
-		} else throw new InwentUserNotFoundException();
-		
-		
-		return createDomainObjectFromApplicant(dto, applicant);
-	}
+//	@Override
+//	public Applicant createDomainObjByInwentId(ApplicantDTO dto) throws InwentUserNotFoundException, IndustrySectorNotFoundException, EnumValueNotFoundException, CountryNotFoundException {
+//		User user;
+//		try {
+//			user = userDAO.findInwentUserByID(dto.getApplicantProfileOwnerId());
+//		} catch (Exception e) {
+//			throw new InwentUserNotFoundException();
+//		}
+//		Applicant applicant;
+//		if(user != null){
+//			applicant = new Applicant(user);
+//		} else throw new InwentUserNotFoundException();
+//		
+//		
+//		return createDomainObjectFromApplicant(dto, applicant);
+//	}
 
 	/*
 	 * Hilfsmethode die duplizierten Code vermeidet und Domain Objekt erstellt
@@ -281,6 +287,9 @@ public class ApplicantAssemblerWorker implements ApplicantAssembler {
 //			applicant.setAdditionalRemarks(dto.getAdditionalRemarks());
 //			applicant.setAdditionalSkills(dto.getAdditionalSkills());
 			applicant.setApplicantProfileId(dto.getApplicantProfileId());
+			if (dto.getPortalId()!=null && dto.getPortalId().length > 0){
+				applicant.setPortalIdList(portalIdAssembler.createDomainObj(dto.getPortalId()));
+			}
 
 			if (dto.getComputerSkills() != null) {
 				applicant.setComputerSkills(DecisionYesNoEnum.fromValue(dto.getComputerSkills()));
@@ -475,19 +484,19 @@ public class ApplicantAssemblerWorker implements ApplicantAssembler {
 		return updateDomainObj(dto, applicant);
 	}
 	
-	@Override
-	public Applicant updateDomainObjByInwentId(ApplicantDTO dto) throws ApplicantProfileNotFoundException, EnumValueNotFoundException, IndustrySectorNotFoundException, CountryNotFoundException{
-		Applicant applicant;
-		try {
-			// applicant =
-			// applicantDAO.findApplicantDataByProfileId(dto.getApplicantProfileId());
-			applicant = applicantDAO.findApplicantProfileByInwentId(dto.getApplicantProfileOwnerId());
-		} catch (ApplicantProfileNotFoundException e) {
-			applicant = null;
-		}
-		
-		return updateDomainObj(dto, applicant);
-	}
+//	@Override
+//	public Applicant updateDomainObjByInwentId(ApplicantDTO dto) throws ApplicantProfileNotFoundException, EnumValueNotFoundException, IndustrySectorNotFoundException, CountryNotFoundException{
+//		Applicant applicant;
+//		try {
+//			// applicant =
+//			// applicantDAO.findApplicantDataByProfileId(dto.getApplicantProfileId());
+//			applicant = applicantDAO.findApplicantProfileByInwentId(dto.getApplicantProfileOwnerId());
+//		} catch (ApplicantProfileNotFoundException e) {
+//			applicant = null;
+//		}
+//		
+//		return updateDomainObj(dto, applicant);
+//	}
 
 	
 	private Applicant updateDomainObj(ApplicantDTO dto, Applicant applicant) throws ApplicantProfileNotFoundException, EnumValueNotFoundException, IndustrySectorNotFoundException,
@@ -497,6 +506,10 @@ public class ApplicantAssemblerWorker implements ApplicantAssembler {
 			throw new ApplicantProfileNotFoundException();
 
 		if (dto != null) {
+			if (dto.getPortalId()!=null){
+				applicant.setPortalIdList(portalIdAssembler.updateDomainObj(dto.getPortalId(), applicant.getPortalIdList()));
+			}
+			
 			applicant.setAdditionalRemarks(dto.getAdditionalRemarks());
 			applicant.setAdditionalSkills(dto.getAdditionalSkills());
 			applicant.setApplicantProfileId(dto.getApplicantProfileId());

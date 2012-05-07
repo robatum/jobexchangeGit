@@ -193,13 +193,13 @@ public class JobWS{
 	 * Die Methode 'checkIfJobOffersExist' überprüft ob für einem konkreten Nutzer bereits Stellenangebote hinterlegt wurden
 	 * oder nicht.
 	 * 
-	 * @param Erwartet die APD User Id als Parameter.
+	 * @param Erwartet die Portal User Id als Parameter.
 	 * @return Gibt ein Objekt vom Typ Boolean zurueck. Im Erfolgsfall traegt dieses den Wert 'true' im Fehlerfall 'false'.
 	 */
-	public Boolean checkIfJobOffersExist(Long apdUserId) {
-		logger.info("Check if user has jobOffers by apdUserId: "+apdUserId);
+	public Boolean checkIfJobOffersExist(Long portalUserId) {
+		logger.info("Check if user has jobOffers by portalUserId: "+portalUserId);
 		try {
-			Collection<JobImpl> jobList = jw.getJobOffersByAPDUser(apdUserId);
+			Collection<JobImpl> jobList = jw.getJobOffersByPortalUser(portalUserId);
 			if(jobList != null && jobList.size()>0){
 				return true;
 			} else return false;
@@ -215,19 +215,19 @@ public class JobWS{
 	 * Die Methode 'checkIfUserIsJobOfferOwner' überprüft ob für einem konkreten Nutzer ob ihm ein konkretes Stellenangebote zuzuschreiben
 	 * ist oder nicht.
 	 * 
-	 * @param Erwartet die APD User Id und die JobOffer Id als Parameter.
+	 * @param Erwartet die Portal User Id und die JobOffer Id als Parameter.
 	 * @return Gibt ein Objekt vom Typ Boolean zurueck. Im Erfolgsfall traegt dieses den Wert 'true' im Fehlerfall 'false'.
 	 */
-	public Boolean checkIfUserIsJobOfferOwner(Long apdUserId, Long jobOfferId) {
-		logger.info("Check if user ("+ apdUserId  +") is owner of jobOffer: "+jobOfferId);
+	public Boolean checkIfUserIsJobOfferOwner(Long portalUserId, Long jobOfferId) {
+		logger.info("Check if user ("+ portalUserId  +") is owner of jobOffer: "+jobOfferId);
 		try {
-			Collection<JobImpl> jobList = jw.getJobOffersByAPDUser(apdUserId);
+			Collection<JobImpl> jobList = jw.getJobOffersByPortalUser(portalUserId);
 			if(jobList != null && jobList.size()>0){
 				
 				Iterator<JobImpl> it = jobList.iterator();
 				while(it.hasNext()){
 					JobImpl job = it.next();
-					if (job.getJobOfferOwner() != null && job.getJobOfferOwner().getApdUserId() != null &&  job.getJobOfferOwner().getApdUserId().equals(apdUserId)){
+					if (job.getJobOfferOwner() != null && job.getJobOfferOwner().getPortalUserId() != null &&  job.getJobOfferOwner().getPortalUserId().equals(portalUserId)){
 						return true;
 					}
 				}
@@ -274,14 +274,14 @@ public class JobWS{
 	 * Die Methode 'getJobOffersByUser' gibt alle in der Jobboerse hinterlegten Stellenangebote eines spezifischen 
 	 * Nutzers zurueck.
 	 * 
-	 * @param Erwartet die APD User Id als Parameter.
+	 * @param Erwartet die Portal User Id als Parameter.
 	 * @return Gibt ein Array von Objekten der Klasse JobDTO zurueck.
 	 */
-	public JobDTO[] getJobOffersByUser(Long apdUserId){	
-		logger.info("Get JobOffer By User apdUserId :"+apdUserId);
+	public JobDTO[] getJobOffersByUser(Long portalUserId){	
+		logger.info("Get JobOffer By User portalUserId :"+portalUserId);
 		Collection<JobImpl> jobOffers = new TreeSet<JobImpl>();
 		try {
-			jobOffers = jw.getJobOffersByAPDUser(apdUserId);
+			jobOffers = jw.getJobOffersByPortalUser(portalUserId);
 		} catch (APDUserNotFoundException e) {
 			e.printStackTrace();
 			return null;
@@ -301,16 +301,16 @@ public class JobWS{
 	 * Die Methode 'getJobOffersByUserAndCriteria' gibt alle in der Jobboerse hinterlegten Stellenangebote eines spezifischen 
 	 * Nutzers und der angegebenen Kriterien zurueck.
 	 * 
-	 * @param Erwartet die APD User Id als Parameter.
+	 * @param Erwartet die Portal User Id als Parameter.
 	 * @return Gibt ein Array von Objekten der Klasse JobDTO zurueck.
 	 */
-	public JobDTO[] getJobOffersByUserAndCriteria(Long apdUserId, String jobActive, CountryDTO country, TerritoryDTO territory, int numberOfResults, int indexStart){	
-		logger.info("Get JobOffer By User apdUserId :"+apdUserId);
+	public JobDTO[] getJobOffersByUserAndCriteria(Long portalUserId, String jobActive, CountryDTO country, TerritoryDTO territory, int numberOfResults, int indexStart){	
+		logger.info("Get JobOffer By User portalUserId :"+portalUserId);
 		Collection<JobImpl> jobOffers = new TreeSet<JobImpl>();
 		try {
 			logger.info(" in country: "+country.getCountry());
 			logger.info(" in territory: "+territory.getTerritory());
-			jobOffers = jw.getJobOffersByAPDUserAndCriteria(apdUserId, JobActiveEnum.fromValue(jobActive), ca.getDomainObj(country), ta.getDomainObj(territory), numberOfResults, indexStart);
+			jobOffers = jw.getJobOffersByPortalUserAndCriteria(portalUserId, JobActiveEnum.fromValue(jobActive), ca.getDomainObj(country), ta.getDomainObj(territory), numberOfResults, indexStart);
 		} catch (APDUserNotFoundException e) {
 			e.printStackTrace();
 			return null;
@@ -482,13 +482,13 @@ public class JobWS{
 	/**
 	 * Die Methode 'addJobOffer' ermoeglicht es fuer einen bestehenden Nutzer ein neues Stellenangebot zu veroeffentlichen.
 	 * 
-	 * @param Erwartet ein Objekt der Klasse JobDTO mit allen relevanten Stellendaten sowie die APD User Id.
+	 * @param Erwartet ein Objekt der Klasse JobDTO mit allen relevanten Stellendaten sowie die Portal User Id.
 	 * @return Gibt ein Objekt vom Typ Boolean zurueck. Im Erfolgsfall traegt dieses den Wert 'true' im Fehlerfall 'false'.
 	 * 
 	 */
-	public Long addJobOffer(JobDTO jobOffer, Long apdUserId){
-		logger.info("Adding joboffer by apdUser: "+apdUserId);
-		jobOffer.setJobOfferOwner(apdUserId);
+	public Long addJobOffer(JobDTO jobOffer, Long portalUserId){
+		logger.info("Adding joboffer by portalUser: "+portalUserId);
+		jobOffer.setJobOfferOwner(portalUserId);
 		Long savedJobId = new Long(0);
 		try {
 			savedJobId = jw.addJobOffer(ja.createDomainObjByApdId(jobOffer),this.dataProvider);	
@@ -514,12 +514,12 @@ public class JobWS{
 	/**
 	 * Die Methode 'applyToJobOffer' ermoeglicht es einem Nutzer der APD Plattform sich auf ein Stellenangebot zu bewerben.
 	 * 
-	 * @param Erwartet die Stellenangebots Id der Stelle auf die sich der Nutzer Bewerben moechte, die APD User Id des Bewerbers sowie eine optionale Kontaktmitteilung als Parameter.
+	 * @param Erwartet die Stellenangebots Id der Stelle auf die sich der Nutzer Bewerben moechte, die Portal User Id des Bewerbers sowie eine optionale Kontaktmitteilung als Parameter.
 	 */
-	public Boolean applyToJobOffer(Long jobOfferId, Long apdUserId, String contactNote){
-		logger.info("Apply to joboffer - jobOfferId: "+jobOfferId+" apdUserId: "+apdUserId);
+	public Boolean applyToJobOffer(Long jobOfferId, Long portalUserId, String contactNote){
+		logger.info("Apply to joboffer - jobOfferId: "+jobOfferId+" portalUserId: "+portalUserId);
 		try {
-			jw.applyToJobOffer(jobOfferId,apdUserId,contactNote);
+			jw.applyToJobOffer(jobOfferId,portalUserId,contactNote);
 		} catch (JobOfferNotFoundException e) {
 			e.printStackTrace();
 			return false;
@@ -548,15 +548,15 @@ public class JobWS{
 	 * Die Methode 'getReceivedJobOfferApplications' liefert alle Kontaktanfragen die ein Nutzer (etwa eine Organisation/Unternehmen) zu seinen 
 	 * veroeffentlichten Stellenangebote erhalten hat.
 	 * 
-	 * @param Erwartet die APD User Id als Parameter.
+	 * @param Erwartet die Portal User Id als Parameter.
 	 * @return Gibt ein Array von Objekten der Klasse JobApplicationDTO zurueck.
 	 */
-	public JobApplicationDTO[] getReceivedJobOfferApplications(Long apdUserId){
-		logger.info("Get Received JobOffer Applications for user apdUserId: "+apdUserId);
+	public JobApplicationDTO[] getReceivedJobOfferApplications(Long portalUserId){
+		logger.info("Get Received JobOffer Applications for user portalUserId: "+portalUserId);
 		
 		Collection<JobApplication> jobApplications;
 		try {
-			jobApplications = jw.getReceivedJobOfferApplications(apdUserId);
+			jobApplications = jw.getReceivedJobOfferApplications(portalUserId);
 		} catch (APDUserNotFoundException e) {
 			e.printStackTrace();
 			return null;

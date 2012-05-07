@@ -21,10 +21,10 @@ public interface UserWorker {
 	public void modifyUser(User user) throws ObjectNotSavedException, PassedAttributeIsNullException;
 	public void deleteUser(User user) throws ObjectNotDeletedException, PassedAttributeIsNullException;
 	public void deleteUser(Long userId) throws ObjectNotDeletedException, PassedAttributeIsNullException;
-	public User getUserByAPDId(Long userId)throws APDUserNotFoundException;
+	public User getUserByPortalId(Long userId)throws APDUserNotFoundException;
 	public User getUserByCobraId(Long userId, boolean isOrganisationUser)throws CobraUserNotFoundException;
-	public User getUserByInwentId(Long inwentUserId) throws InwentUserNotFoundException;
-	public void switchContactAddressByAPDUserId(Long userId)throws APDUserNotFoundException, ObjectNotSavedException;
+//	public User getUserByInwentId(Long inwentUserId) throws InwentUserNotFoundException;
+	public void switchContactAddressByPortalUserId(Long userId)throws APDUserNotFoundException, ObjectNotSavedException;
 	public void setUserOnlineStatus(User user, Boolean onlineStatus) throws ObjectNotSavedException, CantChangeOnlineStateException;
 	public List<User> getOrganisationUserByLoginUser(LoginUser user) throws PassedAttributeIsNullException;
 	public List<OrganisationRoleData> getOrganisationUserDataByLoginUser(LoginUser user) throws PassedAttributeIsNullException;

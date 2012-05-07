@@ -34,14 +34,15 @@ public class User extends AbstractEntity{
 	 */
 	private static final long serialVersionUID = -2284587022138077470L;
 	
-	
+	@Deprecated
 	private Long apdUserId;
 	@Field(index=Index.UN_TOKENIZED, store=Store.NO)
 	private Long cobraSuperId;
 	@Field(index=Index.UN_TOKENIZED, store=Store.NO)
-	private Long inwentUserId;
+	private Long portalUserId;
 	@Field(index=Index.UN_TOKENIZED, store=Store.NO)
-	private Long elggUserId;
+	private PortalIdentifierEnum portalId;
+	@Deprecated
 	private Long agefApplicantNumber;
 	@IndexedEmbedded
 	private DataProvider dataProvider;
@@ -135,6 +136,7 @@ public class User extends AbstractEntity{
 	/**
 	 * @return the guId
 	 */
+	@Deprecated
 	public Long getApdUserId() {
 		return apdUserId;
 	}
@@ -143,6 +145,7 @@ public class User extends AbstractEntity{
 	 * @param guId the guId to set
 	 */
 	@NonVisual
+	@Deprecated
 	public void setApdUserId(Long userId) {
 		this.apdUserId = userId;
 	}
@@ -161,26 +164,37 @@ public class User extends AbstractEntity{
 	public void setCobraSuperId(Long cobraSuperId) {
 		this.cobraSuperId = cobraSuperId;
 	}
+	
 
-	public void setInwentUserId(Long inwentUserId) {
-		this.inwentUserId = inwentUserId;
+	@NonVisual
+	public void setPortalUserId(Long portalUserId) {
+		this.portalUserId = portalUserId;
 	}
 
-	public Long getInwentUserId() {
-		return inwentUserId;
+	public Long getPortalUserId() {
+		return portalUserId;
 	}
 
-	public void setElggUserId(Long elggUserId) {
-		this.elggUserId = elggUserId;
+	/**
+	 * @return the portalId
+	 */
+	@Enumerated(EnumType.STRING)
+	public PortalIdentifierEnum getPortalId() {
+		return portalId;
 	}
 
-	public Long getElggUserId() {
-		return elggUserId;
+	/**
+	 * @param portalId the portalId to set
+	 */
+	@NonVisual
+	public void setPortalId(PortalIdentifierEnum portalId) {
+		this.portalId = portalId;
 	}
 
 	/**
 	 * @return the agefApplicantNumber
 	 */
+	@Deprecated
 	public Long getAgefApplicantNumber() {
 		return agefApplicantNumber;
 	}
@@ -189,6 +203,7 @@ public class User extends AbstractEntity{
 	 * @param agefApplicantNumber the agefApplicantNumber to set
 	 */
 	@NonVisual
+	@Deprecated
 	public void setAgefApplicantNumber(Long agefApplicantNumber) {
 		this.agefApplicantNumber = agefApplicantNumber;
 	}

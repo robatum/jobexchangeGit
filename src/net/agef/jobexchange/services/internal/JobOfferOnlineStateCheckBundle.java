@@ -1,12 +1,10 @@
-/**
- * 
- */
 package net.agef.jobexchange.services.internal;
 
 
 import net.agef.jobexchange.application.JobWorker;
 
 import org.chenillekit.quartz.services.JobSchedulingBundle;
+
 import org.quartz.CronTrigger;
 import org.quartz.JobDataMap;
 import org.quartz.JobDetail;

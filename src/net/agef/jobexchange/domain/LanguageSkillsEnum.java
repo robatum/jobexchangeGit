@@ -5,12 +5,12 @@ import java.io.Serializable;
 import net.agef.jobexchange.exceptions.EnumValueNotFoundException;
 
 public enum LanguageSkillsEnum implements Serializable{
-	NO_SKILLS("NO_SKILLS"),
+	
 	MOTHER_TONGUE("MOTHER_TONGUE"), 
 	BUSINESS_FLUENT("BUSINESS_FLUENT"), 
 	FLUENT("FLUENT"), 
-	BASIC_KNOWLEDGE("BASIC_KNOWLEDGE");
-	
+	BASIC_KNOWLEDGE("BASIC_KNOWLEDGE"),
+	NO_SKILLS("NO_SKILLS");
 	private final String value; 
 	
 	LanguageSkillsEnum(String v) { value = v; }

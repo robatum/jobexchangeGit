@@ -16,7 +16,7 @@ import net.agef.jobexchange.exceptions.PassedAttributeIsNullException;
 public interface LoginUserWorker {
 	
 	public void addLoginUser(LoginUser user) throws ObjectNotSavedException, PassedAttributeIsNullException;
-	public void deleteJobOffer(Long loginUserId) throws ObjectNotDeletedException, PassedAttributeIsNullException;
+	public void deleteLoginUser(Long loginUserId) throws ObjectNotDeletedException, PassedAttributeIsNullException;
 	public LoginUser getUserByName(String userName) throws LoginUserNotFoundException;
 	public LoginUser getLoggedInUser() throws LoginUserNotFoundException;
 	public Boolean isLoggedInUser();

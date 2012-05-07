@@ -99,11 +99,11 @@ public class UserWorkerHandler implements UserWorker{
 	}
 
 	@Override
-	public User getUserByAPDId(Long userId) throws APDUserNotFoundException {
-		User user = userDAO.findAPDUserByID(userId);
+	public User getUserByPortalId(Long portalUserId) throws APDUserNotFoundException {
+		User user = userDAO.findPortalUserByID(portalUserId);
 		if(user !=null){
 			return user;
-		} else throw new APDUserNotFoundException(String.valueOf(userId)); 
+		} else throw new APDUserNotFoundException(String.valueOf(portalUserId)); 
 	}
 	
 	@Override
@@ -114,20 +114,20 @@ public class UserWorkerHandler implements UserWorker{
 		} else throw new CobraUserNotFoundException(userId.toString()); 
 	}
 
-	@Override
-	public User getUserByInwentId(Long userId) throws InwentUserNotFoundException {
-		User user = userDAO.findInwentUserByID(userId);
-		if(user !=null){
-			return user;
-		} else throw new InwentUserNotFoundException(String.valueOf(userId)); 
-	}
+//	@Override
+//	public User getUserByInwentId(Long userId) throws InwentUserNotFoundException {
+//		User user = userDAO.findInwentUserByID(userId);
+//		if(user !=null){
+//			return user;
+//		} else throw new InwentUserNotFoundException(String.valueOf(userId)); 
+//	}
 	
 	@Override
-	public void switchContactAddressByAPDUserId(Long apdUserId) throws APDUserNotFoundException, ObjectNotSavedException {
-		User user = userDAO.findAPDUserByID(apdUserId);
+	public void switchContactAddressByPortalUserId(Long portalUserId) throws APDUserNotFoundException, ObjectNotSavedException {
+		User user = userDAO.findPortalUserByID(portalUserId);
 		if(user !=null){
 			user.setCurrentAddress(!user.getCurrentAddress());
-		} else throw new APDUserNotFoundException(apdUserId.toString()); 
+		} else throw new APDUserNotFoundException(portalUserId.toString()); 
 		
 		try {
 			userDAO.doSave(user);

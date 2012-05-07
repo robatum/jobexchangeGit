@@ -15,6 +15,7 @@ import net.agef.jobexchange.domain.AvailabilityEnum;
 import net.agef.jobexchange.domain.Country;
 import net.agef.jobexchange.domain.DecisionYesNoEnum;
 import net.agef.jobexchange.domain.OccupationalField;
+import net.agef.jobexchange.domain.PortalIdentifierEnum;
 import net.agef.jobexchange.domain.SearchHistoryApplicant;
 import net.agef.jobexchange.domain.Territory;
 import net.agef.jobexchange.domain.User;
@@ -120,15 +121,15 @@ public class ApplicantWorkerHandler implements ApplicantWorker {
 	
 
 	@Override
-	public Applicant getApplicantDataByAPDUserId(Long apdUserId) throws APDUserNotFoundException, ApplicantProfileNotFoundException {
-		User user = userDAO.findAPDUserByID(apdUserId);
+	public Applicant getApplicantDataByPortalUserId(Long portalUserId) throws APDUserNotFoundException, ApplicantProfileNotFoundException {
+		User user = userDAO.findPortalUserByID(portalUserId);
 		if (user != null) {
 			if (user.getApplicantProfile() != null) {
 				return user.getApplicantProfile();
 			} else
 				throw new ApplicantProfileNotFoundException();
 		} else
-			throw new APDUserNotFoundException(apdUserId.toString());
+			throw new APDUserNotFoundException(portalUserId.toString());
 	}
 
 	@Override
@@ -220,8 +221,8 @@ public class ApplicantWorkerHandler implements ApplicantWorker {
 	}
 
 	@Override
-	public void deleteApplicantDataByInwentUserId(Long inwentUserId) throws InwentUserNotFoundException, ApplicantProfileNotFoundException {
-		User user = userDAO.findInwentUserByID(inwentUserId);
+	public void deleteApplicantData(Long portalUserId) throws APDUserNotFoundException, ApplicantProfileNotFoundException {
+		User user = userDAO.findPortalUserByID(portalUserId);
 		if (user != null) {
 			try {
 				applicantDAO.doDelete(user.getApplicantProfile());
@@ -229,21 +230,7 @@ public class ApplicantWorkerHandler implements ApplicantWorker {
 				throw new ApplicantProfileNotFoundException();
 			}
 		} else
-			throw new InwentUserNotFoundException();
-
-	}
-
-	@Override
-	public void deleteApplicantData(Long userId) throws APDUserNotFoundException, ApplicantProfileNotFoundException {
-		User user = userDAO.findAPDUserByID(userId);
-		if (user != null) {
-			try {
-				applicantDAO.doDelete(user.getApplicantProfile());
-			} catch (Exception e) {
-				throw new ApplicantProfileNotFoundException();
-			}
-		} else
-			throw new APDUserNotFoundException(userId.toString());
+			throw new APDUserNotFoundException(portalUserId.toString());
 	}
 
 	@Override
@@ -251,7 +238,7 @@ public class ApplicantWorkerHandler implements ApplicantWorker {
 		if (applicant != null && onlineStatus != null && applicant.getOnlineStatus() != onlineStatus) {
 			applicant.setOnlineStatus(onlineStatus);
 			try {
-				System.out.println(applicant.getWorkUserTypes().size());
+				//System.out.println(applicant.getWorkUserTypes().size());
 				applicantDAO.doSave(applicant);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -477,7 +464,7 @@ public class ApplicantWorkerHandler implements ApplicantWorker {
 
 	@SuppressWarnings("unchecked")
 	public Collection<Applicant> getApplicantByExtendedCriteria(final String criteria,final Country country,final Territory territory, String[] availability, WorkUserType[] workUserType, String[] occupationalField,
-			String managementExperience, Integer resultAmount, Integer pageIndexStart) throws EnumValueNotFoundException {
+			String managementExperience, Integer resultAmount, Integer pageIndexStart, Byte[] portalId) throws EnumValueNotFoundException {
 		logger.info("getApplicantByExtendedCriteria() Begin");
 		
 		List<ApplicantsSearchResultDTO> applicants = new ArrayList<ApplicantsSearchResultDTO>();
@@ -488,7 +475,7 @@ public class ApplicantWorkerHandler implements ApplicantWorker {
 		Integer finalLuceneResultAmount = null;
 		if (applicants != null && applicants.size() > 0) {
 			finalLuceneResultAmount = applicants.size();
-			Criteria criteria1 = prepareCriteriaForExtendedSearch(availability, workUserType, occupationalField, managementExperience, resultAmount, pageIndexStart, applicants);
+			Criteria criteria1 = prepareCriteriaForExtendedSearch(availability, workUserType, occupationalField, managementExperience, resultAmount, pageIndexStart, applicants, portalId);
 			if(criteria == null || criteria.trim().equals("")){
 				criteria1.addOrder(Order.desc("id"));
 			}
@@ -570,7 +557,7 @@ public class ApplicantWorkerHandler implements ApplicantWorker {
 	
 	@Override
 	public int getApplicantsSearchResultsAmountByExtendedCriteria(String criteria, Country country, Territory territory, String[] availability, WorkUserType[] workTypes,
-			String[] occupationalField, String managementExperience) {
+			String[] occupationalField, String managementExperience, Byte[] portalId) {
 List<ApplicantsSearchResultDTO> applicants = new ArrayList<ApplicantsSearchResultDTO>();
 		
 		applicants = prepareAndExecuteFulltextQueryForExtendedCriteria(criteria, country, territory);
@@ -578,7 +565,7 @@ List<ApplicantsSearchResultDTO> applicants = new ArrayList<ApplicantsSearchResul
 		int numberResults = 0;
 		if (applicants != null && applicants.size() > 0) {
 			try {
-				Criteria criteria1 = prepareCriteriaForExtendedSearch(availability, workTypes, occupationalField, managementExperience, null, null, applicants);
+				Criteria criteria1 = prepareCriteriaForExtendedSearch(availability, workTypes, occupationalField, managementExperience, null, null, applicants, portalId);
 				criteria1.setProjection(Projections.countDistinct("id"));
 				numberResults = (Integer) criteria1.uniqueResult();
 			} catch (Exception e) {
@@ -592,7 +579,7 @@ List<ApplicantsSearchResultDTO> applicants = new ArrayList<ApplicantsSearchResul
 	}
 
 	private Criteria prepareCriteriaForExtendedSearch(String[] availability, WorkUserType[] workUserType, String[] occupationalField, String managementExperience, Integer resultAmount,
-			Integer pageIndexStart, List<ApplicantsSearchResultDTO> applicants) throws EnumValueNotFoundException {
+			Integer pageIndexStart, List<ApplicantsSearchResultDTO> applicants, Byte[] portalId) throws EnumValueNotFoundException {
 		List<Long> idList = new ArrayList<Long>();
 		for (ApplicantsSearchResultDTO value : applicants) {
 			idList.add((Long) value.getId());
@@ -603,6 +590,20 @@ List<ApplicantsSearchResultDTO> applicants = new ArrayList<ApplicantsSearchResul
 		// criteria1.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		criteria1.setProjection(Projections.distinct(Projections.property("id")));
 
+		
+		if (portalId != null && portalId.length > 0){
+			Disjunction disjunctionPortalId = Restrictions.disjunction();
+			criteria1.createAlias("portalIdList", "portalIdList");
+			for(Byte portalIdTemp : portalId){
+				if (portalIdTemp != null){
+					logger.info("portalId: " + portalIdTemp);
+					disjunctionPortalId.add(Restrictions.eq("portalIdList.portal", PortalIdentifierEnum.fromPortalId(portalIdTemp.intValue())));
+				}
+			}
+			criteria1.add(disjunctionPortalId);
+		}
+		
+		
 		if (availability != null && availability.length > 0) {
 			Disjunction disjunctionAvailability = Restrictions.disjunction();
 			for (String availabilityString : availability) {
@@ -632,6 +633,7 @@ List<ApplicantsSearchResultDTO> applicants = new ArrayList<ApplicantsSearchResul
 		}
 
 		criteria1.add(Restrictions.in("id", idList));
+		
 		if (workUserType != null && workUserType.length > 0) {
 			Disjunction disjunction = Restrictions.disjunction();
 			criteria1.createAlias("workUserTypes", "workUserTypes");

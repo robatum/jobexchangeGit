@@ -36,7 +36,7 @@ public class JobApplicationAssemblerWorker implements JobApplicationAssembler{
 				dto.setRelatedJobDescription(application.getRelatedJob().getJobDescription());
 			}
 			if(application.getJobApplicationOwner()!=null)	{
-				dto.setApplicationOwnerId(application.getJobApplicationOwner().getApdUserId());
+				dto.setApplicationOwnerId(application.getJobApplicationOwner().getPortalUserId());
 				dto.setApplicationOwnerName(application.getJobApplicationOwner().getFullUserName());
 			}
 			dto.setContactNote(application.getContactNote());
@@ -54,7 +54,7 @@ public class JobApplicationAssemblerWorker implements JobApplicationAssembler{
 		if(dto!=null){
 			
 			if(dto.getApplicationOwnerId()!=null){
-				User user = userDAO.findAPDUserByID(dto.getApplicationOwnerId());
+				User user = userDAO.findPortalUserByID(dto.getApplicationOwnerId());
 				if(user!=null) {
 					application.setJobApplicationOwner(user);
 				} else throw new APDUserNotFoundException(dto.getApplicationOwnerId().toString());

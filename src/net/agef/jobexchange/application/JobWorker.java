@@ -25,7 +25,7 @@ public interface JobWorker {
 	
 	public Collection<JobImpl> getAllJobOffers();
 	
-	public Collection<JobImpl> getJobOffersByAPDUser(Long userId) throws APDUserNotFoundException;
+	public Collection<JobImpl> getJobOffersByPortalUser(Long userId) throws APDUserNotFoundException;
 	
 	public Long addJobOffer(JobImpl jobOffer) throws ObjectNotSavedException, PassedAttributeIsNullException;
 	
@@ -73,5 +73,5 @@ public interface JobWorker {
 	
 	public Collection<JobImpl> getUpdatedJobOffers();
 
-	public Collection<JobImpl> getJobOffersByAPDUserAndCriteria(Long apdUserId, JobActiveEnum jobActive, Country country, Territory territory, int numberOfResults, int indexStart) throws APDUserNotFoundException;
+	public Collection<JobImpl> getJobOffersByPortalUserAndCriteria(Long apdUserId, JobActiveEnum jobActive, Country country, Territory territory, int numberOfResults, int indexStart) throws APDUserNotFoundException;
 }

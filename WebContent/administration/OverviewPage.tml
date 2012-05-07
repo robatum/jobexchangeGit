@@ -65,18 +65,18 @@
 		<td align="left" valign="top" width="50%" >
 		<table border="0" width="100%" cellpadding="2">
         <th width="100%" class="getjob" bgcolor="#245524">
-                     ${message:loginuser}
+                     ${message:loginUserManagement}
                     </th>
                     
                     <tr> 
                        <td align="left" valign="top"  width="100%" bgcolor="#618561"> 
-                      	[<t:pagelink class="lm_active" t:page="administration/addloginuserpage">${message:loginuser_add}</t:pagelink>]
+                      	[<t:pagelink class="lm_active" t:page="administration/addloginuserpage">${message:addLoginUser}</t:pagelink>]
                        </td>
                        
                      </tr>
                      <tr> 
                        <td align="left" valign="top"  width="100%" bgcolor="#618561"> 
-                       	 [<t:pagelink class="lm_active" t:page="administration/manageloginuserpage">${message:loginuser_manage}</t:pagelink>]	
+                       	 [<t:pagelink class="lm_active" t:page="administration/manageloginuserpage">${message:manageLoginUser}</t:pagelink>]	
                        </td>
                        
                      </tr>
