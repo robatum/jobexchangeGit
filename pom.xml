@@ -249,9 +249,9 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 		</dependency>
 
 <!-- 		<dependency> -->
-<!-- 			<groupId>opensymphony</groupId> -->
+<!-- 			<groupId>org.opensymphony.quartz</groupId> -->
 <!-- 			<artifactId>quartz</artifactId> -->
-<!-- 			<version>1.6.0</version> -->
+<!-- 			<version>1.6.1</version> -->
 <!-- 		</dependency> -->
 
 
@@ -412,7 +412,11 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 			<url>http://repo1.maven.org/maven2/</url>
 		</repository>
 
-
+		<repository>
+			<id>maven-repo2</id>
+			<url>http://uk.maven.org/maven2/</url>
+		</repository>
+	
 
 
 		<repository>

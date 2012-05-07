@@ -44,16 +44,20 @@ public class JobexchangeInitializerImpl implements ApplicationInitializerFilter 
 
 	private String[] dataProviderAPDIP = { "84.200.230.34", "84.200.230.35", "84.200.230.36", "84.201.42.193", "84.201.42.194", "84.201.42.195", "84.201.42.196", "84.201.42.197", "84.201.42.202",
 			"84.201.42.200", "84.201.42.201", "84.200.227.132", "85.178.200.125" };
-	private String[] dataProviderPPWIP = { "212.79.161.119", "217.7.251.147" };
+	private String[] dataProviderPPWIP = { "212.79.161.119", "87.79.93.254" };
 	private String[] dataProviderAGEFIP = { "213.146.113.73", "87.193.197.15", "217.91.217.146" };
 	private String[] dataProviderGETJOBSIP = { "127.0.0.1" };
 
+	
+	
 	private boolean runFirst = false;
 	private boolean readSearchData = true;
 	private boolean insertTestData = false;
 	private boolean contextStart = true;
-	private boolean addDataProviderIP = false;
+	private boolean addDataProviderIP = true;
 
+	
+	
 	private boolean runInitialization = runFirst || readSearchData || insertTestData || contextStart || addDataProviderIP;
 
 	public JobexchangeInitializerImpl(PasswordEncoder passwordEncoder, SaltSourceService saltSource, Session session, HibernateSessionManager hbm) {
