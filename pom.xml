@@ -144,11 +144,11 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 			<artifactId>hibernate-core</artifactId>
 			<version>${hibernate-release-version}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-annotations</artifactId>
-			<version>${hibernate-annotations-release-version}</version>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.hibernate</groupId> -->
+<!-- 			<artifactId>hibernate-annotations</artifactId> -->
+<!-- 			<version>${hibernate-annotations-release-version}</version> -->
+<!-- 		</dependency> -->
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -169,20 +169,20 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 		</dependency>
 		<!-- All components and database related dependencies -->
 
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
-			<version>${spring-release-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-dao</artifactId>
-			<version>${spring-release-version}</version>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.springframework</groupId> -->
+<!-- 			<artifactId>spring-web</artifactId> -->
+<!-- 			<version>${spring-release-version}</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.springframework</groupId> -->
+<!-- 			<artifactId>spring-core</artifactId> -->
+<!-- 			<version>${spring-release-version}</version> -->
+<!-- 		</dependency> -->
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
-			<version>1.2.9</version>
+			<version>1.2.16</version>
 		</dependency>
 		<dependency>
 			<groupId>c3p0</groupId>
@@ -193,7 +193,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.6</version>
+			<version>5.1.18</version>
 		</dependency>
 
 		<!-- <dependency> -->
@@ -219,8 +219,14 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 		</dependency>
 
 
+<!-- 		<dependency> -->
+<!-- 			<groupId>nu.localhost.tapestry</groupId> -->
+<!-- 			<artifactId>tapestry-spring-security</artifactId> -->
+<!-- 			<version>${tapestry-spring-security-release-version}</version> -->
+<!-- 		</dependency> -->
+		
 		<dependency>
-			<groupId>nu.localhost.tapestry</groupId>
+			<groupId>com.github.lltyk</groupId>
 			<artifactId>tapestry-spring-security</artifactId>
 			<version>${tapestry-spring-security-release-version}</version>
 		</dependency>
@@ -243,11 +249,11 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 			<version>${chenillekit-release-version}</version>
 		</dependency>
 
-		<dependency>
-			<groupId>uk.co.ioko</groupId>
-			<artifactId>tapestry-mixins</artifactId>
-			<version>1.3.0</version>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>uk.co.ioko</groupId> -->
+<!-- 			<artifactId>tapestry-mixins</artifactId> -->
+<!-- 			<version>1.3.0</version> -->
+<!-- 		</dependency> -->
 
 <!-- 		<dependency> -->
 <!-- 			<groupId>org.opensymphony.quartz</groupId> -->
@@ -390,37 +396,37 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 			a snapshot. The non-snapshot Tapestry artifacts are distributed through the 
 			central repository at ibiblio. -->
 
-		<repository>
+<!--1		<repository>
 			<id>tapestry-snapshots</id>
 			<url>http://tapestry.formos.com/maven-snapshot-repository/</url>
 		</repository>
-		
+-->		
 
-        <repository>
+<!--1        <repository>
             <id>tapestry</id>
             <url>http://tapestry.formos.com/maven-repository</url>
         </repository>
+-->
 
-
-		<repository>
+<!--1		<repository>
 			<id>tapestry-snapshots2</id>
 			<url>https://repository.apache.org/content/repositories/orgapachetapestry-023/
 			</url>
 		</repository>
-
+-->
 		<repository>
 			<id>maven-repo</id>
 			<url>http://repo1.maven.org/maven2/</url>
 		</repository>
 
-		<repository>
+<!--1		<repository>
 			<id>maven-repo2</id>
 			<url>http://uk.maven.org/maven2/</url>
 		</repository>
-	
+-->	
 
 
-		<repository>
+<!--1		<repository>
 			<id>codehaus.snapshots</id>
 			<url>http://snapshots.repository.codehaus.org</url>
 		</repository>
@@ -429,15 +435,19 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 			<name>OpenQA Release Repository</name>
 			<url>http://archiva.openqa.org/repository/releases/</url>
 		</repository>
-		
+-->	
+	
 <!-- 		<repository> -->
 <!-- 			<id>localhost.nu</id> -->
 <!-- 			<url>http://www.localhost.nu/java/mvn</url> -->
 <!-- 		</repository> -->
-		<repository>
+
+<!--1		<repository>
 			<id>localhost.nu</id>
 			<url>http://localhost/mvn</url>
 		</repository>
+-->
+
 <!-- 		<repository> -->
 <!-- 			<id>localhost.nu-snapshots</id> -->
 <!-- 			<url>http://www.localhost.nu/java/mvn-snapshot</url> -->
@@ -452,19 +462,20 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 <!-- 			<name>jboss-repository</name> -->
 <!-- 			<url>http://repository.jboss.org/maven2</url> -->
 <!-- 		</repository> -->
-		<repository>
+
+<!--1		<repository>
 			<id>org.apache.tapestry</id>
 			<name>hlship tap5 Release Repo</name>
 			<url>http://people.apache.org/~hlship/tapestry-ibiblio-rsynch-repository/
 			</url>
 		</repository>
+-->
 
 
-
-		<repository>
+<!--1		<repository>
 			<id>repository.jboss.org</id>
-<!-- 			<url>http://repository.jboss.org/nexus/content/groups/public-jboss/</url> -->
-<!-- 			<url>http://repository.jboss.com/maven2</url> -->
+ 			<url>http://repository.jboss.org/nexus/content/groups/public-jboss/</url> 
+ 			<url>http://repository.jboss.com/maven2</url> 
 				<url>https://repository.jboss.org/nexus/content/repositories/central/</url>
 			<releases>
 				<enabled>true</enabled>
@@ -473,15 +484,16 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 				<enabled>true</enabled>
 			</snapshots>
 		</repository>
+-->
 
-		<repository>
+<!--1		<repository>
 			<id>chenillekit</id>
 			<url>http://www.chenillekit.org/mvnrepo/release</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
-
+ -->
 
 <!-- 		<repository> -->
 <!-- 			<id>tapestry</id> -->
@@ -502,15 +514,17 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 		</pluginRepository> </pluginRepositories> -->
 
 	<properties>
-		<tapestry-release-version>5.1.0.5</tapestry-release-version>
-		<spring-release-version>2.0.8</spring-release-version>
+		<!--<tapestry-release-version>5.1.0.5</tapestry-release-version>  -->
+		<tapestry-release-version>5.3.2</tapestry-release-version>
+		<spring-release-version>3.0.5.RELEASE</spring-release-version>
 		<!-- <hibernate-release-version>4.0.0.Beta4</hibernate-release-version> -->
-		<hibernate-release-version>3.3.2.GA</hibernate-release-version>
+		<hibernate-release-version>3.6.0.Final</hibernate-release-version>
+		<!-- <hibernate-release-version>3.3.2.GA</hibernate-release-version> -->
 		<hibernate-search-release-version>3.1.1.GA</hibernate-search-release-version>
-		<hibernate-annotations-release-version>3.4.0.GA</hibernate-annotations-release-version>
+		<!-- <hibernate-annotations-release-version>3.4.0.GA</hibernate-annotations-release-version> -->
 		<lucene.version>2.4.0</lucene.version>
-		<tapestry-spring-security-release-version>2.1.0</tapestry-spring-security-release-version>
-		<chenillekit-release-version>1.2.0</chenillekit-release-version>
+		<tapestry-spring-security-release-version>3.0.4</tapestry-spring-security-release-version>
+		<chenillekit-release-version>1.3.3</chenillekit-release-version>
 
 
 		<!-- <t5components-release-version>0.5.18</t5components-release-version> -->
